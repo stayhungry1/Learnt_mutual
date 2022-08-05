@@ -1,5 +1,5 @@
-git pull origin ywz
-git push mygitlab ywz
+git pull origin liutie
+git push mygitlab liutie
 echo "once"
 timeout 1
 %0
