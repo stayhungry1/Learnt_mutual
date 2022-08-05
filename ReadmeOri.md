@@ -7,7 +7,7 @@
 [![Downloads](https://pepy.tech/badge/compressai)](https://pypi.org/project/compressai/#files)
 
 CompressAI (_compress-ay_) is a PyTorch library and evaluation platform for
-end-to-end compression research.
+end-to-end compression research.   
 
 CompressAI currently provides:
 
