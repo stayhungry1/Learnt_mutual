@@ -720,6 +720,7 @@ class GeneralizedRCNN(nn.Module):
             torch.nn.utils.clip_grad_norm_(self.net_belle.parameters(), self.belle_clip_max_norm)
         self.optimizer_belle.step()
 
+
         aux_loss = self.net_belle.aux_loss()
         aux_loss.backward()
         self.belle_aux_optimizer.step()
