@@ -15,5 +15,6 @@ def quant_fix(features):
     
 def dequant_fix(x):
     return x.type(torch.float32)/_scale + _min
+    # return x.type(torch.float64)/_scale + _min
 
         

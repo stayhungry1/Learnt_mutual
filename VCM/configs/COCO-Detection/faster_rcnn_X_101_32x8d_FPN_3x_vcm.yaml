@@ -2,20 +2,52 @@
 _BASE_: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/Base-RCNN-FPN-VCM.yaml"
 MODEL:
   MASK_ON: False
-  WEIGHTS: "/media/data/ccr/model_final_68b088.pkl" #"/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P2MSE_nobpploss_lambda1_N192_eachdnorm_08041020/model_0007999.pth"
+  #WEIGHTS: "/media/data/ccr/model_final_68b088.pkl" #"/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P2MSE_nobpploss_lambda1_N192_eachdnorm_08041020/model_0007999.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P4MSE_lambda1_N192_smalltrain7_eachdnorm_08082050/model_0004999.pth"
+#  WEIGHTS: "/media/data/ccr/model_final_68b088.pkl"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P4MSE_ft7imgtrain4999_lambda1_N192_smalltrain5W_eachdnorm_08091030/model_0005999.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P4MSE_ft5Wimgtrain5999_lambda1_N192_eachdnorm_finenet0outP2MSE_08122110_1kcontinue/model_0002999.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P4MSE_ft5Wimgtrain5999_lambda1_N192_eachdnorm_fineoutP2MSE_08121750/model_0003999.pth"
+  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P5MSE_7imgtrain_lambda1_N192_eachdnorm_08141250/model_0004999.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/EXP_cheng2020anchoraddconv2_256chinput_P4MSE_lambda1_N192_7imgtrain_eachdnorm_08181710/model_0007999.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/EXP_cheng2020attn_256chinput_P2345MSE_lambda1_N192_smalltrain5W_eachdnorm_08162130/model_0009499.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchoraddconv2_256chinput_P4MSE_lambda1_N192_7imgtrainft7999_small5Wtrain_eachdnorm_08191040/model_0001499.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/EXP_cheng2020anchoraddconv2_256chinput_P4MSE_lambda1_N192_7imgtrain_eachdnorm_08181710/model_0016999.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_lambda1_N192_7imgtrain_eachdnorm_08202230/model_0012999.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P2down4inP4outMSE_lambda1_N192_7imgtrain_eachdnorm_08202230/model_0012999.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_cropzuoshangjiao_lambda1_N192_7imgtrain_eachdnorm_08212010/model_0004999.pth"
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_replicateyouxiajiao_lambda1_N192_7imgtrain_eachdnorm_08212010/model_0004999.pth"
   PIXEL_STD: [57.375, 57.120, 58.395]
   RESNETS:
     STRIDE_IN_1X1: False  # this is a C2 model
     NUM_GROUPS: 32
     WIDTH_PER_GROUP: 8
     DEPTH: 101
-OUTPUT_DIR: ./output/EXP_bellenoGDN_256chinput_P2MSE_lambda1_N192_smalltrain7_eachdnorm_08042320
+#OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4MSE_ft5Wimgtrain5999_lambda1_N192_eachdnorm_fineoutP2MSE_08121750_4kcontinue
+#OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4MSE_ft5Wimgtrain5999_lambda1_N192_eachdnorm_finenet0outP2MSE_08122110_1k3kcontinue
+#OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P5MSE_7imgtrain_lambda1_N192_eachdnorm_08141250
+OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P5MSE_ft7imgtrain4999_lambda1_N192_smalltrain5W_eachdnorm_08141750_ceshi1
+#OUTPUT_DIR: ./EXP_cheng2020attn_256chinput_P2345MSE_lambda1_N192_smalltrain5W_eachdnorm_08162130
+#OUTPUT_DIR: ./EXP_cheng2020anchoraddconv2_256chinput_P4MSE_lambda1_N192_7imgtrain_eachdnorm_08181710
+#OUTPUT_DIR: ./output/EXP_cheng2020anchoraddconv2_256chinput_P4MSE_lambda1_N192_7imgtrainft7999_small5Wtrain_eachdnorm_08191040
+#OUTPUT_DIR: ./output/EXP_cheng2020attn_256chinput_P2345MSE_lambda1_N192_smalltrain5W_eachdnorm_95kcontinue_08191910
+#OUTPUT_DIR: ./output/EXP_cheng2020attn_256chinput_P2345MSE_lambda1_N192_7imgtrain_eachdnorm_08192010
+#OUTPUT_DIR: ./output/EXP_cheng2020attn_256chinput_P2345MSE_lambda1_N192_smalltrain5W_eachdnorm_95kcontinue_08191910
+#OUTPUT_DIR: ./output/EXP_cheng2020attn_256chinput_P2345MSE_lambda1_N192_7imgtrain_eachdnorm_08192010
+#OUTPUT_DIR: ./output/EXP_cheng2020anchoraddconv2_256chinput_P4MSE_lambda1_N192_7imgtrainft16999_small5Wtrain_eachdnorm_08201150
+#OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_lambda1_N192_7imgtrainft12999_small5Wtrain_eachdnorm_08211030
+#OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P2down4inP4outMSE_lambda1_N192_7imgtrainft12999_small5Wtrain_eachdnorm_08211030
+#OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_cropzuoshangjiao_lambda1_N192_7imgtrain_eachdnorm_08212010
+#OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_replicateyouxiajiao_lambda1_N192_7imgtrain_eachdnorm_08212010
+#OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_cropzuoshangjiao_lambda1_N192_ft7imgtrain4999_small5Wtrain_eachdnorm_082221010
+#OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_replicateyouxiajiao_lambda1_N192_ft7imgtrain4999_small5Wtrain_eachdnorm_08221010
 SOLVER:
   STEPS: (130000, 180000)
   MAX_ITER: 200000
-  CHECKPOINT_PERIOD: 1000 #默认是5000
+  CHECKPOINT_PERIOD: 500 #默认是5000
 INPUT:
-#  MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+# # MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+# # MIN_SIZE_TRAIN: (640, 640)
 #  MIN_SIZE_TRAIN: (640, 640)
-  MIN_SIZE_TRAIN: (640, 640)
-#  MIN_SIZE_TEST: 400
+  MIN_SIZE_TRAIN: (800, 800)
+# # MIN_SIZE_TEST: 400

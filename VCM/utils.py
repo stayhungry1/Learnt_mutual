@@ -12,6 +12,7 @@ import numpy as np
 import torch
 import matplotlib.gridspec as gridspec
 
+
 def simple_filename(filename_ext):
     filename_base = os.path.basename(filename_ext)
     filename_noext = os.path.splitext(filename_base)[0]
@@ -92,15 +93,58 @@ def _save_feature_map(filename, features, debug=False):
             for col in range(width):
                 tile = blk[col + row * width].cpu().numpy()
                 if debug:
-                    cv2.putText(
-                        tile,
-                        f"{col + row * width}",
-                        (32, 32),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.5,
-                        (255, 255, 255),
-                        1,
-                    )
+                    cv2.putText(tile, f"{col + row * width}", (32, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, )
+                big_blk_col = np.hstack((big_blk_col, tile))
+            big_blk = np.vstack((big_blk, big_blk_col))
+        tile_big = np.vstack((tile_big, big_blk))
+    tile_big = tile_big.astype(np.uint16)
+    cv2.imwrite(filename, tile_big)
+
+def save_feature_map_onlyp2(filename, features): #输入dict包括P23456，输出P2
+    features_draw = features.copy()
+    del features_draw["p6"]
+    del features_draw["p5"]
+    del features_draw["p4"]
+    del features_draw["p3"]
+    _save_feature_map_onlyp2(filename, features_draw)
+
+def _save_feature_map_onlyp2(filename, features, debug=False): #输入P2
+    feat = [features["p2"].squeeze()]
+    width_list = [16]
+    height_list = [16]
+    tile_big = np.empty((0, feat[0].shape[2] * width_list[0]))
+    for blk, width, height in zip(feat, width_list, height_list):
+        big_blk = np.empty((0, blk.shape[2] * width))
+        for row in range(height):
+            big_blk_col = np.empty((blk.shape[1], 0))
+            for col in range(width):
+                tile = blk[col + row * width].cpu().numpy()
+                if debug:
+                    cv2.putText(tile, f"{col + row * width}", (32, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, )
+                big_blk_col = np.hstack((big_blk_col, tile))
+            big_blk = np.vstack((big_blk, big_blk_col))
+        tile_big = np.vstack((tile_big, big_blk))
+    tile_big = tile_big.astype(np.uint16)
+    cv2.imwrite(filename, tile_big)
+
+def save_feature_map_p345(filename, features): #输入dict包括P2345，删除P2留下P345
+    features_draw = features.copy()
+    del features_draw["p2"]
+    _save_feature_map_p345(filename, features_draw)
+
+def _save_feature_map_p345(filename, features, debug=False):
+    feat = [features["p3"].squeeze(), features["p4"].squeeze(), features["p5"].squeeze()]
+    width_list = [32, 64, 128]
+    height_list = [8, 4, 2]
+    tile_big = np.empty((0, feat[0].shape[2] * width_list[0]))
+    for blk, width, height in zip(feat, width_list, height_list):
+        big_blk = np.empty((0, blk.shape[2] * width))
+        for row in range(height):
+            big_blk_col = np.empty((blk.shape[1], 0))
+            for col in range(width):
+                tile = blk[col + row * width].cpu().numpy()
+                if debug:
+                    cv2.putText(tile, f"{col + row * width}", (32, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, )
                 big_blk_col = np.hstack((big_blk_col, tile))
             big_blk = np.vstack((big_blk, big_blk_col))
         tile_big = np.vstack((tile_big, big_blk))

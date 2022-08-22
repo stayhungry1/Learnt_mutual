@@ -16,7 +16,7 @@ this file as an example of how to use the library.
 You may want to write your own script with your datasets and other customizations.
 """
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 import sys
 sys.path.append('..')
 

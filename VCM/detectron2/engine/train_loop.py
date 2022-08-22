@@ -291,8 +291,8 @@ class SimpleTrainer(TrainerBase):
         If you need to accumulate gradients or do something similar, you can
         wrap the optimizer with your custom `zero_grad()` method.
         """
-        self.optimizer.zero_grad()
-        losses.backward()
+        # self.optimizer.zero_grad()
+        # losses.backward()
 
         self._write_metrics(loss_dict, data_time)
 
@@ -301,7 +301,7 @@ class SimpleTrainer(TrainerBase):
         wrap the optimizer with your custom `step()` method. But it is
         suboptimal as explained in https://arxiv.org/abs/2006.15704 Sec 3.2.4
         """
-        self.optimizer.step()
+        # self.optimizer.step()
 
     def _write_metrics(
         self,
