@@ -484,7 +484,7 @@ class GeneralizedRCNN(nn.Module):
         compressai_logdir = '/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/tensorboard_belle/EXP_cheng2020anchor_256chinput_P5MSE_ft7imgtrain4999_lambda1_N192_smalltrain5W_eachdnorm_08141750_ceshi1/'
         mkdirs(compressai_logdir)
         self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
-        self.belle_savetensorboardfreq = 20
+        self.belle_savetensorboardfreq = 120
 
         # self.guiyihua_scale = 43.6045
         # self.guiyihua_min = -23.1728
