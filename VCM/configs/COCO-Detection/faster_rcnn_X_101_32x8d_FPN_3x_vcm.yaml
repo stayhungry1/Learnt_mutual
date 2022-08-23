@@ -19,7 +19,8 @@ MODEL:
 #  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_cropzuoshangjiao_lambda1_N192_7imgtrain_eachdnorm_08212010/model_0004999.pth"
 #  WEIGHTS: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_replicateyouxiajiao_lambda1_N192_7imgtrain_eachdnorm_08212010/model_0004999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650/model_0004999.pth"
-  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650_1/model_0009999.pth"
+#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650_1/model_0009999.pth"
+  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231950/model_0009999.pth"
   PIXEL_STD: [57.375, 57.120, 58.395]
   RESNETS:
     STRIDE_IN_1X1: False  # this is a C2 model
@@ -46,8 +47,9 @@ MODEL:
 #OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_replicateyouxiajiao_lambda1_N192_ft7imgtrain4999_small5Wtrain_eachdnorm_08221010
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650_1
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrainft4999_small5Wtrain_eachdnorm_08231750
-OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08231750_1
+#OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08231750_1
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231950
+OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08232200
 SOLVER:
   STEPS: (130000, 180000)
   MAX_ITER: 200000
