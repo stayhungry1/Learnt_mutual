@@ -1,5 +1,5 @@
 #_BASE_: "../Base-RCNN-FPN-VCM.yaml"
-#_BASE_: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/Base-RCNN-FPN-VCM.yaml"
+#_BASE_: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/Base-RCNN-FPN-VCM.yaml" #30901
 _BASE_: "/media/data/ccr/liutieCompressAI/VCM/configs/Base-RCNN-FPN-VCM.yaml" #vivo
 MODEL:
   MASK_ON: False
@@ -27,7 +27,7 @@ MODEL:
 #OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4MSE_ft5Wimgtrain5999_lambda1_N192_eachdnorm_fineoutP2MSE_08121750_4kcontinue
 #OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4MSE_ft5Wimgtrain5999_lambda1_N192_eachdnorm_finenet0outP2MSE_08122110_1k3kcontinue
 #OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P5MSE_7imgtrain_lambda1_N192_eachdnorm_08141250
-OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P5MSE_ft7imgtrain4999_lambda1_N192_smalltrain5W_eachdnorm_08141750_ceshi1
+#OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P5MSE_ft7imgtrain4999_lambda1_N192_smalltrain5W_eachdnorm_08141750_ceshi1
 #OUTPUT_DIR: ./EXP_cheng2020attn_256chinput_P2345MSE_lambda1_N192_smalltrain5W_eachdnorm_08162130
 #OUTPUT_DIR: ./EXP_cheng2020anchoraddconv2_256chinput_P4MSE_lambda1_N192_7imgtrain_eachdnorm_08181710
 #OUTPUT_DIR: ./output/EXP_cheng2020anchoraddconv2_256chinput_P4MSE_lambda1_N192_7imgtrainft7999_small5Wtrain_eachdnorm_08191040
@@ -42,6 +42,7 @@ OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P5MSE_ft7imgtrain4999_lambda
 #OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_replicateyouxiajiao_lambda1_N192_7imgtrain_eachdnorm_08212010
 #OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_cropzuoshangjiao_lambda1_N192_ft7imgtrain4999_small5Wtrain_eachdnorm_082221010
 #OUTPUT_DIR: ./output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_replicateyouxiajiao_lambda1_N192_ft7imgtrain4999_small5Wtrain_eachdnorm_08221010
+OUTPUT_DIR: .,/../liutie_save/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650
 SOLVER:
   STEPS: (130000, 180000)
   MAX_ITER: 200000
