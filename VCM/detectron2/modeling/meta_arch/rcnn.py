@@ -96,11 +96,6 @@ def Pfeature_replicatepad_youxiajiao(feat, factor=16): #相比于Pfeature_replic
 def Pfeature_zeropad_youxiajiao128(feat, factor=16): #相比于Pfeature_replicatepad的区别为pad从上下左右变为右下角 输入feat为[b, 256, h, w]
     h = feat.size()[2]
     w = feat.size()[3]
-    #加了下面4行，hw最小为128
-    if h < 128:
-        h = 128
-    if w < 128:
-        w = 128
     if h % factor == 0:
         h_new = h
     else:
@@ -109,6 +104,11 @@ def Pfeature_zeropad_youxiajiao128(feat, factor=16): #相比于Pfeature_replicat
         w_new = w
     else:
         w_new = ((w // factor) + 1) * factor
+    #加了下面4行让hw_new最小为128
+    if h_new < 128:
+        h_new = 128
+    if w_new < 128:
+        w_new = 128
     h_new_left = 0 #(h_new - h) // 2
     h_new_right = h_new - h
     w_new_left = 0
@@ -553,7 +553,7 @@ class GeneralizedRCNN(nn.Module):
         self.i_step_count = 0
         # compressai_logdir = '/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_replicateyouxiajiao_lambda1_N192_ft7imgtrain4999_small5Wtrain_eachdnorm_08221010/'
         # compressai_logdir = '/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650/'
-        compressai_logdir = '../../../../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650/'
+        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650/'
         mkdirs(compressai_logdir)
         self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
         self.belle_savetensorboardfreq = 100
