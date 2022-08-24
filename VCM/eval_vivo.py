@@ -195,7 +195,7 @@ class Eval:
 
         # self.path_bppsave = 'output/cheng_onlycompressP2_bpp_lambda1e0.json' #P2inP2out
         # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP2outputP4_bpp_lambda1e0.json'
-        self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP3outputP3zeropad128_bpp_lambda1e0_iter14999.json'
+        self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP3outputP3zeropad128_bpp_lambda1e0_iter9999.json'
         self.bpp_test5000 = {}
 
     def prepare_dir(self):
