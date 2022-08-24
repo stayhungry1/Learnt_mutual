@@ -3,7 +3,7 @@
 !docker/vivossh/*
 !ywzfiles/*
 !.yml
-!*.json
+!VCM/settings/*.json
 !.gitignore
 !*.py
 !*.pyc
