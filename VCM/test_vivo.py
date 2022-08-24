@@ -18,7 +18,7 @@ os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/testimg2' #vivo61
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--index", default=28, type=int) #1
+    parser.add_argument("-i", "--index", default=10, type=int) #1
     parser.add_argument("-n", "--number", default=5000, type=int)
     parser.add_argument("-m", "--mode", default='feature_coding')
     # parser.add_argument("-m", "--mode", default='evaluation')
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     elif mode == "evaluation":
         # filenames = glob.glob(f"/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/feature/{set_idx}_rec/*.png")
         # filenames = glob.lob(f"feature/{set_idx}_rec/*.png")
-        filenames = glob.glob(f"feature/{set_idx}_ori/*.png") #cheng2020anchor只压缩P2, 所以用P345 original的文件夹42_ori
+        filenames = glob.glob(f"../../liutie_save/feature/{set_idx}_ori/*.png") #cheng2020anchor只压缩P2, 所以用P345 original的文件夹42_ori
         methods_eval.evaluation(filenames)
 
     elif mode == "evaluation_offline":
