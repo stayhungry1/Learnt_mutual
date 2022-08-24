@@ -2,7 +2,6 @@
 !*/
 !docker/vivossh/*
 !ywzfiles/*
-!.json
 !.yml
 !.gitignore
 !*.py
