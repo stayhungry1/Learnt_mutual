@@ -186,13 +186,19 @@ class RateDistortionLoss(nn.Module):  # 只注释掉了109行的bpp_loss, 080218
     def forward(self, output, target, height, width):  # 0.001 #, lq, x_l, x_enh
         N, _, _, _ = target.size()
         out = {}
-        # num_pixels = N * H * W
+        num_pixels_feature = N * H * W
         num_pixels = N * height * width
+        print('ratedistortion functions: image hxw: %dx%d, num_pixel: %d' % (height, width, num_pixels))
 
         out["bpp_loss"] = sum(
             (torch.log(likelihoods).sum() / (-math.log(2) * num_pixels))
             for likelihoods in output["likelihoods"].values()
         )
+        bpp_temp = sum(
+            (torch.log(likelihoods).sum() / (-math.log(2) * num_pixels_feature))
+            for likelihoods in output["likelihoods"].values()
+        )
+        print('ratedistortion functions: bpp_img/bpp_feat: %8.4f/%8.4f' % (out["bpp_loss"].item(), bpp_temp))
         # # out["mse_loss"] = self.mse(lq, target)
         out["mse_loss"] = self.mse(output["x_hat"], target)
         out["loss"] = self.lmbda * 255 ** 2 * out["mse_loss"] + out["bpp_loss"]  # lambda越小 bpp越小 越模糊 sigma预测的越准，熵越小
@@ -343,7 +349,8 @@ class Eval:
         heigh_temp = self.height_temp
         width_temp = self.width_temp
         numpixel_temp = self.numpixel_temp
-        out_criterion = self.criterion(net_belle_output, d, heigh_temp, width_temp)
+        out_criterion = self.criterion(net_belle_output, d, heigh_temp, width_temp) #net_belle_output和d为pad后的
+        print('image hxw: %dx%d, num_pixel: %d' % (heigh_temp, width_temp, numpixel_temp))
         # define_mse = nn.MSELoss()
         # net_belle_output["x_hat"] = d_output  # [1, 256, 208, 304]->[1, 256, 200, 304]
         # out_criterion["mse_loss"] = define_mse(net_belle_output["x_hat"], d_p4)
