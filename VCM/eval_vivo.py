@@ -17,7 +17,7 @@ import utils
 from quantizer import quant_fix, dequant_fix
 # from VTM_encoder import run_vtm
 from VTM_encoder_ccr import run_vtm
-from cvt_detectron_coco_oid import conversion
+from cvt_detectron_coco_oid_vivo import conversion
 import scipy.io as sio
 from typing import Tuple, Union
 import PIL.Image as Image
