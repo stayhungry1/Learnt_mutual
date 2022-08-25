@@ -184,7 +184,8 @@ class RateDistortionLoss(nn.Module):  # 只注释掉了109行的bpp_loss, 080218
 
     # def forward(self, output, target, lq, x_l, x_enh): #0.001
     def forward(self, output, target, height, width):  # 0.001 #, lq, x_l, x_enh
-        N, _, _, _ = target.size()
+        # N, _, _, _ = target.size()
+        N, _, H, W = target.size()
         out = {}
         num_pixels_feature = N * H * W
         num_pixels = N * height * width
