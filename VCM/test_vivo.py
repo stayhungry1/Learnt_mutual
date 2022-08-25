@@ -18,7 +18,7 @@ os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/OpenImageV6-5K' #vivo61
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--index", default=10, type=int) #1
+    parser.add_argument("-i", "--index", default=14, type=int) #1
     parser.add_argument("-n", "--number", default=5000, type=int)
     parser.add_argument("-m", "--mode", default='feature_coding')
     # parser.add_argument("-m", "--mode", default='evaluation')
@@ -36,8 +36,8 @@ if __name__ == "__main__":
         methods_eval = DetectEval(settings, set_idx)
         picklist = sorted(glob.glob(os.path.join(os.environ["DETECTRON2_DATASETS"], "*.jpg")))[:number]
         picklist = [utils.simple_filename(x) for x in picklist]
-        methods_eval.prepare_part(picklist, data_name="pick") #QP10
-        # methods_eval.prepare_part(picklist, data_name="pick1") #QP14
+        # methods_eval.prepare_part(picklist, data_name="pick") #QP10
+        methods_eval.prepare_part(picklist, data_name="pick1") #QP14
 
     if mode == "feature_coding":
         filenames = methods_eval.feature_coding()
