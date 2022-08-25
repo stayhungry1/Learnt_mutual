@@ -8,7 +8,7 @@ import utils
 from eval import DetectEval
 
 # os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/OpenImageV6-5K' #vivo61
 #os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/testimg2' #vivo61
 os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/OpenImageV6-5K' #30901
@@ -17,10 +17,10 @@ os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/OpenImageV6-5K' #309
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--index", default=28, type=int) #1
+    parser.add_argument("-i", "--index", default=30, type=int) #1
     parser.add_argument("-n", "--number", default=5000, type=int)
-    parser.add_argument("-m", "--mode", default='feature_coding')
-    # parser.add_argument("-m", "--mode", default='evaluation')
+    # parser.add_argument("-m", "--mode", default='feature_coding')
+    parser.add_argument("-m", "--mode", default='evaluation')
 
     args = parser.parse_args()
     set_idx = args.index

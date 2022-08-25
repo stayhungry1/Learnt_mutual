@@ -110,7 +110,7 @@ class Eval:
         self.numpixel_test5000 = json.load(tf)
 
         # self.path_bppsave = 'output/cheng_onlycompressP2_bpp_lambda1e0.json' #P2inP2out
-        self.path_bppsave = 'output/cheng_onlycompressP2outputP4_bpp_lambda1e0.json'
+        self.path_bppsave = 'output/cheng_onlycompressP3outputP5_bpp_lambda1e0.json'
         self.bpp_test5000 = {}
 
     def prepare_dir(self):
