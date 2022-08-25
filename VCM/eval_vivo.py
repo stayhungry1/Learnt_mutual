@@ -297,10 +297,10 @@ class Eval:
         guiyihua_scale = guiyihua_max - guiyihua_min
         ###pad
         d_originalsize = d
-        # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(d, 16)
-        # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao128(d_p4, 16)
-        d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao(d, 16)
-        d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao(d_p4, 16)
+        d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(d, 16)
+        d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao128(d_p4, 16)
+        # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao(d, 16)
+        # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao(d_p4, 16)
         d = (d - guiyihua_min) / guiyihua_scale
         d_p4 = (d_p4 - guiyihua_min) / guiyihua_scale
         d_originalsize = (d_originalsize - guiyihua_min) / guiyihua_scale
