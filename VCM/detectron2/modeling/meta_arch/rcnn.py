@@ -787,24 +787,24 @@ class GeneralizedRCNN(nn.Module):
         cai_input_tensor = features["p2"]  # float32
         cai_input_tensor_p4 = features["p4"]  # float32
         d_originalsize = cai_input_tensor_p4
-        # normlize p2 and p4
-        if torch.min(cai_input_tensor) >= torch.min(cai_input_tensor_p4): #2个数中取小的
-            guiyihua_min = torch.min(cai_input_tensor_p4)
-        else:
-            guiyihua_min = torch.min(cai_input_tensor)
-        if torch.max(cai_input_tensor) >= torch.max(cai_input_tensor_p4): #2个数中取大的
-            guiyihua_max = torch.max(cai_input_tensor)
-        else:
-            guiyihua_max = torch.max(cai_input_tensor_p4)
-        guiyihua_scale = guiyihua_max - guiyihua_min
-        # cai_input_tensor = (cai_input_tensor - guiyihua_min) / guiyihua_scale
-        # cai_input_tensor_p4 = (cai_input_tensor_p4 - guiyihua_min) / guiyihua_scale
         ###pad
         # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(cai_input_tensor, 64)
         # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao128(cai_input_tensor_p4, 16)
         d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao(cai_input_tensor, 64)
         d_down4 = F.interpolate(d, scale_factor=0.25, mode="bilinear", align_corners=False)  # [1, 256, h/4, w/4]->[1, 256, h/8, w/8]
         d_p4, h_new_p4_left, h_new_p4_right, w_new_p4_left, w_new_p4_right = Pfeature_zeropad_youxiajiao(cai_input_tensor_p4, 16)
+        # normlize p2 and p4
+        if torch.min(d_down4) >= torch.min(d_p4): #2个数中取小的
+            guiyihua_min = torch.min(d_p4)
+        else:
+            guiyihua_min = torch.min(d_down4)
+        if torch.max(d_down4) >= torch.max(d_p4): #2个数中取大的
+            guiyihua_max = torch.max(d_down4)
+        else:
+            guiyihua_max = torch.max(d_p4)
+        guiyihua_scale = guiyihua_max - guiyihua_min
+        # cai_input_tensor = (cai_input_tensor - guiyihua_min) / guiyihua_scale
+        # cai_input_tensor_p4 = (cai_input_tensor_p4 - guiyihua_min) / guiyihua_scale
         d = (d - guiyihua_min) / guiyihua_scale
         d_down4 = (d_down4 - guiyihua_min) / guiyihua_scale
         d_p4 = (d_p4 - guiyihua_min) / guiyihua_scale
