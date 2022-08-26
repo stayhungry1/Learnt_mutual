@@ -793,7 +793,7 @@ class GeneralizedRCNN(nn.Module):
         # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(cai_input_tensor, 64)
         # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao128(cai_input_tensor_p4, 16)
         d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao(cai_input_tensor, 64)
-        d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao(cai_input_tensor_p4, 16)
+        d_p4, h_new_p4_left, h_new_p4_right, w_new_p4_left, w_new_p4_right = Pfeature_zeropad_youxiajiao(cai_input_tensor_p4, 16)
         d = (d - guiyihua_min) / guiyihua_scale
         d_p4 = (d_p4 - guiyihua_min) / guiyihua_scale
         d_originalsize = (d_originalsize - guiyihua_min) / guiyihua_scale
@@ -854,7 +854,7 @@ class GeneralizedRCNN(nn.Module):
         self.belle_aux_optimizer.step()
         psnr_temp = 10 * math.log10(1 / out_criterion["mse_loss"].item())
 
-        d_output = Pfeature_zeropad_youxiajiao_reverse(net_belle_output["x_hat"], h_new_left, h_new_right, w_new_left, w_new_right)
+        d_output = Pfeature_zeropad_youxiajiao_reverse(net_belle_output["x_hat"], h_new_p4_left, h_new_p4_right, w_new_p4_left, w_new_p4_right)
         define_mse = nn.MSELoss()
         mse_temp = define_mse(d_output, d_originalsize)
         psnr_temp_originalsize = 10 * math.log10(1 / mse_temp)
