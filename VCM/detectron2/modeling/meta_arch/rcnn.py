@@ -824,7 +824,6 @@ class GeneralizedRCNN(nn.Module):
         d_p4 = d_p4.to(device)
         d_originalsize = d_originalsize.to(device)
         print(d_p4.size(), '-------------------P4_GT afterpad size')
-        aaa
         # #normlize p2 and p4
         # if torch.min(d) >= torch.min(d_p4): #2个数中取小的
         #     guiyihua_min = torch.min(d_p4)
