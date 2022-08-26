@@ -23,8 +23,10 @@ from .build import META_ARCH_REGISTRY
 
 # # --add compressai framework
 import sys
-sys.path.append("/media/data/liutie/VCM/rcnn/VCMbelle_0622")
-sys.path.append("/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM")
+# sys.path.append("/media/data/liutie/VCM/rcnn/VCMbelle_0622")
+# sys.path.append("/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM")
+sys.path.append("/media/data/ccr/liutieCompressAI/")
+sys.path.append("/media/data/ccr/liutieCompressAI/VCM/")
 from compressai.datasets.parse_p2_feature import _joint_split_features
 from examples.train_in_this import * #只用到了IRN_inference和main_cai
 #
