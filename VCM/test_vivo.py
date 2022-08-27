@@ -16,7 +16,7 @@ os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/OpenImageV6-5K' #vivo61
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/m57343_objdet_small_twoimage' #30901
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/rcnn/testimg2' #30901
 
-#####同时跑多个记得修改本文件的pick和eval的bppjson名字这两处
+#####同时跑多个记得修改这两处: 本文件的pick和eval的bppjson名字
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--index", default=10, type=int) #1
