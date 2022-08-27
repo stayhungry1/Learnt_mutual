@@ -230,7 +230,9 @@ class Eval:
 
         # self.path_bppsave = 'output/cheng_onlycompressP2_bpp_lambda1e0.json' #P2inP2out
         # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP2outputP4_bpp_lambda1e0.json'
-        self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP4outputP4zeropad128_bpp_lambda1e0_iter9999.json'
+        # self.path_bppsave = '../../liutie_save/output/cheng_P4inP4outzeropad128_bpp_lambda1e0_iter9999.json'
+        # self.path_bppsave = '../../liutie_save/output/cheng_P4inP4outzeropad128_bpp_lambda1e0_iter44999.json'
+        self.path_bppsave = '../../liutie_save/output/cheng_P4inP4outzeropad16_bpp_lambda1e0_iter39999.json'
         self.bpp_test5000 = {}
 
     def prepare_dir(self):
@@ -297,10 +299,10 @@ class Eval:
         guiyihua_scale = guiyihua_max - guiyihua_min
         ###pad
         d_originalsize = d
-        # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(d, 16)
-        # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao128(d_p4, 16)
-        d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao(d, 16)
-        d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao(d_p4, 16)
+        d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(d, 16)
+        d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao128(d_p4, 16)
+        # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao(d, 16)
+        # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao(d_p4, 16)
         d = (d - guiyihua_min) / guiyihua_scale
         d_p4 = (d_p4 - guiyihua_min) / guiyihua_scale
         d_originalsize = (d_originalsize - guiyihua_min) / guiyihua_scale
@@ -330,8 +332,7 @@ class Eval:
         # d_output = torch.zeros(temp_ori_size_p4)  # 用于从网络输出的tensor取出左上角
         net_belle_output = self.model.net_belle(d)
         print(net_belle_output["x_hat"].size(), '-------------------Cheng output (P4) size')
-        # d_output = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output["x_hat"], h_new_left, h_new_right, w_new_left, w_new_right)
-        d_output = Pfeature_zeropad_youxiajiao_reverse(net_belle_output["x_hat"], h_new_left, h_new_right, w_new_left, w_new_right)
+        d_output = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output["x_hat"], h_new_left, h_new_right, w_new_left, w_new_right)
         print('max/min_P4(GT)(Cheng input): %8.4f/%8.4f, max/min_P4(Cheng output): %8.4f/%8.4f'
               % (torch.max(d), torch.min(d), torch.max(d_output), torch.min(d_output)))
         # d_output = net_belle_output["x_hat"][:, :, 0:temp_ori_size_p4[2], 0:temp_ori_size_p4[3]]
