@@ -847,7 +847,8 @@ class GeneralizedRCNN(nn.Module):
         self.belle_aux_optimizer.step()
         psnr_temp = 10 * math.log10(1 / out_criterion["mse_loss"].item())
 
-        d_output = Pfeature_zeropad_youxiajiao_reverse(net_belle_output["x_hat"], h_new_p4_left, h_new_p4_right, w_new_p4_left, w_new_p4_right)
+        # d_output = Pfeature_zeropad_youxiajiao_reverse(net_belle_output["x_hat"], h_new_p4_left, h_new_p4_right, w_new_p4_left, w_new_p4_right)
+        d_output = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output["x_hat"], h_new_left, h_new_right, w_new_left, w_new_right)
         define_mse = nn.MSELoss()
         mse_temp = define_mse(d_output, d_originalsize)
         psnr_temp_originalsize = 10 * math.log10(1 / mse_temp)
