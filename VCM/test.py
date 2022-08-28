@@ -17,7 +17,7 @@ os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/OpenImageV6-5K' #309
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--index", default=30, type=int) #1
+    parser.add_argument("-i", "--index", default=36, type=int) #1
     parser.add_argument("-n", "--number", default=5000, type=int)
     # parser.add_argument("-m", "--mode", default='feature_coding')
     parser.add_argument("-m", "--mode", default='evaluation')
