@@ -9,7 +9,7 @@ import utils
 from eval_vivo import DetectEval
 
 # os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/OpenImageV6-5K' #vivo61
 os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/testimg2' #vivo61
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/OpenImageV6-5K' #30901
