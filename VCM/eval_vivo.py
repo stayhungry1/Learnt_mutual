@@ -232,7 +232,7 @@ class Eval:
         # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP2outputP4_bpp_lambda1e0.json'
         # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP4outputP4zeropad128_bpp_lambda1e0_iter9999.json'
         # self.path_bppsave = '../../liutie_save/output/cheng_P4inP4outzeropad16_bpp_lambda1e0_iter39999.json'
-        self.path_bppsave = '../../liutie_save/output/cheng_P2inP4out_P2zeropad64_bpp_lambda1e0_iter34999.json'
+        self.path_bppsave = '../../liutie_save/output/cheng_P2inP4out_P2zeropad64_bpp_lambda1e0_iter43999.json'
         self.bpp_test5000 = {}
 
     def prepare_dir(self):
