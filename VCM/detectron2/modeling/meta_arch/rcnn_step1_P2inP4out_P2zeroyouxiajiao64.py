@@ -120,7 +120,13 @@ def Pfeature_zeropad_youxiajiao128(feat, factor=16): #相比于Pfeature_replicat
     feat_pad = pad_func(feat)
     return feat_pad, h_new_left, h_new_right, w_new_left, w_new_right #恢复时h_new_left:(h_now-h_right)
 
-def Pfeature_zeropad_youxiajiao(feat, factor=16): #相比于Pfeature_replicatepad的区别为pad从上下左右变为右下角 输入feat为[b, 256, h, w]
+def Pfeature_zeropad_youxiajiao128_reverse(feat, h_new_left, h_new_right, w_new_left, w_new_right): #输入feat为[b, 256, h, w]
+    h = feat.size()[2]
+    w = feat.size()[3]
+    feat_new = feat[:, :, h_new_left:(h-h_new_right), w_new_left:(w-w_new_right)]
+    return feat_new
+
+def Pfeature_zeropad_youxiajiao(feat, factor=16):
     h = feat.size()[2]
     w = feat.size()[3]
     if h % factor == 0:
@@ -579,14 +585,10 @@ class GeneralizedRCNN(nn.Module):
         self.belle_lr_scheduler = optim.lr_scheduler.MultiStepLR(self.optimizer_belle, milestones=[2000, 4250], gamma=0.5)
         self.belle_criterion = RateDistortionLoss(compressaiargs_lambda)
         self.i_step_count = 0
-        # compressai_logdir = '/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_replicateyouxiajiao_lambda1_N192_ft7imgtrain4999_small5Wtrain_eachdnorm_08221010/'
-        # compressai_logdir = '/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650/'
-        # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650/'
-        # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrainft4999_small5Wtrain_eachdnorm_08231750/'
-        # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08231650_1/'
-        # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08231750_1/'
-        # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao_lambda1_N192_zeropad128ft29999_small5Wtrain_eachdnorm_08251850/'
-        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao16_lambda1_N192_7imgtrain_eachdnorm_08291230/'
+        # compressai_logdir = '/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4MSE_ft7imgtrain4999_lambda1_N192_smalltrain5W_eachdnorm_08081740_2_ceshi1/'
+        # compressai_logdir = '/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4MSE_lambda1_N192_smalltrain5W_eachdnorm_08172010/'
+        # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP4outMSE_P2zeroyouxiajiao64_lambda1_N192_7imgtrain_eachdnorm_08262010/'
+        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP4outMSE_P2zeroyouxiajiao64_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08262300/'
         mkdirs(compressai_logdir)
         self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
         self.belle_savetensorboardfreq = 200
@@ -773,12 +775,18 @@ class GeneralizedRCNN(nn.Module):
         # time1_start = time.time()
         device = self.device
         ## ywz add for CAI forward - 使用locals()进行反射
-        cai_input_tensor = features["p3"]  # float32
-        cai_input_tensor_p5 = features["p5"]  # float32
-        d_originalsize = cai_input_tensor_p5
-        #normlize p3 and p5
-        guiyihua_max = torch.max(cai_input_tensor_p5)
-        guiyihua_min = torch.min(cai_input_tensor_p5)
+        cai_input_tensor = features["p2"]  # float32
+        cai_input_tensor_p4 = features["p4"]  # float32
+        d_originalsize = cai_input_tensor_p4
+        # normlize p2 and p4
+        if torch.min(cai_input_tensor) >= torch.min(cai_input_tensor_p4): #2个数中取小的
+            guiyihua_min = torch.min(cai_input_tensor_p4)
+        else:
+            guiyihua_min = torch.min(cai_input_tensor)
+        if torch.max(cai_input_tensor) >= torch.max(cai_input_tensor_p4): #2个数中取大的
+            guiyihua_max = torch.max(cai_input_tensor)
+        else:
+            guiyihua_max = torch.max(cai_input_tensor_p4)
         guiyihua_scale = guiyihua_max - guiyihua_min
         # cai_input_tensor = (cai_input_tensor - guiyihua_min) / guiyihua_scale
         # cai_input_tensor_p4 = (cai_input_tensor_p4 - guiyihua_min) / guiyihua_scale
@@ -786,9 +794,9 @@ class GeneralizedRCNN(nn.Module):
         # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(cai_input_tensor, 64)
         # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao128(cai_input_tensor_p4, 16)
         d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao(cai_input_tensor, 64)
-        d_p5, h_new_p5_left, h_new_p5_right, w_new_p5_left, w_new_p5_right = Pfeature_zeropad_youxiajiao(cai_input_tensor_p5, 16)
+        d_p4, h_new_p4_left, h_new_p4_right, w_new_p4_left, w_new_p4_right = Pfeature_zeropad_youxiajiao(cai_input_tensor_p4, 16)
         d = (d - guiyihua_min) / guiyihua_scale
-        d_p5 = (d_p5 - guiyihua_min) / guiyihua_scale
+        d_p4 = (d_p4 - guiyihua_min) / guiyihua_scale
         d_originalsize = (d_originalsize - guiyihua_min) / guiyihua_scale
         # ###将P2crop成64的倍数
         # h_p2 = cai_input_tensor.size()[2]
@@ -801,13 +809,8 @@ class GeneralizedRCNN(nn.Module):
         # cai_input_tensor_new = torch.zeros(target_size)
         # cai_input_tensor_new = cai_input_tensor[:, 0:cai_input_tensor_new.size()[1], 0:cai_input_tensor_new.size()[2], 0:cai_input_tensor_new.size()[3]]
         # # print(cai_input_tensor_new.size(), '-------------------CAI P2 input new size')
-        # #此2行替换成下面4行
-        # # h_p4_new = int(h_p2_new / 4)
-        # # w_p4_new = int(w_p2_new / 4)
-        # h_p4 = cai_input_tensor_p4.size()[2]
-        # w_p4 = cai_input_tensor_p4.size()[3]
-        # h_p4_new = h_p4 // 16 * 16
-        # w_p4_new = w_p4 // 16 * 16
+        # h_p4_new = int(h_p2_new / 4)
+        # w_p4_new = int(w_p2_new / 4)
         # target_size_p4 = [cai_input_tensor_p4.size()[0], cai_input_tensor_p4.size()[1], h_p4_new, w_p4_new]  # [b, 256, 128 / 4, 192 / 4]
         # cai_input_tensor_p4_new = torch.zeros(target_size_p4)
         # cai_input_tensor_p4_new = cai_input_tensor_p4[:, 0:cai_input_tensor_p4_new.size()[1], 0:cai_input_tensor_p4_new.size()[2], 0:cai_input_tensor_p4_new.size()[3]]
@@ -815,19 +818,33 @@ class GeneralizedRCNN(nn.Module):
         ### train CAI framework
         self.net_belle.train()
         # self.net_belle.eval()
+        # d = cai_input_tensor_new #[:, channel_idx: (channel_idx + 1), :, :]
         d = d.to(device)
-        d_p5 = d_p5.to(device)
+        print(d.size(), '-------------------cheng input (P2) size')
+        # d_p4 = cai_input_tensor_p4_new #[:, channel_idx: (channel_idx + 1), :, :]
+        d_p4 = d_p4.to(device)
         d_originalsize = d_originalsize.to(device)
-        # print(d_p4.size(), '-------------------P4_GT size')
-        print(d_p5.size(), '-------------------cheng input (P5) size')
+        print(d_p4.size(), '-------------------P4_GT afterpad size')
+        # #normlize p2 and p4
+        # if torch.min(d) >= torch.min(d_p4): #2个数中取小的
+        #     guiyihua_min = torch.min(d_p4)
+        # else:
+        #     guiyihua_min = torch.min(d)
+        # if torch.max(d) >= torch.max(d_p4): #2个数中取大的
+        #     guiyihua_max = torch.max(d)
+        # else:
+        #     guiyihua_max = torch.max(d_p4)
+        # guiyihua_scale = guiyihua_max - guiyihua_min
+        # d = (d - guiyihua_min) / guiyihua_scale
+        # d_p4 = (d_p4 - guiyihua_min) / guiyihua_scale
         # time1_end = time.time()
         # time1 = time1_end - time1_start
         # time2_start = time.time()
         self.optimizer_belle.zero_grad()  # optimizer.zero_grad()
         self.belle_aux_optimizer.zero_grad()
-        net_belle_output = self.net_belle(d_p5)
-        print(net_belle_output["x_hat"].size(), '-------------------cheng output (P5) size')
-        out_criterion = self.belle_criterion(net_belle_output, d_p5)
+        net_belle_output = self.net_belle(d)
+        print(net_belle_output["x_hat"].size(), '-------------------cheng output (P4) size')
+        out_criterion = self.belle_criterion(net_belle_output, d_p4)
         out_criterion["loss"].backward()
         if self.belle_clip_max_norm > 0:
             torch.nn.utils.clip_grad_norm_(self.net_belle.parameters(), self.belle_clip_max_norm)
@@ -838,7 +855,7 @@ class GeneralizedRCNN(nn.Module):
         self.belle_aux_optimizer.step()
         psnr_temp = 10 * math.log10(1 / out_criterion["mse_loss"].item())
 
-        d_output = Pfeature_zeropad_youxiajiao_reverse(net_belle_output["x_hat"], h_new_p5_left, h_new_p5_right, w_new_p5_left, w_new_p5_right)
+        d_output = Pfeature_zeropad_youxiajiao_reverse(net_belle_output["x_hat"], h_new_p4_left, h_new_p4_right, w_new_p4_left, w_new_p4_right)
         define_mse = nn.MSELoss()
         mse_temp = define_mse(d_output, d_originalsize)
         psnr_temp_originalsize = 10 * math.log10(1 / mse_temp)
@@ -850,10 +867,8 @@ class GeneralizedRCNN(nn.Module):
             f'\tPSNR: {psnr_temp:.3f} |'
             f'\tPSNR_orisize: {psnr_temp_originalsize:.3f} |'
         )
-        # print("i_step: %d, max/min_P2(cheng input): %8.4f/%8.4f, max/min_P4(cheng output): %8.4f/%8.4f, max/min_P4(GT): %8.4f/%8.4f"
-        #       % (self.i_step_count, torch.max(d), torch.min(d), torch.max(net_belle_output["x_hat"]), torch.min(net_belle_output["x_hat"]), torch.max(d_p4), torch.min(d_p4)))
-        print("i_step: %d, max/min_P5(cheng input): %8.4f/%8.4f, max/min_P5(cheng output): %8.4f/%8.4f"
-              % (self.i_step_count, torch.max(d_p5), torch.min(d_p5), torch.max(net_belle_output["x_hat"]), torch.min(net_belle_output["x_hat"])))
+        print("i_step: %d, max/min_P2(cheng input): %8.4f/%8.4f, max/min_P4(cheng output): %8.4f/%8.4f, max/min_P4(GT): %8.4f/%8.4f"
+              % (self.i_step_count, torch.max(d), torch.min(d), torch.max(net_belle_output["x_hat"]), torch.min(net_belle_output["x_hat"]), torch.max(d_p4), torch.min(d_p4)))
 
         #net_belle_output["x_hat"]小于0置为0，大于1置为1
 
@@ -866,9 +881,9 @@ class GeneralizedRCNN(nn.Module):
             self.belle_writer.add_scalar("training/PSNR", psnr_temp, global_step=self.i_step_count)
             self.belle_writer.add_scalar("training/PSNR_orisize", psnr_temp_originalsize, global_step=self.i_step_count)
             self.belle_writer.add_image('images.tensor', images.tensor[0, :, :, :], global_step=self.i_step_count, dataformats='CHW')  # dataformats='HWC')
-            self.belle_writer.add_image('P3_GT', d[0, i_select_channel:(i_select_channel+1), :, :], global_step=self.i_step_count, dataformats='CHW')  # dataformats='HWC')
-            self.belle_writer.add_image('P5_GT', d_p5[0, i_select_channel:(i_select_channel+1), :, :], global_step=self.i_step_count, dataformats='CHW')  # dataformats='HWC')
-            self.belle_writer.add_image('netcheng_output', net_belle_output["x_hat"][0, i_select_channel:(i_select_channel+1), :, :], global_step=self.i_step_count, dataformats='CHW')  # dataformats='HWC')
+            self.belle_writer.add_image('P2_GT', d[0, i_select_channel:(i_select_channel+1), :, :], global_step=self.i_step_count, dataformats='CHW')  # dataformats='HWC')
+            self.belle_writer.add_image('P4_GT', d_p4[0, i_select_channel:(i_select_channel+1), :, :], global_step=self.i_step_count, dataformats='CHW')  # dataformats='HWC')
+            self.belle_writer.add_image('netbelle_output', net_belle_output["x_hat"][0, i_select_channel:(i_select_channel+1), :, :], global_step=self.i_step_count, dataformats='CHW')  # dataformats='HWC')
 
         self.i_step_count = self.i_step_count + 1
 
