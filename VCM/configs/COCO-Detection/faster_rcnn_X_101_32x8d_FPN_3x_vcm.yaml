@@ -60,7 +60,8 @@ MODEL:
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down4inP4outMSE_P2zeroyouxiajiao64_lambda1_N192_7imgtrain_eachdnorm_08262050
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down4inP4outMSE_P2zeroyouxiajiao64_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08271030
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_08271100
-OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao16_lambda1_N192_7imgtrain_eachdnorm_08291230
+#OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao16_lambda1_N192_7imgtrain_eachdnorm_08291230
+OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2inoutMSE_zeroyouxiajiao128_lambda1_N192_7imgtrain_eachdnorm_08291230
 SOLVER:
   STEPS: (130000, 180000)
   MAX_ITER: 200000
