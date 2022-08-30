@@ -292,7 +292,7 @@ class Eval:
 
         d = features['p5']  # [1, 256, 200, 304]
         d_p4 = features['p4']  # [1, 256, 200, 304]
-        print(d.size(), '-------------------P4 original size')
+        print(d.size(), '-------------------P5 original size')
         #normlize p4 and p4
         guiyihua_max = torch.max(d)
         guiyihua_min = torch.min(d)
@@ -302,9 +302,9 @@ class Eval:
         # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(d, 16)
         # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao128(d_p4, 16)
         d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao(d, 16)
-        d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao(d_p4, 16)
+        # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao(d_p4, 16)
         d = (d - guiyihua_min) / guiyihua_scale
-        d_p4 = (d_p4 - guiyihua_min) / guiyihua_scale
+        # d_p4 = (d_p4 - guiyihua_min) / guiyihua_scale
         d_originalsize = (d_originalsize - guiyihua_min) / guiyihua_scale
         print(d.size(), '-------------------Cheng input (P5) size')
         # # normlize p2 and p4
