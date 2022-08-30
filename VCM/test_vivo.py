@@ -19,7 +19,7 @@ os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/OpenImageV6-5K' #vivo61
 #####同时跑多个记得修改这两处: 本文件的pick和eval的bppjson名字
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--index", default=16, type=int) #1
+    parser.add_argument("-i", "--index", default=20, type=int) #1
     parser.add_argument("-n", "--number", default=5000, type=int)
     parser.add_argument("-m", "--mode", default='feature_coding')
     # parser.add_argument("-m", "--mode", default='evaluation')
