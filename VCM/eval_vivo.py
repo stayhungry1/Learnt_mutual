@@ -361,7 +361,7 @@ class Eval:
         heigh_temp = self.height_temp
         width_temp = self.width_temp
         numpixel_temp = self.numpixel_temp
-        out_criterion = self.criterion(net_belle_output, d, heigh_temp, width_temp) #net_belle_output和d为pad后的
+        out_criterion = self.criterion(net_belle_output, d_down2, heigh_temp, width_temp) #net_belle_output和d为pad后的
         print('image hxw: %dx%d, num_pixel: %d' % (heigh_temp, width_temp, numpixel_temp))
         # define_mse = nn.MSELoss()
         # net_belle_output["x_hat"] = d_output  # [1, 256, 208, 304]->[1, 256, 200, 304]
