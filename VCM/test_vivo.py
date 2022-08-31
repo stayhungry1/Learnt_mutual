@@ -37,8 +37,8 @@ if __name__ == "__main__":
         methods_eval = DetectEval(settings, set_idx)
         picklist = sorted(glob.glob(os.path.join(os.environ["DETECTRON2_DATASETS"], "*.jpg")))[:number]
         picklist = [utils.simple_filename(x) for x in picklist]
-        methods_eval.prepare_part(picklist, data_name="pick") #QP10 QP11 QP13 QP20
-        # methods_eval.prepare_part(picklist, data_name="pick1") #QP12 QP15 QP16 QP
+        # methods_eval.prepare_part(picklist, data_name="pick") #QP10 QP11 QP13 QP20
+        methods_eval.prepare_part(picklist, data_name="pick1") #QP12 QP15 QP16
 
     if mode == "feature_coding":
         filenames = methods_eval.feature_coding()
