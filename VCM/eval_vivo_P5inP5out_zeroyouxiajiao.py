@@ -232,7 +232,9 @@ class Eval:
         # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP2outputP4_bpp_lambda1e0.json'
         # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP4outputP4zeropad128_bpp_lambda1e0_iter9999.json'
         # self.path_bppsave = '../../liutie_save/output/cheng_P4inP4outzeropad16_bpp_lambda1e0_iter39999.json'
-        self.path_bppsave = '../../liutie_save/output/cheng_P3inP3outzeropad128_bpp_lambda1e0_iter39999.json'
+        # self.path_bppsave = '../../liutie_save/output/cheng_P5inP5outzeropad16_bpp_lambda1e0_iter39999.json'
+        # self.path_bppsave = '../../liutie_save/output/cheng_P5inP5outzeropad16_bpp_lambda1e0_iter61999.json'
+        self.path_bppsave = '../../liutie_save/output/cheng_P5inP5outzeropad16_bpp_lambda1e0_iter74999.json'
         self.bpp_test5000 = {}
 
     def prepare_dir(self):
@@ -290,23 +292,23 @@ class Eval:
         height_originalimage = images.image_sizes[0]
         width_originalimage = images.image_sizes[0]
 
-        d = features['p3']  # [1, 256, 200, 304]
+        d = features['p5']  # [1, 256, 200, 304]
         d_p4 = features['p4']  # [1, 256, 200, 304]
-        print(d.size(), '-------------------P3 original size')
+        print(d.size(), '-------------------P5 original size')
         #normlize p4 and p4
         guiyihua_max = torch.max(d)
         guiyihua_min = torch.min(d)
         guiyihua_scale = guiyihua_max - guiyihua_min
         ###pad
         d_originalsize = d
-        d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(d, 16)
-        d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao128(d_p4, 16)
-        # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao(d, 16)
+        # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(d, 16)
+        # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao128(d_p4, 16)
+        d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao(d, 16)
         # d_p4, _, _, _, _ = Pfeature_zeropad_youxiajiao(d_p4, 16)
         d = (d - guiyihua_min) / guiyihua_scale
-        d_p4 = (d_p4 - guiyihua_min) / guiyihua_scale
+        # d_p4 = (d_p4 - guiyihua_min) / guiyihua_scale
         d_originalsize = (d_originalsize - guiyihua_min) / guiyihua_scale
-        print(d.size(), '-------------------Cheng input (P3) size')
+        print(d.size(), '-------------------Cheng input (P5) size')
         # # normlize p2 and p4
         # if torch.min(d) >= torch.min(d_p4):  # 2个数中取小的
         #     guiyihua_min = torch.min(d_p4)
@@ -331,10 +333,10 @@ class Eval:
         # d_big_p4[:, 0:temp_ori_size_p4[1], 0:temp_ori_size_p4[2], 0:temp_ori_size_p4[3]] = d_p4
         # d_output = torch.zeros(temp_ori_size_p4)  # 用于从网络输出的tensor取出左上角
         net_belle_output = self.model.net_belle(d)
-        print(net_belle_output["x_hat"].size(), '-------------------Cheng output (P3) size')
-        d_output = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output["x_hat"], h_new_left, h_new_right, w_new_left, w_new_right)
-        # d_output = Pfeature_zeropad_youxiajiao_reverse(net_belle_output["x_hat"], h_new_left, h_new_right, w_new_left, w_new_right)
-        print('max/min_P3(GT)(Cheng input): %8.4f/%8.4f, max/min_P3(Cheng output): %8.4f/%8.4f'
+        print(net_belle_output["x_hat"].size(), '-------------------Cheng output (P5) size')
+        # d_output = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output["x_hat"], h_new_left, h_new_right, w_new_left, w_new_right)
+        d_output = Pfeature_zeropad_youxiajiao_reverse(net_belle_output["x_hat"], h_new_left, h_new_right, w_new_left, w_new_right)
+        print('max/min_P5(GT)(Cheng input): %8.4f/%8.4f, max/min_P5(Cheng output): %8.4f/%8.4f'
               % (torch.max(d), torch.min(d), torch.max(d_output), torch.min(d_output)))
         # d_output = net_belle_output["x_hat"][:, :, 0:temp_ori_size_p4[2], 0:temp_ori_size_p4[3]]
         print(d_output.size(), '-------------------output size')
@@ -343,11 +345,11 @@ class Eval:
         features_cheng = features.copy()
         features_p345 = features.copy()
         # features_cheng["p4"] = d_output * guiyihua_scale + guiyihua_min
-        features_p345["p3"] = d_output * guiyihua_scale + guiyihua_min
+        features_p345["p5"] = d_output * guiyihua_scale + guiyihua_min
         # print('After denormlize: max/min_p2(GT)(Cheng input): %8.4f/%8.4f, max/min_p4(GT): %8.4f/%8.4f, max/min_P4(Cheng output): %8.4f/%8.4f'
         #       % (torch.max(features["p2"]), torch.min(features["p2"]), torch.max(features["p4"]), torch.min(features["p4"]), torch.max(features_p345["p4"]), torch.min(features_p345["p4"])))
-        print('After denormlize: max/min_P3(GT)(Cheng input): %8.4f/%8.4f, max/min_P3(Cheng output): %8.4f/%8.4f'
-              % (torch.max(features["p3"]), torch.min(features["p3"]), torch.max(features_p345["p3"]), torch.min(features_p345["p3"])))
+        print('After denormlize: max/min_P5(GT)(Cheng input): %8.4f/%8.4f, max/min_P5(Cheng output): %8.4f/%8.4f'
+              % (torch.max(features["p5"]), torch.min(features["p5"]), torch.max(features_p345["p5"]), torch.min(features_p345["p5"])))
         cheng_feat = quant_fix(features_cheng.copy())
 
         heigh_temp = self.height_temp
@@ -508,28 +510,18 @@ class Eval:
         print(fname)
         # fname_ds_rec = fname.replace('rec', 'ds_rec')
         # # fname_resid_rec = fname.replace('rec', 'resid_rec')
-        # fname_ds_rec = fname.replace('ori', 'ds')  # QP36原始
-        ## fname_ds_rec = fname.replace('36_ori', '42_ds') #暂时没用
-        fname_p4 = fname.replace('12_ori', '10_ori')  #P4
-        fname_p2 = fname.replace('12_ori', '21_ds')  #P2
-        fname_p5= fname.replace('12_ori', '16_ori')  #P5
+        fname_ds_rec = fname.replace('ori', 'ds')  # QP36原始
+        # fname_ds_rec = fname.replace('36_ori', '42_ds') #QP36
 
         with open(f"../../liutie_save/info/{self.set_idx}/{fname_simple}_inputs.bin", "rb") as inputs_f:
             inputs = torch.load(inputs_f)
 
         images = self.model.preprocess_image(inputs)
         features = self.feat2feat_p345(fname)  # P3P4P5P6 float32
-        # features_ds = self.feat2feat_onlyp2(fname_ds_rec)  # P2 float32
-        features_p2 = self.feat2feat_onlyp2(fname_p2)
-        features_p4 = self.feat2feat_p345(fname_p4)
-        features_p5 = self.feat2feat_p345(fname_p5)
-
-        ## features_resid = self.feat2feat_onlyp2(fname_resid_rec)
-        ## resid = features_resid['p2']
-        # features['p2'] = features_ds['p2']  # 给features(只有P3456)加上P2
-        features['p2'] = features_p2['p2']  # 给features(只有P3456)加上P2
-        features['p4'] = features_p4['p4']  #把12_ori的P4拿来用
-        features['p5'] = features_p5['p5']  #把12_ori的P4拿来用
+        features_ds = self.feat2feat_onlyp2(fname_ds_rec)  # P2 float32
+        # features_resid = self.feat2feat_onlyp2(fname_resid_rec)
+        # resid = features_resid['p2']
+        features['p2'] = features_ds['p2']  # 给features(只有P3456)加上P2
         features['p2'] = features['p2'].type(torch.float64)
         features['p3'] = features['p3'].type(torch.float64)
         features['p4'] = features['p4'].type(torch.float64)
