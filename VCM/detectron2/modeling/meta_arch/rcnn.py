@@ -901,7 +901,7 @@ class GeneralizedRCNN(nn.Module):
         print("i_step: %d, max/min_P3(cheng input): %8.4f/%8.4f, max/min_P3(cheng output): %8.4f/%8.4f"
               % (self.i_step_count, torch.max(d_p3), torch.min(d_p3), torch.max(net_belle_output["x_hat"]), torch.min(net_belle_output["x_hat"])))
 
-        fake_image_f_GT = d_p3
+        fake_image_f_GT = d
         upsample = torch.nn.Upsample(scale_factor=2, mode='bilinear')
         up_image = upsample(net_belle_output["x_hat"])
         self.finenet_optimizer.zero_grad()
