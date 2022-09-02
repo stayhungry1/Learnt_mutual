@@ -598,10 +598,8 @@ class GeneralizedRCNN(nn.Module):
         # # self.net_belle = Cheng2020AttentionMulti(N=192)
         self.net_belle = Cheng2020Anchor(N=192)
         self.net_belle = self.net_belle.to(device)
-        # print('#####################################PRINT NET_BELLE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        # print(self.net_belle)
-        self.optimizer_belle, self.belle_aux_optimizer = configure_optimizers(self.net_belle, compressaiargs_learning_rate, compressaiargs_aux_learning_rate)
-        self.belle_lr_scheduler = optim.lr_scheduler.MultiStepLR(self.optimizer_belle, milestones=[2000, 4250], gamma=0.5)
+        # self.optimizer_belle, self.belle_aux_optimizer = configure_optimizers(self.net_belle, compressaiargs_learning_rate, compressaiargs_aux_learning_rate)
+        # self.belle_lr_scheduler = optim.lr_scheduler.MultiStepLR(self.optimizer_belle, milestones=[2000, 4250], gamma=0.5)
         self.belle_criterion = RateDistortionLoss(compressaiargs_lambda)
         self.i_step_count = 0
         # compressai_logdir = '/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/tensorboard_belle/EXP_cheng2020anchor_256chinput_P4inP4outMSE_replicateyouxiajiao_lambda1_N192_ft7imgtrain4999_small5Wtrain_eachdnorm_08221010/'
@@ -876,14 +874,14 @@ class GeneralizedRCNN(nn.Module):
         net_belle_output = self.net_belle(d_p3)
         print(net_belle_output["x_hat"].size(), '-------------------cheng output (P3) size')
         out_criterion = self.belle_criterion(net_belle_output, d_p3)
-        out_criterion["loss"].backward()
-        if self.belle_clip_max_norm > 0:
-            torch.nn.utils.clip_grad_norm_(self.net_belle.parameters(), self.belle_clip_max_norm)
-        self.optimizer_belle.step()
+        # out_criterion["loss"].backward()
+        # if self.belle_clip_max_norm > 0:
+        #     torch.nn.utils.clip_grad_norm_(self.net_belle.parameters(), self.belle_clip_max_norm)
+        # self.optimizer_belle.step()
 
         aux_loss = self.net_belle.aux_loss()
-        aux_loss.backward()
-        self.belle_aux_optimizer.step()
+        # aux_loss.backward()
+        # self.belle_aux_optimizer.step()
         psnr_temp = 10 * math.log10(1 / out_criterion["mse_loss"].item())
 
         d_output = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output["x_hat"], h_new_p3_left, h_new_p3_right, w_new_p3_left, w_new_p3_right)
