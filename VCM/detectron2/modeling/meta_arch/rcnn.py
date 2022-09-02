@@ -932,6 +932,11 @@ class GeneralizedRCNN(nn.Module):
         loss_l2_P3GT = define_mse(up_image_P3GT, d_originalsize_p2)
         psnr_temp_upP3GT_originalsize = 10 * math.log10(1 / loss_l2_P3GT)
 
+        print("FINENET train_loss:%8.4f, (ori)dpsnr/psnr/psnr0: %8.4f/%8.4f/%8.4f, (ori)psnr_upP3GT: %8.4f, max/min_P2(GT): %8.4f/%8.4f, max/min_P3up(Finenet input): %8.4f/%8.4f, max/min_P2(FineNet output): %8.4f/%8.4f"
+            % (loss_l2, dpsnr_temp_originalsize, psnr_temp_originalsize_1, psnr_temp_originalsize_0, psnr_temp_upP3GT_originalsize, torch.max(fake_image_f_GT),
+               torch.min(fake_image_f_GT), torch.max(up_image), torch.min(up_image), torch.max(fake_image_f),
+               torch.min(fake_image_f)))
+
         if (self.i_step_count % self.belle_savetensorboardfreq == 0): # and (channel_idx == 0):
             i_select_channel = random.randint(0, 255)
             self.belle_writer.add_scalar("training/Loss", out_criterion["loss"], global_step=self.i_step_count)
