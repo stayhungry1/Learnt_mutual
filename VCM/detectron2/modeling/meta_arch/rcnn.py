@@ -866,11 +866,11 @@ class GeneralizedRCNN(nn.Module):
         d_originalsize = d_originalsize.to(device)
         # print(d_p4.size(), '-------------------P4_GT size')
         print(d_p3.size(), '-------------------cheng input (P3) size')
-        # time1_end = time.time()
-        # time1 = time1_end - time1_start
-        # time2_start = time.time()
-        self.optimizer_belle.zero_grad()  # optimizer.zero_grad()
-        self.belle_aux_optimizer.zero_grad()
+        ## time1_end = time.time()
+        ## time1 = time1_end - time1_start
+        ## time2_start = time.time()
+        # self.optimizer_belle.zero_grad()  # optimizer.zero_grad()
+        # self.belle_aux_optimizer.zero_grad()
         net_belle_output = self.net_belle(d_p3)
         print(net_belle_output["x_hat"].size(), '-------------------cheng output (P3) size')
         out_criterion = self.belle_criterion(net_belle_output, d_p3)
