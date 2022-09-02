@@ -30,7 +30,8 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao64_lambda1_N192_7imgtrain_eachdnorm_08291900/model_0009999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P4inP4outMSE_zeroyouxiajiao_lambda1_N192_7imgtrain_eachdnorm_08301600/model_0009999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_08271100/model_0028999.pth"
-  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_small5Wtrain_eachdnorm_09011100/model_0014999.pth"
+#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_small5Wtrain_eachdnorm_09011100/model_0014999.pth"
+  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09011500/model_0011999.pth"
   PIXEL_STD: [57.375, 57.120, 58.395]
   RESNETS:
     STRIDE_IN_1X1: False  # this is a C2 model
@@ -70,7 +71,8 @@ MODEL:
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_08271100
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_08271100_29kcontinue
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_small5Wtrain_eachdnorm_09011100
-OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09011500
+#OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09011500
+OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12kcontinue_09021000
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao16_lambda1_N192_7imgtrain_eachdnorm_08291230
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao16_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08291510
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao64_lambda1_N192_7imgtrain_eachdnorm_08291900
