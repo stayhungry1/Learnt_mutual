@@ -922,6 +922,7 @@ class GeneralizedRCNN(nn.Module):
         mse_ori_temp = define_mse(d_output_p2, d_originalsize_p2)
         psnr_temp_originalsize_1 = 10 * math.log10(1 / mse_ori_temp)
 
+        up_image = Pfeature_zeropad_youxiajiao256_reverse(up_image, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right)
         loss_l2_0 = define_mse(up_image, d_originalsize_p2)
         psnr_temp_originalsize_0 = 10 * math.log10(1 / loss_l2_0)
         dpsnr_temp_originalsize = psnr_temp_originalsize_1 - psnr_temp_originalsize_0
