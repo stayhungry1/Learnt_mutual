@@ -514,7 +514,7 @@ class Eval:
         # fname_p4 = fname.replace('12_ori', '10_ori')  #P4
         # fname_p2 = fname.replace('12_ori', '21_ds')  #P2
         # fname_p5= fname.replace('12_ori', '16_ori')  #P5
-        #12+10,21,16
+        #12+10,21,18
         fname_p4 = fname.replace('12_ori', '10_ori')  #P4
         fname_p2 = fname.replace('12_ori', '21_ds')  #P2
         fname_p5= fname.replace('12_ori', '18_ori')  #P5
