@@ -890,7 +890,7 @@ class GeneralizedRCNN(nn.Module):
         self.belle_aux_optimizer.zero_grad()
         net_belle_output = self.net_belle(d)
         print(net_belle_output["x_hat"].size(), '-------------------cheng output (P3) size')
-        out_criterion = self.belle_criterion(net_belle_output, d)
+        out_criterion = self.belle_criterion(net_belle_output, d_p3)
         out_criterion["loss"].backward()
         if self.belle_clip_max_norm > 0:
             torch.nn.utils.clip_grad_norm_(self.net_belle.parameters(), self.belle_clip_max_norm)
