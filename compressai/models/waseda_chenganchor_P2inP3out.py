@@ -185,7 +185,7 @@ class Cheng2020Anchor_addconv2_P2P3inP4P5out(JointAutoregressiveHierarchicalPrio
         return net
 
 
-class Cheng2020Anchor(JointAutoregressiveHierarchicalPriors): #_P2P3inP4P5outnoprobolem
+class Cheng2020Anchor(JointAutoregressiveHierarchicalPriors): #_P2inP3outnoprobolem
     """Anchor model variant from `"Learned Image Compression with
     Discretized Gaussian Mixture Likelihoods and Attention Modules"
     <https://arxiv.org/abs/2001.01568>`_, by Zhengxue Cheng, Heming Sun, Masaru
@@ -243,7 +243,7 @@ class Cheng2020Anchor(JointAutoregressiveHierarchicalPriors): #_P2P3inP4P5outnop
             ResidualBlock(N, N),
             ResidualBlockUpsample(N, N, 2), #rm TODO P4
             ResidualBlock(N, N),
-            subpel_conv3x3(N, 256, 2), #rm TODO P4
+            subpel_conv3x3(N, 256, 1), #TODO P4
         )
 
     @classmethod
