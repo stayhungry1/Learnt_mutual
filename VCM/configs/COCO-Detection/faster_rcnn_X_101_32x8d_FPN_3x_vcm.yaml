@@ -36,7 +36,8 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08232200/model_0039999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_finenet_09011130/model_0001999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_finenet_2kcontinue_09021500/model_0060999.pth"
-  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrain_eachdnorm_09051830/model_0009999.pth"
+#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrain_eachdnorm_09051830/model_0009999.pth"
+  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_09052300/model_0015999.pth"
   PIXEL_STD: [57.375, 57.120, 58.395]
   RESNETS:
     STRIDE_IN_1X1: False  # this is a C2 model
@@ -89,7 +90,8 @@ MODEL:
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_finenet_2kcontinue_09021500
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_finenet_2k61kcontinue_09041700
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrain_eachdnorm_09051830
-OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_09052300
+#OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_09052300
+OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230
 SOLVER:
   STEPS: (130000, 180000)
   MAX_ITER: 200000
