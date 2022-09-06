@@ -357,8 +357,8 @@ class Eval:
             guiyihua_max = torch.max(d_p3)
         guiyihua_scale = guiyihua_max - guiyihua_min
         ###pad
-        d, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right = Pfeature_zeropad_youxiajiao256(cai_input_tensor, 32)
-        d_p3, h_new_p3_left, h_new_p3_right, w_new_p3_left, w_new_p3_right = Pfeature_zeropad_youxiajiao128(cai_input_tensor_p3, 16)
+        d, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right = Pfeature_zeropad_youxiajiao256(d, 32)
+        d_p3, h_new_p3_left, h_new_p3_right, w_new_p3_left, w_new_p3_right = Pfeature_zeropad_youxiajiao128(d_p3, 16)
         d = (d - guiyihua_min) / guiyihua_scale
         d_p3 = (d_p3 - guiyihua_min) / guiyihua_scale
         d_originalsize = (d_originalsize - guiyihua_min) / guiyihua_scale
