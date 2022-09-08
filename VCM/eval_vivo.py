@@ -580,8 +580,8 @@ class Eval:
         fname_ds_rec = fname.replace('ori', 'ds')  # QP36原始
         # fname_ds_rec = fname.replace('36_ori', '42_ds') #QP36
         #33+10,18
-        fname_p4 = fname.replace('31_ori', '10_ori')  #P4
-        fname_p5= fname.replace('31_ori', '18_ori')  #P5
+        fname_p4 = fname.replace('33_ori', '10_ori')  #P4
+        fname_p5= fname.replace('33_ori', '18_ori')  #P5
 
         with open(f"../../liutie_save/info/{self.set_idx}/{fname_simple}_inputs.bin", "rb") as inputs_f:
             inputs = torch.load(inputs_f)
