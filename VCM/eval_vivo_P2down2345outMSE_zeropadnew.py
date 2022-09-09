@@ -221,8 +221,16 @@ class Eval:
 
         # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP2_bpp_lambda1e0.json' #P2inP2out
         # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP2outputP4_bpp_lambda1e0.json'
-        self.path_bppsave = '../../liutie_save/output/chengattn_P2down2P345_bpp_lambda1e0.json'
+        self.path_bppsave = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda1e0.json'
+        self.path_bppsave_p2 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda1e0_P2.json'
+        self.path_bppsave_p3 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda1e0_P3.json'
+        self.path_bppsave_p4 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda1e0_P4.json'
+        self.path_bppsave_p5 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda1e0_P5.json'
         self.bpp_test5000 = {}
+        self.bpp_test5000_p2 = {}
+        self.bpp_test5000_p3 = {}
+        self.bpp_test5000_p4 = {}
+        self.bpp_test5000_p5 = {}
 
     def prepare_dir(self):
         os.makedirs(f"../../liutie_save/info/{self.set_idx}", exist_ok=True)
@@ -253,6 +261,7 @@ class Eval:
                     continue
                 filenames.append(self._feature_coding(inputs, fname_temp)) #inputs是filename 15d64d, height 680, width 1024, image_id 19877和image这个tensor [3, 800, 1205] uint8 大于1
                 pbar.update()
+        ###bpp_all
         tf = open(self.path_bppsave, "r")
         bpp_test5000 = json.load(tf)
         bpp_sum = 0
@@ -263,6 +272,50 @@ class Eval:
             i_count = i_count + 1
             print('i_count: %d, bpp: %8.4f, %s' %(i_count, bpp_test5000[key][0], key))
         print('average bpp: %8.4f' %(bpp_sum / i_count))
+        ###bpp_P2
+        tf_p2 = open(self.path_bppsave_p2, "r")
+        bpp_test5000_p2 = json.load(tf_p2)
+        bpp_sum_p2 = 0
+        i_count_p2 = 0
+        for key in bpp_test5000_p2:
+            bpp_temp = bpp_test5000_p2[key]
+            bpp_sum_p2 = bpp_sum_p2 + bpp_temp[0]
+            i_count_p2 = i_count_p2 + 1
+            # print('i_count: %d, bpp: %8.4f, %s' % (i_count, bpp_test5000_p2[key][0], key))
+        print('average bpp_p2: %8.4f' % (bpp_sum_p2 / i_count_p2))
+        ###bpp_P3
+        tf_p3 = open(self.path_bppsave_p3, "r")
+        bpp_test5000_p3 = json.load(tf_p3)
+        bpp_sum_p3 = 0
+        i_count_p3 = 0
+        for key in bpp_test5000_p3:
+            bpp_temp = bpp_test5000_p3[key]
+            bpp_sum_p3 = bpp_sum_p3 + bpp_temp[0]
+            i_count_p3 = i_count_p3 + 1
+            # print('i_count: %d, bpp: %8.4f, %s' % (i_count, bpp_test5000_p2[key][0], key))
+        print('average bpp_p3: %8.4f' % (bpp_sum_p3 / i_count_p3))
+        ###bpp_P4
+        tf_p4 = open(self.path_bppsave_p4, "r")
+        bpp_test5000_p4 = json.load(tf_p4)
+        bpp_sum_p4 = 0
+        i_count_p4 = 0
+        for key in bpp_test5000_p4:
+            bpp_temp = bpp_test5000_p4[key]
+            bpp_sum_p4 = bpp_sum_p4 + bpp_temp[0]
+            i_count_p4 = i_count_p4 + 1
+            # print('i_count: %d, bpp: %8.4f, %s' % (i_count, bpp_test5000_p2[key][0], key))
+        print('average bpp_p4: %8.4f' % (bpp_sum_p4 / i_count_p4))
+        ###bpp_P5
+        tf_p5 = open(self.path_bppsave_p5, "r")
+        bpp_test5000_p5 = json.load(tf_p5)
+        bpp_sum_p5 = 0
+        i_count_p5 = 0
+        for key in bpp_test5000_p5:
+            bpp_temp = bpp_test5000_p5[key]
+            bpp_sum_p5 = bpp_sum_p5 + bpp_temp[0]
+            i_count_p5 = i_count_p5 + 1
+            # print('i_count: %d, bpp: %8.4f, %s' % (i_count, bpp_test5000_p2[key][0], key))
+        print('average bpp_p5: %8.4f' % (bpp_sum_p5 / i_count_p5))
         print("####################### NOT run VTM!!! ###############################")
         # print("runvtm---------------------runvtmrunvtmrunvtmrunvtmrunvtmrunvtmrunvtm")
         # run_vtm(f"feature/{self.set_idx}_ori", self.VTM_param["QP"], self.VTM_param["threads"])
@@ -440,10 +493,26 @@ class Eval:
         bpp_p2345_temp = out_criterion_p2["bpp_loss"].item() + out_criterion_p3["bpp_loss"].item() + out_criterion_p4["bpp_loss"].item() + out_criterion_p5["bpp_loss"].item()
         print('[P2345] bpp: %8.4f' %(bpp_p2345_temp))
         self.bpp_test5000[fname_temp] = [bpp_p2345_temp]
+        ###bpp_all
         tf = open(self.path_bppsave, "w")
         json.dump(self.bpp_test5000, tf)
         tf.close()
-
+        ###bpp_p2
+        tf_p2 = open(self.path_bppsave_p2, "w")
+        json.dump(self.bpp_test5000_p2, tf_p2)
+        tf_p2.close()
+        ###bpp_p3
+        tf_p3 = open(self.path_bppsave_p3, "w")
+        json.dump(self.bpp_test5000_p3, tf_p3)
+        tf_p3.close()
+        ###bpp_p4
+        tf_p4 = open(self.path_bppsave_p4, "w")
+        json.dump(self.bpp_test5000_p4, tf_p4)
+        tf_p4.close()
+        ###bpp_p5
+        tf_p5 = open(self.path_bppsave_p5, "w")
+        json.dump(self.bpp_test5000_p5, tf_p5)
+        tf_p5.close()
         ##features_resid = features.copy()
         ##features_resid["p2"] = resid_pic
         ##resid_feat = quant_fix(features_resid.copy())
