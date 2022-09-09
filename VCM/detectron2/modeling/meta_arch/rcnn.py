@@ -597,7 +597,8 @@ class GeneralizedRCNN(nn.Module):
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09011500/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12kcontinue_09021000/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/'
-        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda2_N192_7imgtrain_eachdnorm_09092000/'
+        # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda2_N192_7imgtrain_eachdnorm_09092000/'
+        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda2_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09092200/'
         mkdirs(compressai_logdir)
         self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
         self.belle_savetensorboardfreq = 200
