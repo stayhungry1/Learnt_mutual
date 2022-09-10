@@ -493,6 +493,10 @@ class Eval:
         bpp_p2345_temp = out_criterion_p2["bpp_loss"].item() + out_criterion_p3["bpp_loss"].item() + out_criterion_p4["bpp_loss"].item() + out_criterion_p5["bpp_loss"].item()
         print('[P2345] bpp: %8.4f' %(bpp_p2345_temp))
         self.bpp_test5000[fname_temp] = [bpp_p2345_temp]
+        self.bpp_test5000_p2[fname_temp] = [out_criterion_p2["bpp_loss"].item()]
+        self.bpp_test5000_p3[fname_temp] = [out_criterion_p3["bpp_loss"].item()]
+        self.bpp_test5000_p4[fname_temp] = [out_criterion_p4["bpp_loss"].item()]
+        self.bpp_test5000_p5[fname_temp] = [out_criterion_p5["bpp_loss"].item()]
         ###bpp_all
         tf = open(self.path_bppsave, "w")
         json.dump(self.bpp_test5000, tf)
