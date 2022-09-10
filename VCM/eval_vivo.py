@@ -270,7 +270,7 @@ class Eval:
             bpp_temp = bpp_test5000[key]
             bpp_sum = bpp_sum + bpp_temp[0]
             i_count = i_count + 1
-            print('i_count: %d, bpp: %8.4f, %s' %(i_count, bpp_test5000[key][0], key))
+            print('i_count: %d, bpp: %9.6f, %s' %(i_count, bpp_test5000[key][0], key))
         print('average bpp: %8.4f' %(bpp_sum / i_count))
         ###bpp_P2
         tf_p2 = open(self.path_bppsave_p2, "r")
@@ -282,7 +282,7 @@ class Eval:
             bpp_sum_p2 = bpp_sum_p2 + bpp_temp[0]
             i_count_p2 = i_count_p2 + 1
             # print('i_count: %d, bpp: %8.4f, %s' % (i_count, bpp_test5000_p2[key][0], key))
-        print('average bpp_p2: %8.4f' % (bpp_sum_p2 / i_count_p2))
+        print('average bpp_p2: %9.6f' % (bpp_sum_p2 / i_count_p2))
         ###bpp_P3
         tf_p3 = open(self.path_bppsave_p3, "r")
         bpp_test5000_p3 = json.load(tf_p3)
@@ -293,7 +293,7 @@ class Eval:
             bpp_sum_p3 = bpp_sum_p3 + bpp_temp[0]
             i_count_p3 = i_count_p3 + 1
             # print('i_count: %d, bpp: %8.4f, %s' % (i_count, bpp_test5000_p2[key][0], key))
-        print('average bpp_p3: %8.4f' % (bpp_sum_p3 / i_count_p3))
+        print('average bpp_p3: %9.6f' % (bpp_sum_p3 / i_count_p3))
         ###bpp_P4
         tf_p4 = open(self.path_bppsave_p4, "r")
         bpp_test5000_p4 = json.load(tf_p4)
@@ -304,7 +304,7 @@ class Eval:
             bpp_sum_p4 = bpp_sum_p4 + bpp_temp[0]
             i_count_p4 = i_count_p4 + 1
             # print('i_count: %d, bpp: %8.4f, %s' % (i_count, bpp_test5000_p2[key][0], key))
-        print('average bpp_p4: %8.4f' % (bpp_sum_p4 / i_count_p4))
+        print('average bpp_p4: %9.6f' % (bpp_sum_p4 / i_count_p4))
         ###bpp_P5
         tf_p5 = open(self.path_bppsave_p5, "r")
         bpp_test5000_p5 = json.load(tf_p5)
@@ -315,7 +315,7 @@ class Eval:
             bpp_sum_p5 = bpp_sum_p5 + bpp_temp[0]
             i_count_p5 = i_count_p5 + 1
             # print('i_count: %d, bpp: %8.4f, %s' % (i_count, bpp_test5000_p2[key][0], key))
-        print('average bpp_p5: %8.4f' % (bpp_sum_p5 / i_count_p5))
+        print('average bpp_p5: %9.6f' % (bpp_sum_p5 / i_count_p5))
         print("####################### NOT run VTM!!! ###############################")
         # print("runvtm---------------------runvtmrunvtmrunvtmrunvtmrunvtmrunvtmrunvtm")
         # run_vtm(f"feature/{self.set_idx}_ori", self.VTM_param["QP"], self.VTM_param["threads"])
