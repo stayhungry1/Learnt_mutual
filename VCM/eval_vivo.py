@@ -46,13 +46,11 @@ def Pfeature_replicatepad(feat, factor=16): #输入feat为[b, 256, h, w]
     feat_pad = pad_func(feat)
     return feat_pad, h_new_left, h_new_right, w_new_left, w_new_right #恢复时h_new_left:(h_now-h_right)
 
-
 def Pfeature_replicatepad_reverse(feat, h_new_left, h_new_right, w_new_left, w_new_right): #输入feat为[b, 256, h, w]
     h = feat.size()[2]
     w = feat.size()[3]
     feat_new = feat[:, :, h_new_left:(h-h_new_right), w_new_left:(w-w_new_right)]
     return feat_new
-
 
 def Pfeature_replicatepad_youxiajiao(feat, factor=16): #相比于Pfeature_replicatepad的区别为pad从上下左右变为右下角 输入feat为[b, 256, h, w]
     h = feat.size()[2]
@@ -73,7 +71,6 @@ def Pfeature_replicatepad_youxiajiao(feat, factor=16): #相比于Pfeature_replic
     pad_func = nn.ReplicationPad2d((w_new_left, w_new_right, h_new_left, h_new_right))
     feat_pad = pad_func(feat)
     return feat_pad, h_new_left, h_new_right, w_new_left, w_new_right #恢复时h_new_left:(h_now-h_right)
-
 
 def Pfeature_zeropad_youxiajiao128(feat, factor=16): #相比于Pfeature_replicatepad的区别为pad从上下左右变为右下角 输入feat为[b, 256, h, w]
     h = feat.size()[2]
@@ -100,13 +97,11 @@ def Pfeature_zeropad_youxiajiao128(feat, factor=16): #相比于Pfeature_replicat
     feat_pad = pad_func(feat)
     return feat_pad, h_new_left, h_new_right, w_new_left, w_new_right #恢复时h_new_left:(h_now-h_right)
 
-
 def Pfeature_zeropad_youxiajiao128_reverse(feat, h_new_left, h_new_right, w_new_left, w_new_right): #输入feat为[b, 256, h, w]
     h = feat.size()[2]
     w = feat.size()[3]
     feat_new = feat[:, :, h_new_left:(h-h_new_right), w_new_left:(w-w_new_right)]
     return feat_new
-
 
 def Pfeature_zeropad_youxiajiao256(feat, factor=16): #相比于Pfeature_replicatepad的区别为pad从上下左右变为右下角 输入feat为[b, 256, h, w]
     h = feat.size()[2]
@@ -133,13 +128,42 @@ def Pfeature_zeropad_youxiajiao256(feat, factor=16): #相比于Pfeature_replicat
     feat_pad = pad_func(feat)
     return feat_pad, h_new_left, h_new_right, w_new_left, w_new_right #恢复时h_new_left:(h_now-h_right)
 
-
 def Pfeature_zeropad_youxiajiao256_reverse(feat, h_new_left, h_new_right, w_new_left, w_new_right): #输入feat为[b, 256, h, w]
     h = feat.size()[2]
     w = feat.size()[3]
     feat_new = feat[:, :, h_new_left:(h-h_new_right), w_new_left:(w-w_new_right)]
     return feat_new
 
+def Pfeature_zeropad_youxiajiao64(feat, factor=16): #相比于Pfeature_replicatepad的区别为pad从上下左右变为右下角 输入feat为[b, 256, h, w]
+    h = feat.size()[2]
+    w = feat.size()[3]
+    if h % factor == 0:
+        h_new = h
+    else:
+        h_new = ((h // factor) + 1) * factor
+    if w % factor == 0:
+        w_new = w
+    else:
+        w_new = ((w // factor) + 1) * factor
+    #加了下面4行让hw_new最小为64
+    if h_new < 64:
+        h_new = 64
+    if w_new < 64:
+        w_new = 64
+    h_new_left = 0 #(h_new - h) // 2
+    h_new_right = h_new - h
+    w_new_left = 0
+    w_new_right = w_new - w
+    # nn.ReplicationPad2d((1, 2, 3, 2))  #左侧填充1行，右侧填充2行，上方填充3行，下方填充2行
+    pad_func = nn.ZeroPad2d((w_new_left, w_new_right, h_new_left, h_new_right))
+    feat_pad = pad_func(feat)
+    return feat_pad, h_new_left, h_new_right, w_new_left, w_new_right #恢复时h_new_left:(h_now-h_right)
+
+def Pfeature_zeropad_youxiajiao64_reverse(feat, h_new_left, h_new_right, w_new_left, w_new_right): #输入feat为[b, 256, h, w]
+    h = feat.size()[2]
+    w = feat.size()[3]
+    feat_new = feat[:, :, h_new_left:(h-h_new_right), w_new_left:(w-w_new_right)]
+    return feat_new
 
 def Pfeature_zeropad_youxiajiao(feat, factor=16):
     h = feat.size()[2]
@@ -161,13 +185,11 @@ def Pfeature_zeropad_youxiajiao(feat, factor=16):
     feat_pad = pad_func(feat)
     return feat_pad, h_new_left, h_new_right, w_new_left, w_new_right #恢复时h_new_left:(h_now-h_right)
 
-
 def Pfeature_zeropad_youxiajiao_reverse(feat, h_new_left, h_new_right, w_new_left, w_new_right): #输入feat为[b, 256, h, w]
     h = feat.size()[2]
     w = feat.size()[3]
     feat_new = feat[:, :, h_new_left:(h-h_new_right), w_new_left:(w-w_new_right)]
     return feat_new
-
 
 def padding_size(ori_size, factor_size):
     if ori_size % factor_size == 0:
@@ -261,13 +283,10 @@ class Eval:
         tf = open(path_save, "r")
         self.numpixel_test5000 = json.load(tf)
 
-        # self.path_bppsave = 'output/cheng_onlycompressP2_bpp_lambda1e0.json' #P2inP2out
-        # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP2outputP4_bpp_lambda1e0.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP4outputP4zeropad128_bpp_lambda1e0_iter9999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P4inP4outzeropad16_bpp_lambda1e0_iter39999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P3inP3outzeropad128_bpp_lambda1e0_iter39999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P3inP3outzeropad128_bpp_lambda1e0_finenet_iter33999.json'
-        self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1e0_finenet_iter37999.json'
+        # self.path_bppsave = '../../liutie_save/output/cheng_P5inP5outzeropad16_bpp_lambda1e0_iter97999.json'
+        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3out_P2zeropad256_bpp_lambda1e0_iter15999.json'
+        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3out_P2zeropad256_bpp_lambda2e0_iter15999.json'
+        self.path_bppsave = '../../liutie_save/output/cheng_P2inP3out_P2zeropad256_bpp_lambda2e0_iter20999.json'
         self.bpp_test5000 = {}
 
     def prepare_dir(self):
@@ -325,32 +344,27 @@ class Eval:
         height_originalimage = images.image_sizes[0]
         width_originalimage = images.image_sizes[0]
 
-        d_p2 = features['p2']  # [1, 256, 200, 304]
-        d_p3 = features['p3']
-        d_originalsize_p2 = d_p2
-        d_originalsize_p3 = d_p3
-        print(d_p2.size(), '-------------------P2 original size')
-        #normlize p3 and p2
-        if torch.min(d_p2) >= torch.min(d_p3): #2个数中取小的
+        d = features['p2']  # [1, 256, 200, 304]
+        d_p3 = features['p3']  # [1, 256, 200, 304]
+        d_originalsize = d_p3
+        print(d.size(), '-------------------P2 original size')
+        #normlize p4 and p4
+        if torch.min(d) >= torch.min(d_p3): #2个数中取小的
             guiyihua_min = torch.min(d_p3)
         else:
-            guiyihua_min = torch.min(d_p2)
-        if torch.max(d_p2) >= torch.max(d_p3): #2个数中取大的
-            guiyihua_max = torch.max(d_p2)
+            guiyihua_min = torch.min(d)
+        if torch.max(d) >= torch.max(d_p3): #2个数中取大的
+            guiyihua_max = torch.max(d)
         else:
             guiyihua_max = torch.max(d_p3)
         guiyihua_scale = guiyihua_max - guiyihua_min
         ###pad
-        # d_originalsize = d
-        # d, h_new_left, h_new_right, w_new_left, w_new_right = Pfeature_zeropad_youxiajiao128(d, 16)
-        # d_p2, _, _, _, _ = Pfeature_zeropad_youxiajiao128(d_p2, 16)
-        d_p2, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right = Pfeature_zeropad_youxiajiao256(d_p2, 32)
+        d, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right = Pfeature_zeropad_youxiajiao256(d, 32)
         d_p3, h_new_p3_left, h_new_p3_right, w_new_p3_left, w_new_p3_right = Pfeature_zeropad_youxiajiao128(d_p3, 16)
-        d_p2 = (d_p2 - guiyihua_min) / guiyihua_scale
+        d = (d - guiyihua_min) / guiyihua_scale
         d_p3 = (d_p3 - guiyihua_min) / guiyihua_scale
-        d_originalsize_p2 = (d_originalsize_p2 - guiyihua_min) / guiyihua_scale
-        d_originalsize_p3 = (d_originalsize_p3 - guiyihua_min) / guiyihua_scale
-        print(d_p2.size(), '-------------------Cheng input (P2) size')
+        d_originalsize = (d_originalsize - guiyihua_min) / guiyihua_scale
+        print(d.size(), '-------------------Cheng input (P2) size')
         # # normlize p2 and p4
         # if torch.min(d) >= torch.min(d_p4):  # 2个数中取小的
         #     guiyihua_min = torch.min(d_p4)
@@ -374,47 +388,21 @@ class Eval:
         # d_big_p4 = torch.zeros(target_size_p4).cuda()
         # d_big_p4[:, 0:temp_ori_size_p4[1], 0:temp_ori_size_p4[2], 0:temp_ori_size_p4[3]] = d_p4
         # d_output = torch.zeros(temp_ori_size_p4)  # 用于从网络输出的tensor取出左上角
-        net_belle_output = self.model.net_belle(d_p2)
+        net_belle_output = self.model.net_belle(d)
         print(net_belle_output["x_hat"].size(), '-------------------Cheng output (P3) size')
         d_output = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output["x_hat"], h_new_p3_left, h_new_p3_right, w_new_p3_left, w_new_p3_right)
-        print('max/min_P2(GT)(Cheng input): %8.4f/%8.4f, max/min_P3(Cheng output): %8.4f/%8.4f'
-              % (torch.max(d_p2), torch.min(d_p2), torch.max(d_output), torch.min(d_output)))
         print(d_output.size(), '-------------------output size')
+        print('max/min_P2(GT)(Cheng input): %8.4f/%8.4f, max/min_P3(Cheng output): %8.4f/%8.4f'
+              % (torch.max(d), torch.min(d), torch.max(d_output), torch.min(d_output)))
         features_cheng = features.copy()
         features_p345 = features.copy()
         # features_cheng["p4"] = d_output * guiyihua_scale + guiyihua_min
         features_p345["p3"] = d_output * guiyihua_scale + guiyihua_min
         # print('After denormlize: max/min_p2(GT)(Cheng input): %8.4f/%8.4f, max/min_p4(GT): %8.4f/%8.4f, max/min_P4(Cheng output): %8.4f/%8.4f'
         #       % (torch.max(features["p2"]), torch.min(features["p2"]), torch.max(features["p4"]), torch.min(features["p4"]), torch.max(features_p345["p4"]), torch.min(features_p345["p4"])))
-        print('After denormlize: max/min_P3(GT)(Cheng input): %8.4f/%8.4f, max/min_P3(Cheng output): %8.4f/%8.4f'
-              % (torch.max(features["p3"]), torch.min(features["p3"]), torch.max(features_p345["p3"]), torch.min(features_p345["p3"])))
-
-        fake_image_f_GT = d_p2
-        upsample = torch.nn.Upsample(scale_factor=2, mode='bilinear')
-        up_image = upsample(net_belle_output["x_hat"])
-        res = self.model.netG.forward(up_image)
-        fake_image_f = res + up_image
-        d_output_p2 = Pfeature_zeropad_youxiajiao256_reverse(fake_image_f, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right)
-        print(d_output_p2.size(), '-------------------Finenet output P2 size')
-        print('max/min_P3up(Finenet input): %8.4f/%8.4f, max/min_P2(GT): %8.4f/%8.4f, max/min_P2(Finenet output): %8.4f/%8.4f' %(torch.max(up_image), torch.min(up_image), torch.max(d_p2), torch.min(d_p2), torch.max(d_output_p2), torch.min(d_output_p2)))
-
-        features_cheng["p2"] = d_output_p2 * guiyihua_scale + guiyihua_min
+        print('After denormlize: max/min_P2(GT)(Cheng input): %8.4f/%8.4f, max/min_P3(Cheng output): %8.4f/%8.4f'
+              % (torch.max(features["p2"]), torch.min(features["p2"]), torch.max(features_p345["p3"]), torch.min(features_p345["p3"])))
         cheng_feat = quant_fix(features_cheng.copy())
-        print('After denormlize: max/min_P2(GT): %8.4f/%8.4f, max/min_P2(Finenet output): %8.4f/%8.4f' %(torch.max(features["p2"]), torch.min(features["p2"]), torch.max(features_cheng["p2"]), torch.min(features_cheng["p2"])))
-
-        l_l2 = torch.nn.MSELoss().cuda()
-        loss_l2 = l_l2(d_output_p2, d_originalsize_p2)
-        psnr_temp1 = 10 * math.log10(1 / loss_l2)
-
-        up_image = Pfeature_zeropad_youxiajiao256_reverse(up_image, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right)
-        loss_l2_0 = l_l2(up_image, d_originalsize_p2)
-        psnr_temp1_0 = 10 * math.log10(1 / loss_l2_0)
-        dpsnr_temp = psnr_temp1 - psnr_temp1_0
-
-        up_image_P3GT = upsample(d_p3)
-        up_image_P3GT = Pfeature_zeropad_youxiajiao256_reverse(up_image_P3GT, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right)
-        loss_l2_P3GT = l_l2(up_image_P3GT, d_originalsize_p2)
-        psnr_temp1_P3GT = 10 * math.log10(1 / loss_l2_P3GT)
 
         heigh_temp = self.height_temp
         width_temp = self.width_temp
@@ -427,16 +415,13 @@ class Eval:
         # psnr_temp = mse2psnr(out_criterion['mse_loss'])
         # print('bpp: %8.4f, MSE: %8.4f, PSNR: %8.4f' % (out_criterion["bpp_loss"].item(), out_criterion["mse_loss"].item(), psnr_temp))
         define_mse = nn.MSELoss()
-        out_criterion["mse_loss"] = define_mse(d_output, d_originalsize_p3)
+        out_criterion["mse_loss"] = define_mse(d_output, d_originalsize)
         psnr_temp = mse2psnr(out_criterion["mse_loss"])
         print('bpp: %8.4f, MSE: %8.4f, PSNR: %8.4f' % (out_criterion["bpp_loss"].item(), out_criterion["mse_loss"].item(), psnr_temp))
         self.bpp_test5000[fname_temp] = [out_criterion["bpp_loss"].item()]
         tf = open(self.path_bppsave, "w")
         json.dump(self.bpp_test5000, tf)
         tf.close()
-
-        print("FINENET MSE:%8.4f, (ori)dpsnr/psnr/psnr0: %8.4f/%8.4f/%8.4f, psnr_useP3GT: %8.4f, max/min_P2(GT): %8.4f/%8.4f, max/min_P3up(Finenet input): %8.4f/%8.4f, max/min_P2(FineNet output): %8.4f/%8.4f"
-            % (loss_l2, dpsnr_temp, psnr_temp1, psnr_temp1_0, psnr_temp1_P3GT, torch.max(fake_image_f_GT), torch.min(fake_image_f_GT), torch.max(up_image), torch.min(up_image), torch.max(fake_image_f), torch.min(fake_image_f)))
 
         ##features_resid = features.copy()
         ##features_resid["p2"] = resid_pic
@@ -579,8 +564,6 @@ class Eval:
         # # fname_resid_rec = fname.replace('rec', 'resid_rec')
         fname_ds_rec = fname.replace('ori', 'ds')  # QP36原始
         # fname_ds_rec = fname.replace('36_ori', '42_ds') #QP36
-        #33+103
-        fname_p4p5 = fname.replace('33_ori', '103_ori')  #P4P5
 
         with open(f"../../liutie_save/info/{self.set_idx}/{fname_simple}_inputs.bin", "rb") as inputs_f:
             inputs = torch.load(inputs_f)
@@ -588,12 +571,9 @@ class Eval:
         images = self.model.preprocess_image(inputs)
         features = self.feat2feat_p345(fname)  # P3P4P5P6 float32
         features_ds = self.feat2feat_onlyp2(fname_ds_rec)  # P2 float32
-        features_p4p5 = self.feat2feat_p345(fname_p4p5)
         # features_resid = self.feat2feat_onlyp2(fname_resid_rec)
         # resid = features_resid['p2']
         features['p2'] = features_ds['p2']  # 给features(只有P3456)加上P2
-        features['p4'] = features_p4p5['p4']  #把103_ori的P4拿来用
-        features['p5'] = features_p4p5['p5']  #把103_ori的P4拿来用
         features['p2'] = features['p2'].type(torch.float64)
         features['p3'] = features['p3'].type(torch.float64)
         features['p4'] = features['p4'].type(torch.float64)
