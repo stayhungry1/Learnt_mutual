@@ -658,21 +658,16 @@ class Eval:
         # fname_ds_rec = fname.replace('rec', 'ds_rec')
         fname_ds_rec = fname.replace('ori', 'ds') #原始我才用的ori是P345，ds是P2
         # # fname_ds_rec = fname.replace('36_ori', '42_ds') #QP36
-        #33+103
-        fname_p2 = fname.replace('104_ori', '10_ds')  #P2ori
-        fname_p3 = fname.replace('104_ori', '10_ori')  #P3ori
 
         with open(f"../../liutie_save/info/{self.set_idx}/{fname_simple}_inputs.bin", "rb") as inputs_f:
             inputs = torch.load(inputs_f)
 
         images = self.model.preprocess_image(inputs)
         features = self.feat2feat_p345(fname) #P3P4P5P6 float32
-        # features_ds = self.feat2feat_onlyp2(fname_ds_rec) #P2 float32
-        features_p2 = self.feat2feat_onlyp2(fname_p2)
-        features_p3 = self.feat2feat_p345(fname_p3)
-        # features['p2'] = features_ds['p2'] #给features(只有P3456)加上P2
-        features['p2'] = features_p2['p2']  #把10_ori的P3拿来用
-        features['p3'] = features_p3['p3']  #把10_ori的P3拿来用
+        features_ds = self.feat2feat_onlyp2(fname_ds_rec) #P2 float32
+        # features_resid = self.feat2feat_onlyp2(fname_resid_rec)
+        # resid = features_resid['p2']
+        features['p2'] = features_ds['p2'] #给features(只有P3456)加上P2
         features['p2'] = features['p2'].type(torch.float64)
         features['p3'] = features['p3'].type(torch.float64)
         features['p4'] = features['p4'].type(torch.float64)
