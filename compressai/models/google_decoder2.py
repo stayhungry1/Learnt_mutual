@@ -1036,6 +1036,16 @@ class JointAutoregressiveHierarchicalPriors(MeanScaleHyperprior):
             deconv(N, 3, kernel_size=5, stride=2),
         )
 
+        self.g_s_p2 = nn.Sequential(
+            deconv(M, N, kernel_size=5, stride=2),
+            GDN(N, inverse=True),
+            deconv(N, N, kernel_size=5, stride=2),
+            GDN(N, inverse=True),
+            deconv(N, N, kernel_size=5, stride=2),
+            GDN(N, inverse=True),
+            deconv(N, 3, kernel_size=5, stride=2),
+        )
+
         self.h_a = nn.Sequential(
             conv(M, N, stride=1, kernel_size=3),
             nn.LeakyReLU(inplace=True),
@@ -1088,9 +1098,11 @@ class JointAutoregressiveHierarchicalPriors(MeanScaleHyperprior):
         scales_hat, means_hat = gaussian_params.chunk(2, 1)
         _, y_likelihoods = self.gaussian_conditional(y, scales_hat, means=means_hat)
         x_hat = self.g_s(y_hat)
+        x_hat_p2 = self.g_s_p2(y_hat)
 
         return {
             "x_hat": x_hat,
+            "x_hat_p2": x_hat_p2,
             "likelihoods": {"y": y_likelihoods, "z": z_likelihoods},
         }
 

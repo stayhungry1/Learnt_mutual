@@ -112,6 +112,32 @@ class RateDistortionLoss(nn.Module): #只注释掉了109行的bpp_loss, 08021808
         return out
 
 
+class RateDistortionLoss_p2(nn.Module): #只注释掉了109行的bpp_loss, 08021808又加上了
+    """Custom rate distortion loss with a Lagrangian parameter."""
+
+    def __init__(self, lmbda=1e-2):
+        super().__init__()
+        self.mse = nn.MSELoss()
+        self.lmbda = lmbda
+
+    # def forward(self, output, target, lq, x_l, x_enh): #0.001
+    def forward(self, output, target):  # 0.001 #, lq, x_l, x_enh
+        N, _, H, W = target.size()
+        out = {}
+        num_pixels = N * H * W
+
+        out["bpp_loss"] = sum(
+            (torch.log(likelihoods).sum() / (-math.log(2) * num_pixels))
+            for likelihoods in output["likelihoods"].values()
+        )
+        # # out["mse_loss"] = self.mse(lq, target)
+        out["mse_loss"] = self.mse(output["x_hat_p2"], target)
+        out["loss"] = self.lmbda * 255 ** 2 * out["mse_loss"] + out["bpp_loss"] #lambda越小 bpp越小 越模糊 sigma预测的越准，熵越小
+        # out["loss"] = self.mse(x_l, x_enh)
+        # out["loss"] = self.mse(x_l, x_enh) + out["mse_loss"]
+        return out
+
+
 class RateDistortionLoss_copy(nn.Module):
     """Custom rate distortion loss with a Lagrangian parameter."""
 
