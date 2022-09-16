@@ -182,28 +182,21 @@ class Worker_copy(threading.Thread):
         print('# DS------------------------------DS')
         if (os.path.exists(f"{ds_temp_path}{file_name}_yuv.yuv")): os.remove(f"{ds_temp_path}{file_name}_yuv.yuv")
         # subp.run(f"ffmpeg -i {self.file_path} -f rawvideo -pix_fmt gray16le -dst_range 1 {temp_path}{file_name}_yuv.yuv", shell = True, stdout = stdout_fmp, stderr = stdout_fmp)
-        subp.run(
-            f"/media/data/ccr/ffmpeg-4.4-amd64-static/ffmpeg -i {ds_file_path} -f rawvideo -pix_fmt gray16le -dst_range 1 {ds_temp_path}{file_name}_yuv.yuv",
-            shell=True, stdout=ds_stdout_fmp, stderr=ds_stdout_fmp)
+        subp.run(f"/media/data/ccr/ffmpeg-4.4-amd64-static/ffmpeg -i {ds_file_path} -f rawvideo -pix_fmt gray16le -dst_range 1 {ds_temp_path}{file_name}_yuv.yuv", shell=True, stdout=ds_stdout_fmp, stderr=ds_stdout_fmp)
 
         # Encoding
         print('# Encoding')
-        subp.run(
-            f"./EncoderAppStatic -c ./cfg/encoder_intra_vtm.cfg -i {ds_temp_path}{file_name}_yuv.yuv -o \"\" -b {ds_bitstream_path}{file_name}.vvc -q {self.qp} --ConformanceWindowMode=1 -wdt {ds_width} -hgt {ds_height} -f 1 -fr 1 --InternalBitDepth=10 --InputBitDepth=10 --InputChromaFormat=400 --OutputBitDepth=10",
-            stdout=ds_stdout_vtm, shell=True)
+        subp.run(f"./EncoderAppStatic -c ./cfg/encoder_intra_vtm.cfg -i {ds_temp_path}{file_name}_yuv.yuv -o \"\" -b {ds_bitstream_path}{file_name}.vvc -q {self.qp} --ConformanceWindowMode=1 -wdt {ds_width} -hgt {ds_height} -f 1 -fr 1 --InternalBitDepth=10 --InputBitDepth=10 --InputChromaFormat=400 --OutputBitDepth=10", stdout=ds_stdout_vtm, shell=True)
 
         # Decoding
         print('# Decoding')
-        subp.run(f"./DecoderAppStatic -b {ds_bitstream_path}{file_name}.vvc -o {ds_temp_path}{file_name}_rec.yuv",
-                 stdout=ds_stdout_vtm, shell=True)
+        subp.run(f"./DecoderAppStatic -b {ds_bitstream_path}{file_name}.vvc -o {ds_temp_path}{file_name}_rec.yuv", stdout=ds_stdout_vtm, shell=True)
 
         # Convert yuv to png
         print('# Convert yuv to png')
         if (os.path.exists(f"{ds_temp_path}{file_name}_rec.png")): os.remove(f"{ds_temp_path}{file_name}_rec.png")
         # subp.run(f"ffmpeg -f rawvideo -pix_fmt gray16le -s {width}x{height} -src_range 1 -i {temp_path}{file_name}_rec.yuv -frames 1 -pix_fmt gray16le {recon_path}{file_name}.png", shell = True, stdout = stdout_fmp, stderr = stdout_fmp)
-        subp.run(
-            f"/media/data/ccr/ffmpeg-4.4-amd64-static/ffmpeg -f rawvideo -pix_fmt gray16le -s {ds_width}x{ds_height} -src_range 1 -i {ds_temp_path}{file_name}_rec.yuv -frames 1 -pix_fmt gray16le {ds_recon_path}{file_name}.png",
-            shell=True, stdout=ds_stdout_fmp, stderr=ds_stdout_fmp)
+        subp.run(f"/media/data/ccr/ffmpeg-4.4-amd64-static/ffmpeg -f rawvideo -pix_fmt gray16le -s {ds_width}x{ds_height} -src_range 1 -i {ds_temp_path}{file_name}_rec.yuv -frames 1 -pix_fmt gray16le {ds_recon_path}{file_name}.png", shell=True, stdout=ds_stdout_fmp, stderr=ds_stdout_fmp)
 
         # ###################################################################ccr added resid
         # print('# Resid---------------------------Resid')
@@ -231,28 +224,21 @@ class Worker_copy(threading.Thread):
         print('# Convert png to yuv')
         if (os.path.exists(f"{temp_path}{file_name}_yuv.yuv")): os.remove(f"{temp_path}{file_name}_yuv.yuv")
         # subp.run(f"ffmpeg -i {self.file_path} -f rawvideo -pix_fmt gray16le -dst_range 1 {temp_path}{file_name}_yuv.yuv", shell = True, stdout = stdout_fmp, stderr = stdout_fmp)
-        subp.run(
-            f"/media/data/ccr/ffmpeg-4.4-amd64-static/ffmpeg -i {self.file_path} -f rawvideo -pix_fmt gray16le -dst_range 1 {temp_path}{file_name}_yuv.yuv",
-            shell=True, stdout=stdout_fmp, stderr=stdout_fmp)
+        subp.run(f"/media/data/ccr/ffmpeg-4.4-amd64-static/ffmpeg -i {self.file_path} -f rawvideo -pix_fmt gray16le -dst_range 1 {temp_path}{file_name}_yuv.yuv", shell=True, stdout=stdout_fmp, stderr=stdout_fmp)
 
         # Encoding
         print('# Encoding')
-        subp.run(
-            f"./EncoderAppStatic -c ./cfg/encoder_intra_vtm.cfg -i {temp_path}{file_name}_yuv.yuv -o \"\" -b {bitstream_path}{file_name}.vvc -q {self.qp} --ConformanceWindowMode=1 -wdt {width} -hgt {height} -f 1 -fr 1 --InternalBitDepth=10 --InputBitDepth=10 --InputChromaFormat=400 --OutputBitDepth=10",
-            stdout=stdout_vtm, shell=True)
+        subp.run(f"./EncoderAppStatic -c ./cfg/encoder_intra_vtm.cfg -i {temp_path}{file_name}_yuv.yuv -o \"\" -b {bitstream_path}{file_name}.vvc -q {self.qp} --ConformanceWindowMode=1 -wdt {width} -hgt {height} -f 1 -fr 1 --InternalBitDepth=10 --InputBitDepth=10 --InputChromaFormat=400 --OutputBitDepth=10", stdout=stdout_vtm, shell=True)
 
         # Decoding
         print('# Decoding')
-        subp.run(f"./DecoderAppStatic -b {bitstream_path}{file_name}.vvc -o {temp_path}{file_name}_rec.yuv",
-                 stdout=stdout_vtm, shell=True)
+        subp.run(f"./DecoderAppStatic -b {bitstream_path}{file_name}.vvc -o {temp_path}{file_name}_rec.yuv", stdout=stdout_vtm, shell=True)
 
         # Convert yuv to png
         print('# Convert yuv to png')
         if (os.path.exists(f"{temp_path}{file_name}_rec.png")): os.remove(f"{temp_path}{file_name}_rec.png")
         # subp.run(f"ffmpeg -f rawvideo -pix_fmt gray16le -s {width}x{height} -src_range 1 -i {temp_path}{file_name}_rec.yuv -frames 1 -pix_fmt gray16le {recon_path}{file_name}.png", shell = True, stdout = stdout_fmp, stderr = stdout_fmp)
-        subp.run(
-            f"/media/data/ccr/ffmpeg-4.4-amd64-static/ffmpeg -f rawvideo -pix_fmt gray16le -s {width}x{height} -src_range 1 -i {temp_path}{file_name}_rec.yuv -frames 1 -pix_fmt gray16le {recon_path}{file_name}.png",
-            shell=True, stdout=stdout_fmp, stderr=stdout_fmp)
+        subp.run(f"/media/data/ccr/ffmpeg-4.4-amd64-static/ffmpeg -f rawvideo -pix_fmt gray16le -s {width}x{height} -src_range 1 -i {temp_path}{file_name}_rec.yuv -frames 1 -pix_fmt gray16le {recon_path}{file_name}.png", shell=True, stdout=stdout_fmp, stderr=stdout_fmp)
 
         # Remove tmp files
         try:
