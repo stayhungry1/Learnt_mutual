@@ -313,7 +313,7 @@ class Eval:
         # print('average bpp: %8.4f' % (bpp_sum / i_count))
         # print("####################### NOT run VTM!!! ###############################")
         print("runvtm---------------------runvtmrunvtmrunvtmrunvtmrunvtmrunvtmrunvtm")
-        run_vtm(f"feature/{self.set_idx}_ori", self.VTM_param["QP"], self.VTM_param["threads"])
+        run_vtm(f"../../liutie_save/feature/{self.set_idx}_ori", self.VTM_param["QP"], self.VTM_param["threads"])
         filenames = []
 
         return filenames
