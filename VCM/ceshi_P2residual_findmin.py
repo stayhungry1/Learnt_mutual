@@ -17,8 +17,8 @@ def simple_filename(filename_ext):
     return filename_noext
 
 # set_idx = 35
-# filenames = glob.glob(f"/media/data/liutie/VCM/OpenImageV6-5K/*.jpg")
-filenames = glob.glob(f"/media/data/ccr/testimg2/*.jpg")
+filenames = glob.glob(f"/media/data/liutie/VCM/OpenImageV6-5K/*.jpg")
+# filenames = glob.glob(f"/media/data/ccr/testimg2/*.jpg")
 # filenames = glob.glob(f"/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/m57343_objdet_small_twoimage/*.jpg")
 # filenames = glob.glob(f"/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/feature/{set_idx}_rec/*.png")
 num_img = len(filenames)
