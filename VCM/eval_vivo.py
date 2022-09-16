@@ -317,8 +317,8 @@ class Eval:
             # print('i_count: %d, bpp: %8.4f, %s' % (i_count, bpp_test5000_p2[key][0], key))
         print('average bpp_p5: %9.6f' % (bpp_sum_p5 / i_count_p5))
         print("####################### NOT run VTM!!! ###############################")
-        # print("runvtm---------------------runvtmrunvtmrunvtmrunvtmrunvtmrunvtmrunvtm")
-        # run_vtm(f"feature/{self.set_idx}_ori", self.VTM_param["QP"], self.VTM_param["threads"])
+        print("runvtm---------------------runvtmrunvtmrunvtmrunvtmrunvtmrunvtmrunvtm")
+        run_vtm(f"feature/{self.set_idx}_ori", self.VTM_param["QP"], self.VTM_param["threads"])
 
         return filenames
 
