@@ -77,7 +77,8 @@ class Worker(threading.Thread): #only P2_residual
         print('# Resid---------------------------Resid')
         if (os.path.exists(f"{resid_temp_path}{file_name}_yuv.yuv")): os.remove(f"{resid_temp_path}{file_name}_yuv.yuv")
         # subp.run(f"ffmpeg -i {self.file_path} -f rawvideo -pix_fmt gray16le -dst_range 1 {temp_path}{file_name}_yuv.yuv", shell = True, stdout = stdout_fmp, stderr = stdout_fmp)
-        subp.run(f"/media/data/liutie/ffmpeg-4.4-amd64-static/ffmpeg -i {resid_file_path} -f rawvideo -pix_fmt gray16le -dst_range 1 {resid_temp_path}{file_name}_yuv.yuv", shell=True, stdout=resid_stdout_fmp, stderr=resid_stdout_fmp)
+        # subp.run(f"/media/data/liutie/ffmpeg-4.4-amd64-static/ffmpeg -i {resid_file_path} -f rawvideo -pix_fmt gray16le -dst_range 1 {resid_temp_path}{file_name}_yuv.yuv", shell=True, stdout=resid_stdout_fmp, stderr=resid_stdout_fmp)
+        subp.run(f"/media/data/ccr/ffmpeg-4.4-amd64-static/ffmpeg -i {resid_file_path} -f rawvideo -pix_fmt gray16le -dst_range 1 {resid_temp_path}{file_name}_yuv.yuv", shell=True, stdout=resid_stdout_fmp, stderr=resid_stdout_fmp)
 
         # Encoding
         print('# Encoding')
@@ -91,7 +92,8 @@ class Worker(threading.Thread): #only P2_residual
         print('# Convert yuv to png')
         if (os.path.exists(f"{resid_temp_path}{file_name}_rec.png")): os.remove(f"{resid_temp_path}{file_name}_rec.png")
         # subp.run(f"ffmpeg -f rawvideo -pix_fmt gray16le -s {width}x{height} -src_range 1 -i {temp_path}{file_name}_rec.yuv -frames 1 -pix_fmt gray16le {recon_path}{file_name}.png", shell = True, stdout = stdout_fmp, stderr = stdout_fmp)
-        subp.run(f"/media/data/liutie/ffmpeg-4.4-amd64-static/ffmpeg -f rawvideo -pix_fmt gray16le -s {resid_width}x{resid_height} -src_range 1 -i {resid_temp_path}{file_name}_rec.yuv -frames 1 -pix_fmt gray16le {resid_recon_path}{file_name}.png", shell=True, stdout=resid_stdout_fmp, stderr=resid_stdout_fmp)
+        # subp.run(f"/media/data/liutie/ffmpeg-4.4-amd64-static/ffmpeg -f rawvideo -pix_fmt gray16le -s {resid_width}x{resid_height} -src_range 1 -i {resid_temp_path}{file_name}_rec.yuv -frames 1 -pix_fmt gray16le {resid_recon_path}{file_name}.png", shell=True, stdout=resid_stdout_fmp, stderr=resid_stdout_fmp)
+        subp.run(f"/media/data/ccr/ffmpeg-4.4-amd64-static/ffmpeg -f rawvideo -pix_fmt gray16le -s {resid_width}x{resid_height} -src_range 1 -i {resid_temp_path}{file_name}_rec.yuv -frames 1 -pix_fmt gray16le {resid_recon_path}{file_name}.png", shell=True, stdout=resid_stdout_fmp, stderr=resid_stdout_fmp)
 
         ###########################################################################ccr added 20220619
 
