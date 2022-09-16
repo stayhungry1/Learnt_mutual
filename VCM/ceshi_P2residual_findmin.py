@@ -24,8 +24,8 @@ filenames = glob.glob(f"/media/data/ccr/OpenImageV6-5K/*.jpg") #vivo
 # filenames = glob.glob(f"/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/feature/{set_idx}_rec/*.png")
 num_img = len(filenames)
 path_P2ori_qianzhui = '../../liutie_save/feature/10_ds/'
-path_P2_qianzhui = '../../liutie_save/feature/103_ds/'
-path_saveres_qianzhui = '../../liutie_save/feature/103_resid/' #QP43 res
+path_P2_qianzhui = '../../liutie_save/feature/33_ds/'
+path_saveres_qianzhui = '../../liutie_save/feature/33_resid/' #QP43 res
 os.makedirs(path_saveres_qianzhui, exist_ok=True)
 
 #0706短边416长边832时的_min
