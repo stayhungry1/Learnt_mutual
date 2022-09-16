@@ -56,9 +56,9 @@ for fname in filenames:
     h_P2 = feat_P2ori.shape[0] #4420 int
     w_P2 = feat_P2ori.shape[1] #5120 int
     feat_res = feat_P2ori - feat_P2
-    ##注释掉这2行和下面imwrite来求阈值
-    # feat_res = feat_res - _min
-    # feat_res = feat_res.astype(np.uint16) #uint16
+    #注释掉这2行和下面imwrite来求阈值
+    feat_res = feat_res - _min
+    feat_res = feat_res.astype(np.uint16) #uint16
     feat_res_min = np.min(feat_res)
     feat_res_max = np.max(feat_res)
     if i_count == 0:
@@ -70,7 +70,7 @@ for fname in filenames:
         if feat_res_max >= feat_res_all_max:
             feat_res_all_max = feat_res_max
     i_count = i_count + 1
-    # cv2.imwrite(path_res, feat_res) #cv2.imwrite得到的png为uint8或uint16，像素最小值大于0
+    cv2.imwrite(path_res, feat_res) #cv2.imwrite得到的png为uint8或uint16，像素最小值大于0
     # print('%d/%d, smallF_hw[%dx%d], bigF_hw[%dx%d], imgname: %s, res_minmax[%d, %d], allres_minmax[%d, %d], count_all/valid/invalid: [%d/%d/%d]'
     #       %(i_count, num_img, h_small, w_small, h_big, w_big, fname_simple, feat_res_min, feat_res_max, feat_res_all_min, feat_res_all_max, i_count, i_count_valid, i_count_invalid))
     # print('%d/%d, smallF_hw[%dx%d], bigF_hw[%dx%d], imgname: %s, res_minmax[%7.3f, %7.3f], allres_minmax[%7.3f, %7.3f]'
