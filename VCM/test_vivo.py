@@ -17,6 +17,7 @@ os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/testimg2' #vivo61
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/rcnn/testimg2' #30901
 
 #####同时跑多个记得修改这两处: 本文件的pick和eval的bppjson名字
+#####如果用P2残差的话，改eval里面的QP和p2res_min这两处
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--index", default=31, type=int) #1

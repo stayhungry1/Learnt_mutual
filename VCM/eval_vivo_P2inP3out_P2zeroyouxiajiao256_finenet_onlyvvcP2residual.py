@@ -577,13 +577,11 @@ class Eval:
 
     def _evaluation(self, fname):
 
-        p2res_min = -500.0
         fname_simple = utils.simple_filename(fname)
         print(fname)
         # fname_ds_rec = fname.replace('rec', 'ds_rec')
         # # fname_resid_rec = fname.replace('rec', 'resid_rec')
         fname_ds_rec = fname.replace('ori', 'ds')  # QP36原始
-        fname_ds_rec_residual = fname.replace('ori', 'resid_rec')  # QP36原始
         # fname_ds_rec = fname.replace('36_ori', '42_ds') #QP36
 
         with open(f"../../liutie_save/info/{self.set_idx}/{fname_simple}_inputs.bin", "rb") as inputs_f:
@@ -591,8 +589,7 @@ class Eval:
 
         images = self.model.preprocess_image(inputs)
         features = self.feat2feat_p345(fname)  # P3P4P5P6 float32
-        # features_ds = self.feat2feat_onlyp2(fname_ds_rec)  # P2 float32
-        features_ds = self.feat2feat_onlyp2addresidual(fname_ds_rec, fname_ds_rec_residual, p2res_min)  # P2 float32
+        features_ds = self.feat2feat_onlyp2(fname_ds_rec)  # P2 float32
         # features_resid = self.feat2feat_onlyp2(fname_resid_rec)
         # resid = features_resid['p2']
         features['p2'] = features_ds['p2']  # 给features(只有P3456)加上P2
@@ -699,21 +696,6 @@ class Eval:
         pyramid = {}
         png = cv2.imread(fname, -1).astype(np.float32)
         pyramid["p2"] = self.feature_slice(png, [png.shape[0] // 16, png.shape[1] // 16])
-        pyramid["p2"] = dequant_fix(pyramid["p2"])
-        pyramid["p2"] = torch.unsqueeze(pyramid["p2"], 0)
-        # 加了下面这几句弄到cuda
-        pyramid["p2"] = pyramid["p2"].cuda()
-        return pyramid
-
-    def feat2feat_onlyp2addresidual(self, fname_p2, fname_p2res, p2res_min):
-        pyramid = {}
-        png = cv2.imread(fname_p2, -1).astype(np.float32)
-        pyramid["p2"] = self.feature_slice(png, [png.shape[0] // 16, png.shape[1] // 16])
-        pyramid_res = {}
-        png_res = cv2.imread(fname_p2res, -1).astype(np.float32)
-        pyramid_res["p2"] = self.feature_slice(png_res, [png_res.shape[0] // 16, png_res.shape[1] // 16])
-        pyramid_res["p2"] = pyramid_res["p2"] + p2res_min
-        pyramid["p2"] = pyramid["p2"] + pyramid_res["p2"]
         pyramid["p2"] = dequant_fix(pyramid["p2"])
         pyramid["p2"] = torch.unsqueeze(pyramid["p2"], 0)
         # 加了下面这几句弄到cuda
