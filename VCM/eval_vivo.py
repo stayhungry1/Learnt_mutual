@@ -328,7 +328,7 @@ class Eval:
             bpp_sum = bpp_sum + bpp_temp[0]
             i_count = i_count + 1
             print('i_count: %d, bpp: %8.4f, %s' % (i_count, bpp_test5000[key][0], key))
-        print('average bpp: %8.4f' % (bpp_sum / i_count))
+        print('average bpp: %9.6f' % (bpp_sum / i_count))
         print("####################### NOT run VTM!!! ###############################")
         # print("runvtm---------------------runvtmrunvtmrunvtmrunvtmrunvtmrunvtmrunvtm")
         # run_vtm(f"feature/{self.set_idx}_ori", self.VTM_param["QP"], self.VTM_param["threads"])
