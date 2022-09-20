@@ -23,18 +23,18 @@ def get_openimg_dicts(root_path, training=True):
         save_path = root_path + 'train/'
         # if os.path.exists(save_path + '/openimg_anno.json'):
         # if os.path.exists(save_path + '/openimg_anno_only3000.json'):
-        if os.path.exists(save_path + '/openimg_anno_only8.json'):
+        # if os.path.exists(save_path + '/openimg_anno_only8.json'):
         # if os.path.exists(save_path + '/openimg_anno_only30000.json'):
-        # if os.path.exists(save_path + '/openimg_anno_99999select50000.json'):
+        if os.path.exists(save_path + '/openimg_anno_99999select50000.json'):
             # with open(save_path + '/openimg_anno.json', "r") as fp:
-            with open(save_path + '/openimg_anno_only8.json', "r") as fp:
+            # with open(save_path + '/openimg_anno_only8.json', "r") as fp:
             # with open(save_path + '/openimg_anno_only30000.json', "r") as fp:
-            # with open(save_path + '/openimg_anno_99999select50000.json', "r") as fp:
+            with open(save_path + '/openimg_anno_99999select50000.json', "r") as fp:
                 print("Load existing json files ...")
                 dataset_dicts = json.load(fp)
         else:
-            anno_path = root_path + 'train/annotation/train_GT47_small.csv'
-            # anno_path = root_path + 'train/annotation/train_GT47_small5W.csv'
+            # anno_path = root_path + 'train/annotation/train_GT47_small.csv'
+            anno_path = root_path + 'train/annotation/train_GT47_small5W.csv'
             imgs_path = root_path + 'train/OpenImage_smaller'
             for root, dirs, files in os.walk(imgs_path):
                 for file_name in files:
@@ -61,9 +61,9 @@ def get_openimg_dicts(root_path, training=True):
                         break
             # with open(save_path + '/openimg_anno.json', "w") as fp:
             # with open(save_path + '/openimg_anno_only3000.json', "w") as fp:
-            with open(save_path + '/openimg_anno_only8.json', "w") as fp:
+            # with open(save_path + '/openimg_anno_only8.json', "w") as fp:
             # with open(save_path + '/openimg_anno_only30000.json', "w") as fp:
-            # with open(save_path + '/openimg_anno_99999select50000.json', "w") as fp:
+            with open(save_path + '/openimg_anno_99999select50000.json', "w") as fp:
                 print("Now saving imgs ...")
                 json.dump(dataset_dicts, fp)
     return dataset_dicts
