@@ -35,7 +35,7 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12kcontinue_09021000/model_0063999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda2_N192_7imgtrain_eachdnorm_09092000/model_0014999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_7imgtrain_eachdnorm_09191600/model_0014999.pth"
-  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/model_0135999.pth"
+#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/model_0135999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08232200/model_0039999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_finenet_09011130/model_0001999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_finenet_2kcontinue_09021500/model_0060999.pth"
@@ -47,6 +47,7 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_7imgtrain_eachdnorm_09191600/model_0009999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_7imgtrainft9999_small5Wtrain_eachdnorm_09191900/model_0017999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu4_N192_7imgtrain_eachdnorm_09201100/model_0009999.pth"
+  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_09201400/model_0017999.pth"
   PIXEL_STD: [57.375, 57.120, 58.395]
   RESNETS:
     STRIDE_IN_1X1: False  # this is a C2 model
@@ -93,7 +94,7 @@ MODEL:
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda2_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09092200
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_7imgtrain_eachdnorm_09191600
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09191900
-OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_lambda1ft135999_small5Wtrain_eachdnorm_09211430
+#OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_lambda1ft135999_small5Wtrain_eachdnorm_09211430
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao16_lambda1_N192_7imgtrain_eachdnorm_08291230
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao16_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08291510
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao64_lambda1_N192_7imgtrain_eachdnorm_08291900
@@ -116,10 +117,11 @@ OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345M
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09211000
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu4_N192_7imgtrain_eachdnorm_09201100
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_09201400
+OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09221530
 SOLVER:
   STEPS: (130000, 180000)
   MAX_ITER: 250000
-  CHECKPOINT_PERIOD: 1000 #默认是5000
+  CHECKPOINT_PERIOD: 2000 #默认是5000
 INPUT:
 # # MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
 # # MIN_SIZE_TRAIN: (640, 640)
