@@ -10,8 +10,8 @@ from eval_vivo import DetectEval
 
 # os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
 os.environ['CUDA_VISIBLE_DEVICES'] = '1'
-os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/OpenImageV6-5K' #vivo
-# os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/testimg2' #vivo
+# os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/OpenImageV6-5K' #vivo
+os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/testimg2' #vivo
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/OpenImageV6-5K' #30901
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/m57343_objdet_small_twoimage' #30901
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/rcnn/testimg2' #30901
@@ -38,8 +38,8 @@ if __name__ == "__main__":
         methods_eval = DetectEval(settings, set_idx)
         picklist = sorted(glob.glob(os.path.join(os.environ["DETECTRON2_DATASETS"], "*.jpg")))[:number]
         picklist = [utils.simple_filename(x) for x in picklist]
-        methods_eval.prepare_part(picklist, data_name="pick") #QP10 QP11 QP13 QP20 QP21 QP12 QP22 QP31 QP32 QP33 QP34 QP35 QP36 QP38 QP39 QP40 QP42 QP44
-        # methods_eval.prepare_part(picklist, data_name="pick1") #QP15 QP16 QP17 QP18 QP101 QP102 QP103 QP33 QP104 QP105 QP37 QP106 QP41 QP107 QP43
+        # methods_eval.prepare_part(picklist, data_name="pick") #QP10 QP11 QP13 QP20 QP21 QP12 QP22 QP31 QP32 QP33 QP34 QP35 QP36 QP38 QP39 QP40 QP42 QP44
+        methods_eval.prepare_part(picklist, data_name="pick1") #QP15 QP16 QP17 QP18 QP101 QP102 QP103 QP33 QP104 QP105 QP37 QP106 QP41 QP107 QP43 QP45
         # methods_eval.prepare_part(picklist, data_name="pick2") #QP108
 
     if mode == "feature_coding":
