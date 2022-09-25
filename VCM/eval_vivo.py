@@ -271,7 +271,8 @@ class Eval:
         # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda2e0_finenet_iter37999.json'
         # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda2e0_finenet_iter89999.json'
         # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1chu2_finenet_iter23999.json'
-        self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1chu2_finenet_iter37999.json'
+        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1chu2_finenet_iter37999.json'
+        self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1chu2_ftlambda1_finenet_iter3999.json'
         self.bpp_test5000 = {}
 
     def prepare_dir(self):
