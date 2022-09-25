@@ -581,7 +581,7 @@ class GeneralizedRCNN(nn.Module):
         # self.netG = define_G(256, 256, 64, 'global', 3, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #原始finenet
         # self.netG = define_G(256, 256, 64, 'global', 0, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #3->0
         self.netG = define_G(256, 256, 128, 'global', 0, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #3->0 64->128
-        self.finenet_optimizer = Adam(self.netG.parameters(), lr=0.0001)
+        # self.finenet_optimizer = Adam(self.netG.parameters(), lr=0.0001)
 
         ############################belle
         compressaiargs_experiment = 'rcnn_belle_0730'
@@ -914,8 +914,8 @@ class GeneralizedRCNN(nn.Module):
         fake_image_f_GT = d
         upsample = torch.nn.Upsample(scale_factor=2, mode='bilinear')
         up_image = upsample(net_belle_output["x_hat"])
-        self.finenet_optimizer.zero_grad()
-        # print(up_image.size(),'----------------------------------up_image')
+        # self.finenet_optimizer.zero_grad()
+        ## print(up_image.size(),'----------------------------------up_image')
         res = self.netG.forward(up_image)
         # print(res.size(),'----------------------------------------res')
         fake_image_f = res + up_image
@@ -924,8 +924,8 @@ class GeneralizedRCNN(nn.Module):
         l_l2 = torch.nn.MSELoss().to(device)
         loss_l2 = l_l2(fake_image_f, fake_image_f_GT)
         psnr_temp1 = 10 * math.log10(1 / loss_l2)
-        loss_l2.backward()
-        self.finenet_optimizer.step()
+        # loss_l2.backward()
+        # self.finenet_optimizer.step()
 
         d_output_p2 = Pfeature_zeropad_youxiajiao256_reverse(fake_image_f, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right)
         define_mse = nn.MSELoss().to(device)
