@@ -594,8 +594,7 @@ class GeneralizedRCNN(nn.Module):
         #####lambda设置
         # compressaiargs_lambda = 2.0
         # compressaiargs_lambda = 0.512
-        # compressaiargs_lambda = 0.256
-        compressaiargs_lambda = 0.128
+        compressaiargs_lambda = 0.256
         ###############
         self.belle_clip_max_norm = 1.0
         # # self.net_belle = image_models[compressaiargs_model](quality=compressaiargs_quality)
@@ -613,8 +612,9 @@ class GeneralizedRCNN(nn.Module):
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda2_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft19999_finenet_09111130/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft15999_finenet_09202000/' #删除吧
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09211000/'
+        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_small5Wtrain_eachdnorm_ftlambda1_finenet_09251100/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09221530/'
-        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09251030/'
+        # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09251030/'
         mkdirs(compressai_logdir)
         self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
         self.belle_savetensorboardfreq = 200
