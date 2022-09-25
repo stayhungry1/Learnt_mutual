@@ -581,7 +581,7 @@ class GeneralizedRCNN(nn.Module):
         # self.netG = define_G(256, 256, 64, 'global', 3, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #原始finenet
         # self.netG = define_G(256, 256, 64, 'global', 0, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #3->0
         self.netG = define_G(256, 256, 128, 'global', 0, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #3->0 64->128
-        # self.finenet_optimizer = Adam(self.netG.parameters(), lr=0.0001)
+        self.finenet_optimizer = Adam(self.netG.parameters(), lr=0.0001)
 
         ############################belle
         compressaiargs_experiment = 'rcnn_belle_0730'
@@ -593,8 +593,9 @@ class GeneralizedRCNN(nn.Module):
         compressaiargs_aux_learning_rate = 0.001 #new_train.py的parse_args
         #####lambda设置
         # compressaiargs_lambda = 2.0
-        compressaiargs_lambda = 0.512
+        # compressaiargs_lambda = 0.512
         # compressaiargs_lambda = 0.256
+        compressaiargs_lambda = 0.128
         ###############
         self.belle_clip_max_norm = 1.0
         # # self.net_belle = image_models[compressaiargs_model](quality=compressaiargs_quality)
@@ -603,8 +604,8 @@ class GeneralizedRCNN(nn.Module):
         # # self.net_belle = Cheng2020AttentionMulti(N=192)
         self.net_belle = Cheng2020Anchor(N=192)
         self.net_belle = self.net_belle.to(device)
-        self.optimizer_belle, self.belle_aux_optimizer = configure_optimizers(self.net_belle, compressaiargs_learning_rate, compressaiargs_aux_learning_rate)
-        self.belle_lr_scheduler = optim.lr_scheduler.MultiStepLR(self.optimizer_belle, milestones=[2000, 4250], gamma=0.5)
+        # self.optimizer_belle, self.belle_aux_optimizer = configure_optimizers(self.net_belle, compressaiargs_learning_rate, compressaiargs_aux_learning_rate)
+        # self.belle_lr_scheduler = optim.lr_scheduler.MultiStepLR(self.optimizer_belle, milestones=[2000, 4250], gamma=0.5)
         self.belle_criterion = RateDistortionLoss(compressaiargs_lambda)
         self.i_step_count = 0
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_finenet_2k61kcontinue_09041700/'
@@ -612,9 +613,8 @@ class GeneralizedRCNN(nn.Module):
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda2_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft19999_finenet_09111130/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft15999_finenet_09202000/' #删除吧
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09211000/'
-        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_small5Wtrain_eachdnorm_ftlambda1_finenet_09251100/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09221530/'
-        # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09251030/'
+        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09251030/'
         mkdirs(compressai_logdir)
         self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
         self.belle_savetensorboardfreq = 200
@@ -655,9 +655,9 @@ class GeneralizedRCNN(nn.Module):
             p.requires_grad = False
             FrozenBatchNorm2d.convert_frozen_batchnorm(self.roi_heads)
 
-        # for p in self.net_belle.parameters():
-        #     p.requires_grad = False
-        #     FrozenBatchNorm2d.convert_frozen_batchnorm(self.net_belle)
+        for p in self.net_belle.parameters():
+            p.requires_grad = False
+            FrozenBatchNorm2d.convert_frozen_batchnorm(self.net_belle)
 
     @classmethod
     def from_config(cls, cfg):
@@ -877,45 +877,45 @@ class GeneralizedRCNN(nn.Module):
         ## time1_end = time.time()
         ## time1 = time1_end - time1_start
         ## time2_start = time.time()
-        self.optimizer_belle.zero_grad()  # optimizer.zero_grad()
-        self.belle_aux_optimizer.zero_grad()
-        # with torch.no_grad():
-        d_cheng_input = d
-        net_belle_output = self.net_belle(d_cheng_input)
-        print(net_belle_output["x_hat"].size(), '-------------------cheng output (P3) size')
-        out_criterion = self.belle_criterion(net_belle_output, d_p3)
-        out_criterion["loss"].backward()
-        if self.belle_clip_max_norm > 0:
-            torch.nn.utils.clip_grad_norm_(self.net_belle.parameters(), self.belle_clip_max_norm)
-        self.optimizer_belle.step()
+        # self.optimizer_belle.zero_grad()  # optimizer.zero_grad()
+        # self.belle_aux_optimizer.zero_grad()
+        with torch.no_grad():
+            d_cheng_input = d
+            net_belle_output = self.net_belle(d_cheng_input)
+            print(net_belle_output["x_hat"].size(), '-------------------cheng output (P3) size')
+            out_criterion = self.belle_criterion(net_belle_output, d_p3)
+            # out_criterion["loss"].backward()
+            # if self.belle_clip_max_norm > 0:
+            #     torch.nn.utils.clip_grad_norm_(self.net_belle.parameters(), self.belle_clip_max_norm)
+            # self.optimizer_belle.step()
 
-        aux_loss = self.net_belle.aux_loss()
-        aux_loss.backward()
-        self.belle_aux_optimizer.step()
-        psnr_temp = 10 * math.log10(1 / out_criterion["mse_loss"].item())
+            aux_loss = self.net_belle.aux_loss()
+            # aux_loss.backward()
+            # self.belle_aux_optimizer.step()
+            psnr_temp = 10 * math.log10(1 / out_criterion["mse_loss"].item())
 
-        d_output = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output["x_hat"], h_new_p3_left, h_new_p3_right, w_new_p3_left, w_new_p3_right)
-        define_mse = nn.MSELoss()
-        mse_temp = define_mse(d_output, d_originalsize)
-        psnr_temp_originalsize = 10 * math.log10(1 / mse_temp)
-        print(
-            f'Loss: {out_criterion["loss"].item():.3f} |'
-            f'\tMSE loss: {out_criterion["mse_loss"].item():.3f} |'
-            f'\tBpp loss: {out_criterion["bpp_loss"].item():.2f} |'
-            f"\tAux loss: {aux_loss.item():.2f}"
-            f'\tPSNR: {psnr_temp:.3f} |'
-            f'\tPSNR_orisize: {psnr_temp_originalsize:.3f} |'
-        )
-        # print("i_step: %d, max/min_P2(cheng input): %8.4f/%8.4f, max/min_P4(cheng output): %8.4f/%8.4f, max/min_P4(GT): %8.4f/%8.4f"
-        #       % (self.i_step_count, torch.max(d), torch.min(d), torch.max(net_belle_output["x_hat"]), torch.min(net_belle_output["x_hat"]), torch.max(d_p4), torch.min(d_p4)))
-        print("i_step: %d, max/min_P3(cheng input): %8.4f/%8.4f, max/min_P3(cheng output): %8.4f/%8.4f"
-              % (self.i_step_count, torch.max(d_p3), torch.min(d_p3), torch.max(net_belle_output["x_hat"]), torch.min(net_belle_output["x_hat"])))
+            d_output = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output["x_hat"], h_new_p3_left, h_new_p3_right, w_new_p3_left, w_new_p3_right)
+            define_mse = nn.MSELoss()
+            mse_temp = define_mse(d_output, d_originalsize)
+            psnr_temp_originalsize = 10 * math.log10(1 / mse_temp)
+            print(
+                f'Loss: {out_criterion["loss"].item():.3f} |'
+                f'\tMSE loss: {out_criterion["mse_loss"].item():.3f} |'
+                f'\tBpp loss: {out_criterion["bpp_loss"].item():.2f} |'
+                f"\tAux loss: {aux_loss.item():.2f}"
+                f'\tPSNR: {psnr_temp:.3f} |'
+                f'\tPSNR_orisize: {psnr_temp_originalsize:.3f} |'
+            )
+            # print("i_step: %d, max/min_P2(cheng input): %8.4f/%8.4f, max/min_P4(cheng output): %8.4f/%8.4f, max/min_P4(GT): %8.4f/%8.4f"
+            #       % (self.i_step_count, torch.max(d), torch.min(d), torch.max(net_belle_output["x_hat"]), torch.min(net_belle_output["x_hat"]), torch.max(d_p4), torch.min(d_p4)))
+            print("i_step: %d, max/min_P3(cheng input): %8.4f/%8.4f, max/min_P3(cheng output): %8.4f/%8.4f"
+                  % (self.i_step_count, torch.max(d_p3), torch.min(d_p3), torch.max(net_belle_output["x_hat"]), torch.min(net_belle_output["x_hat"])))
 
         fake_image_f_GT = d
         upsample = torch.nn.Upsample(scale_factor=2, mode='bilinear')
         up_image = upsample(net_belle_output["x_hat"])
-        # self.finenet_optimizer.zero_grad()
-        ## print(up_image.size(),'----------------------------------up_image')
+        self.finenet_optimizer.zero_grad()
+        # print(up_image.size(),'----------------------------------up_image')
         res = self.netG.forward(up_image)
         # print(res.size(),'----------------------------------------res')
         fake_image_f = res + up_image
@@ -924,8 +924,8 @@ class GeneralizedRCNN(nn.Module):
         l_l2 = torch.nn.MSELoss().to(device)
         loss_l2 = l_l2(fake_image_f, fake_image_f_GT)
         psnr_temp1 = 10 * math.log10(1 / loss_l2)
-        # loss_l2.backward()
-        # self.finenet_optimizer.step()
+        loss_l2.backward()
+        self.finenet_optimizer.step()
 
         d_output_p2 = Pfeature_zeropad_youxiajiao256_reverse(fake_image_f, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right)
         define_mse = nn.MSELoss().to(device)
