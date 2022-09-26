@@ -221,11 +221,11 @@ class Eval:
 
         # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP2_bpp_lambda1e0.json' #P2inP2out
         # self.path_bppsave = '../../liutie_save/output/cheng_onlycompressP2outputP4_bpp_lambda1e0.json'
-        self.path_bppsave = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda1chu2.json'
-        self.path_bppsave_p2 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda1chu2_P2.json'
-        self.path_bppsave_p3 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda1chu2_P3.json'
-        self.path_bppsave_p4 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda1chu2_P4.json'
-        self.path_bppsave_p5 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda1chu2_P5.json'
+        self.path_bppsave = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda4.json'
+        self.path_bppsave_p2 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda4_P2.json'
+        self.path_bppsave_p3 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda4_P3.json'
+        self.path_bppsave_p4 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda4_P4.json'
+        self.path_bppsave_p5 = '../../liutie_save/output/chenganchor_P2down2P345_bpp_lambda4_P5.json'
         self.bpp_test5000 = {}
         self.bpp_test5000_p2 = {}
         self.bpp_test5000_p3 = {}
