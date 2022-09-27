@@ -592,8 +592,9 @@ class GeneralizedRCNN(nn.Module):
         compressaiargs_learning_rate = 0.0001 #指令里
         compressaiargs_aux_learning_rate = 0.001 #new_train.py的parse_args
         #####lambda设置
+        compressaiargs_lambda = 4.0
         # compressaiargs_lambda = 2.0
-        compressaiargs_lambda = 0.512
+        # compressaiargs_lambda = 0.512
         # compressaiargs_lambda = 0.256
         # compressaiargs_lambda = 0.128
         ###############
