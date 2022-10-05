@@ -573,10 +573,11 @@ class GeneralizedRCNN(nn.Module):
         compressaiargs_learning_rate = 0.0001 #指令里
         compressaiargs_aux_learning_rate = 0.001 #new_train.py的parse_args
         ######lambda设置的取值
+        compressaiargs_lambda = 8.0
         # compressaiargs_lambda = 4.0
         # compressaiargs_lambda = 2.0
         # compressaiargs_lambda = 0.512
-        compressaiargs_lambda = 0.256
+        # compressaiargs_lambda = 0.256
         # compressaiargs_lambda = 0.128
         #####################
         self.belle_clip_max_norm = 1.0
@@ -607,9 +608,10 @@ class GeneralizedRCNN(nn.Module):
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09191900/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_lambda1ft135999_small5Wtrain_eachdnorm_09211430/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu4_N192_lambda1chu2ft3999_small5Wtrain_eachdnorm_09221600/'
-        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu4_N192_small5Wtrain_eachdnorm_10011030/'
+        # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu4_N192_small5Wtrain_eachdnorm_10011030/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu8_N192_lambda1chu4ft3999_small5Wtrain_eachdnorm_09231300/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda4_N192_lambda2ft125999_small5Wtrain_eachdnorm_09261700/'
+        compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda8_N192_lambda4ft3999_small5Wtrain_eachdnorm_10051600/'
         mkdirs(compressai_logdir)
         self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
         self.belle_savetensorboardfreq = 200
