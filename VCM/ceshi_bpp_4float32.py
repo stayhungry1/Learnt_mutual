@@ -64,7 +64,7 @@ for fname in filenames:
     num_pixel_all[i_count] = num_pixel
     bpp_all[i_count] = bpp
     # print('%d/%d, hw[%dx%d], bit/pixel/bpp: %d/%d/%6.3f, imgname: %s' %((i_count+1), num_img, height, width, bit, num_pixel, bpp, fname_simple))
-    print('%d/%d, hw[%dx%d, %d], hw_json[%dx%d, %d], bit/pixel/bpp: %d/%d/%8.6f, imgname: %s' %((i_count+1), num_img, height, width, num_pixel, height_json, width_json, num_pixel_json, bit, num_pixel, bpp, fname_simple))
+    print('%d/%d, hw[%dx%d, %d], hw_json[%dx%d, %d], bit/pixel/bpp: %d/%d/%8.6f, imgname: %s' %((i_count+1), num_img, height, width, num_pixel, height_json, width_json, numpixel_json, bit, num_pixel, bpp, fname_simple))
     i_count = i_count + 1
 bit_avg = bit_sum / num_img
 num_pixel_avg = num_pixel_sum / num_img
