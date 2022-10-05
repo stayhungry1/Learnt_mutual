@@ -69,9 +69,9 @@ for fname in filenames:
 bit_avg = bit_sum / num_img
 num_pixel_avg = num_pixel_sum / num_img
 bpp_avg = bpp_sum / num_img
-print('avg_bit: {:.4f}, sum_bit: {:.0f}, num_image: {:.0f}'.format(bit_avg, bit_sum, num_img))
+print('avg_bit: {:.7f}, sum_bit: {:.7f}, num_image: {:.0f}'.format(bit_avg, bit_sum, num_img))
 print('avg_numpixel: {:.0f}, sum_numpixel: {:.0f}, num_image: {:.0f}'.format(num_pixel_avg, num_pixel_sum, num_img))
-print('avg_bpp: {:.4f}, sum_bpp: {:.4f}, num_image: {:.0f}'.format(bpp_avg, bpp_sum, num_img))
+print('avg_bpp: {:.7f}, sum_bpp: {:.7f}, num_image: {:.0f}'.format(bpp_avg, bpp_sum, num_img))
 
 
 
