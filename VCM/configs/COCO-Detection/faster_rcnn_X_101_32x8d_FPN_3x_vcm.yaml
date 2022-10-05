@@ -35,6 +35,7 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12kcontinue_09021000/model_0063999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda2_N192_7imgtrain_eachdnorm_09092000/model_0014999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda2_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09092200/model_0125999.pth"
+#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu4_N192_small5Wtrain_eachdnorm_10011030/model_0149999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_7imgtrain_eachdnorm_09191600/model_0014999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/model_0135999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_lambda1ft135999_small5Wtrain_eachdnorm_09211430/model_0003999.pth"
@@ -102,6 +103,7 @@ MODEL:
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda2_N192_7imgtrain_eachdnorm_09092000
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda2_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09092200
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda4_N192_lambda2ft125999_small5Wtrain_eachdnorm_09261700
+#OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda8_N192_lambda4ft125999_small5Wtrain_eachdnorm_09261700
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_7imgtrain_eachdnorm_09191600
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_7imgtrainft14999_small5Wtrain_eachdnorm_09191900
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_lambda1ft135999_small5Wtrain_eachdnorm_09211430
