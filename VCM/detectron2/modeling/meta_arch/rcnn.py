@@ -573,12 +573,13 @@ class GeneralizedRCNN(nn.Module):
         compressaiargs_learning_rate = 0.0001 #指令里
         compressaiargs_aux_learning_rate = 0.001 #new_train.py的parse_args
         ######lambda设置的取值
-        compressaiargs_lambda = 8.0
+        # compressaiargs_lambda = 8.0
         # compressaiargs_lambda = 4.0
         # compressaiargs_lambda = 2.0
         # compressaiargs_lambda = 0.512
         # compressaiargs_lambda = 0.256
         # compressaiargs_lambda = 0.128
+        compressaiargs_lambda = 0.064
         #####################
         self.belle_clip_max_norm = 1.0
         # # self.net_belle = image_models[compressaiargs_model](quality=compressaiargs_quality)
