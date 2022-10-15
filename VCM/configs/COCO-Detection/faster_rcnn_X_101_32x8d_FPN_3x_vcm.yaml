@@ -40,7 +40,7 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/model_0135999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu2_N192_lambda1ft135999_small5Wtrain_eachdnorm_09211430/model_0003999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu4_N192_lambda1chu2ft3999_small5Wtrain_eachdnorm_09221600/model_0003999.pth"
-  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu8_N192_lambda1chu4ft3999_small5Wtrain_eachdnorm_09231300/model_0003999.pth"
+#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu8_N192_lambda1chu4ft3999_small5Wtrain_eachdnorm_09231300/model_0003999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda4_N192_lambda2ft125999_small5Wtrain_eachdnorm_09261700/model_0003999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08232200/model_0039999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P3inP3outMSE_zeroyouxiajiao128_lambda1_N192_small5Wtrain_eachdnorm_finenet_09011130/model_0001999.pth"
@@ -57,6 +57,7 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu8_N192_7imgtrain_eachdnorm_09230930/model_0009999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_09231300/model_0017999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu16_N192_7imgtrain_eachdnorm_10142030/model_0009999.pth"
+  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu16_N192_7imgtrainft9999_small5Wtrain_eachdnorm_10142230/model_0015999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09211000/model_0053999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda4_N192_7imgtrain_eachdnorm_09261700/model_0009999.pth"
@@ -115,7 +116,7 @@ MODEL:
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu4_N192_lambda1chu2ft3999_small5Wtrain_eachdnorm_09221600
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu4_N192_small5Wtrain_eachdnorm_10011030
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu8_N192_lambda1chu4ft3999_small5Wtrain_eachdnorm_09231300
-OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu16_N192_lambda1chu8ft3999_small5Wtrain_eachdnorm_10142030
+#OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu16_N192_lambda1chu8ft3999_small5Wtrain_eachdnorm_10142030
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao16_lambda1_N192_7imgtrain_eachdnorm_08291230
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao16_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_08291510
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P5inP5outMSE_zeroyouxiajiao64_lambda1_N192_7imgtrain_eachdnorm_08291900
@@ -145,6 +146,7 @@ OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345M
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09251030
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu16_N192_7imgtrain_eachdnorm_10142030
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu16_N192_7imgtrainft9999_small5Wtrain_eachdnorm_10142230
+OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu16_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft15999_finenet_10152300
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_small5Wtrain_eachdnorm_ftlambda1_finenet_09251100
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda4_N192_7imgtrain_eachdnorm_09261700
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_09261830
