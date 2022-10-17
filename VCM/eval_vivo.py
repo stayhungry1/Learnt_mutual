@@ -267,16 +267,7 @@ class Eval:
         # self.path_bppsave = '../../liutie_save/output/cheng_P4inP4outzeropad16_bpp_lambda1e0_iter39999.json'
         # self.path_bppsave = '../../liutie_save/output/cheng_P3inP3outzeropad128_bpp_lambda1e0_iter39999.json'
         # self.path_bppsave = '../../liutie_save/output/cheng_P3inP3outzeropad128_bpp_lambda1e0_finenet_iter33999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1e0_finenet_iter37999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda2e0_finenet_iter37999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda2e0_finenet_iter89999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1chu2_finenet_iter23999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1chu2_finenet_iter37999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1chu2_ftlambda1_finenet_iter3999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1chu8_finenet_iter37999.json'
-        self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1chu16_finenet_iter37999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda4_finenet_iter37999.json'
-        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda8_finenet_iter37999.json'
+        self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1e0_finenet_iter37999.json'
         self.bpp_test5000 = {}
 
     def prepare_dir(self):
@@ -588,6 +579,28 @@ class Eval:
         # # fname_resid_rec = fname.replace('rec', 'resid_rec')
         fname_ds_rec = fname.replace('ori', 'ds')  # QP36原始
         # fname_ds_rec = fname.replace('36_ori', '42_ds') #QP36
+        ##lambda1: 33+103
+        # fname_p4p5 = fname.replace('33_ori', '103_ori')  #P4P5
+        ##lambda2: 35+104
+        # fname_p4p5 = fname.replace('35_ori', '104_ori')  #P4P5
+        ## lambda1chu2: 42+106
+        # fname_p4p5 = fname.replace('42_ori', '106_ori')  # P4P5
+        ## lambda1chu2: 47+106
+        # fname_p4p5 = fname.replace('47_ori', '106_ori')  # P4P5
+        ## lambda1chu4: 43+107
+        # fname_p4p5 = fname.replace('43_ori', '107_ori')  # P4P5
+        ## lambda1chu4: 43+107
+        # fname_p4p5 = fname.replace('43_ori', '111_ori')  # P4P5
+        ## lambda1chu8: 48+108
+        # fname_p4p5 = fname.replace('48_ori', '108_ori')  # P4P5
+        # lambda1chu8: 48+108
+        fname_p4p5 = fname.replace('55_ori', '113_ori')  # P4P5
+        ## lambda4: 51+109
+        # fname_p4p5 = fname.replace('51_ori', '109_ori')  # P4P5
+        ## lambda4: 50+109
+        # fname_p4p5 = fname.replace('50_ori', '109_ori')  # P4P5
+        ## lambda8: 53+112
+        # fname_p4p5 = fname.replace('53_ori', '112_ori')  # P4P5
 
         with open(f"../../liutie_save/info/{self.set_idx}/{fname_simple}_inputs.bin", "rb") as inputs_f:
             inputs = torch.load(inputs_f)
@@ -595,9 +608,12 @@ class Eval:
         images = self.model.preprocess_image(inputs)
         features = self.feat2feat_p345(fname)  # P3P4P5P6 float32
         features_ds = self.feat2feat_onlyp2(fname_ds_rec)  # P2 float32
+        features_p4p5 = self.feat2feat_p345(fname_p4p5)
         # features_resid = self.feat2feat_onlyp2(fname_resid_rec)
         # resid = features_resid['p2']
         features['p2'] = features_ds['p2']  # 给features(只有P3456)加上P2
+        features['p4'] = features_p4p5['p4']  #把103_ori的P4拿来用
+        features['p5'] = features_p4p5['p5']  #把103_ori的P5拿来用
         features['p2'] = features['p2'].type(torch.float64)
         features['p3'] = features['p3'].type(torch.float64)
         features['p4'] = features['p4'].type(torch.float64)
