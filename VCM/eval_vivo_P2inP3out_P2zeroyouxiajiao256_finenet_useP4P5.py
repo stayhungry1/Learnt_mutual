@@ -7,7 +7,6 @@ import torch.nn as nn
 from detectron2.data import build_detection_test_loader
 from detectron2.evaluation import COCOEvaluator
 from detectron2.data import DatasetCatalog
-from detectron2.data.detection_utils import convert_image_to_rgb
 from tqdm import tqdm
 import cv2
 import numpy as np
@@ -278,49 +277,9 @@ class Eval:
         # os.makedirs(f"feature/{self.set_idx}_resid", exist_ok=True)
         os.makedirs(f"../../liutie_save/output", exist_ok=True)
 
-    def visualize_training(self, batched_inputs, proposals):
-        """
-        A function used to visualize images and proposals. It shows ground truth
-        bounding boxes on the original image and up to 20 top-scoring predicted
-        object proposals on the original image. Users can implement different
-        visualization functions for different models.
-
-        Args:
-            batched_inputs (list): a list that contains input to the model.
-            proposals (list): a list that contains predicted proposals. Both
-                batched_inputs and proposals should have the same length.
-        """
-        from detectron2.utils.visualizer import Visualizer
-
-        # storage = get_event_storage()
-        max_vis_prop = 20
-
-        for input, prop in zip(batched_inputs, proposals):
-            img = input["image"]
-            img = convert_image_to_rgb(img.permute(1, 2, 0), self.input_format)
-            v_gt = Visualizer(img, None)
-            v_gt = v_gt.overlay_instances(boxes=input["instances"].gt_boxes)
-            anno_img = v_gt.get_image()
-            box_size = min(len(prop.proposal_boxes), max_vis_prop)
-            v_pred = Visualizer(img, None)
-            v_pred = v_pred.overlay_instances(
-                boxes=prop.proposal_boxes[0:box_size].tensor.cpu().numpy()
-            )
-            prop_img = v_pred.get_image()
-            vis_img = np.concatenate((anno_img, prop_img), axis=1)
-            vis_img = vis_img.transpose(2, 0, 1)
-            vis_name = "Left: GT bounding boxes;  Right: Predicted proposals"
-
-            print(vis_img.shape)
-            path_savevisualize = '1.png'
-            cv2.imwrite(path_savevisualize, vis_img)
-            # storage.put_image(vis_name, vis_img)
-            break  # only visualize one image in a batch
-
     def forward_front(self, inputs, images, features):
         proposals, _ = self.model.proposal_generator(images, features, None)
         results, _ = self.model.roi_heads(images, features, proposals, None)
-        self.visualize_training(inputs, proposals)
         return self.model._postprocess(results, inputs, images.image_sizes)
 
     def feature_coding(self):
@@ -634,10 +593,10 @@ class Eval:
         # fname_p4p5 = fname.replace('43_ori', '111_ori')  # P4P5
         ## lambda1chu8: 48+108
         # fname_p4p5 = fname.replace('48_ori', '108_ori')  # P4P5
-        ## lambda1chu8: 48+108
-        # fname_p4p5 = fname.replace('55_ori', '113_ori')  # P4P5
-        # lambda4: 51+109
-        fname_p4p5 = fname.replace('51_ori', '109_ori')  # P4P5
+        # lambda1chu8: 48+108
+        fname_p4p5 = fname.replace('55_ori', '113_ori')  # P4P5
+        ## lambda4: 51+109
+        # fname_p4p5 = fname.replace('51_ori', '109_ori')  # P4P5
         ## lambda4: 50+109
         # fname_p4p5 = fname.replace('50_ori', '109_ori')  # P4P5
         ## lambda8: 53+112
