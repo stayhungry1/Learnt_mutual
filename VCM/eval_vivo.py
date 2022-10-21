@@ -312,7 +312,7 @@ class Eval:
             vis_name = "Left: GT bounding boxes;  Right: Predicted proposals"
 
             print(vis_img.shape)
-            path_savevisualize = '1.png'
+            path_savevisualize = '../../liutie_save/feature/1.png'
             cv2.imwrite(path_savevisualize, vis_img)
             # storage.put_image(vis_name, vis_img)
             break  # only visualize one image in a batch
