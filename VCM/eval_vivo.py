@@ -324,7 +324,8 @@ class Eval:
 
             v_pred = Visualizer(img, None)
             v_pred = v_pred.overlay_instances(
-                boxes=prop.proposal_boxes[0:box_size].tensor.cpu().numpy()
+                # boxes=prop.proposal_boxes[0:box_size].tensor.cpu().numpy()
+                boxes = prop['instances'].pred_boxes[0:box_size].tensor.cpu().numpy()
             )
             prop_img = v_pred.get_image()
             vis_img = np.concatenate((anno_img, prop_img), axis=1)
