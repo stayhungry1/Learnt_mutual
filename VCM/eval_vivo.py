@@ -320,6 +320,8 @@ class Eval:
             print(prop['instances'].pred_boxes.tensor.to('cpu').numpy())
             print(prop['instances'].scores.tensor.to('cpu').numpy().shape)
             print(prop['instances'].pred_classes.tensor.to('cpu').numpy().shape)
+            box_size = min(len(prop.pred_boxes), max_vis_prop)
+            print(box_size)
 
             v_pred = Visualizer(img, None)
             v_pred = v_pred.overlay_instances(
