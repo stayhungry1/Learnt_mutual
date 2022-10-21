@@ -309,8 +309,8 @@ class Eval:
             v_gt = v_gt.overlay_instances(boxes=None)
             anno_img = v_gt.get_image()
             box_size = min(len(prop.proposal_boxes), max_vis_prop)
-            print(prop.proposal_boxes[0:box_size].shape)
-            print(prop.proposal_boxes[0:box_size])
+            print(prop.proposal_boxes[0:box_size].tensor.cpu().numpy().shape)
+            print(prop.proposal_boxes[0:box_size].tensor.cpu().numpy())
 
             v_pred = Visualizer(img, None)
             v_pred = v_pred.overlay_instances(
