@@ -306,6 +306,7 @@ class Eval:
             img = convert_image_to_rgb(img.permute(1, 2, 0), self.input_format)
             v_gt = Visualizer(img, None)
             # v_gt = v_gt.overlay_instances(boxes=input["instances"].gt_boxes)
+            v_gt = v_gt.overlay_instances(boxes=None)
             anno_img = v_gt.get_image()
             box_size = min(len(prop.proposal_boxes), max_vis_prop)
             print(prop.proposal_boxes[0:box_size].shape)
