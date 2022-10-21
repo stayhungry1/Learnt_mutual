@@ -316,7 +316,7 @@ class Eval:
             # box_size = min(len(prop.proposal_boxes), max_vis_prop)
             # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy().shape)
             # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy())
-            print(prop['instances'].pred_boxes.to('cpu').numpy().shape)
+            print(prop['instances'].pred_boxes.tensor.to('cpu').numpy().shape)
             # print(prop['instances'].pred_boxes.to('cpu').numpy()) #125
             print(prop['instances'].scores.to('cpu').numpy().shape)
             print(prop['instances'].pred_classes.to('cpu').numpy().shape)
