@@ -302,6 +302,11 @@ class Eval:
             # for i in input:
             #     print(i)
 
+            # classes = outputs[0]['instances'].pred_classes.to('cpu').numpy()
+            # scores = outputs[0]['instances'].scores.to('cpu').numpy()
+            # bboxes = outputs[0]['instances'].pred_boxes.tensor.to('cpu').numpy()
+            # H, W = outputs[0]['instances'].image_size
+
             img = input["image"]
             img = convert_image_to_rgb(img.permute(1, 2, 0), self.input_format)
             v_gt = Visualizer(img, None)
@@ -309,8 +314,12 @@ class Eval:
             v_gt = v_gt.overlay_instances(boxes=None)
             anno_img = v_gt.get_image()
             box_size = min(len(prop.proposal_boxes), max_vis_prop)
-            print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy().shape)
-            print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy())
+            # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy().shape)
+            # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy())
+            print(prop['instances'].pred_boxes.tensor.to('cpu').numpy().shape)
+            print(prop['instances'].pred_boxes.tensor.to('cpu').numpy())
+            print(prop['instances'].scores.tensor.to('cpu').numpy().shape)
+            print(prop['instances'].pred_classes.tensor.to('cpu').numpy().shape)
 
             v_pred = Visualizer(img, None)
             v_pred = v_pred.overlay_instances(
@@ -330,7 +339,7 @@ class Eval:
     def forward_front(self, inputs, images, features):
         proposals, _ = self.model.proposal_generator(images, features, None)
         results, _ = self.model.roi_heads(images, features, proposals, None)
-        self.visualize_training(inputs, proposals)
+        # self.visualize_training(inputs, proposals)
         return self.model._postprocess(results, inputs, images.image_sizes)
 
     def feature_coding(self):
@@ -703,6 +712,7 @@ class Eval:
         # ###################################################ccr added
         outputs = self.forward_front(inputs, images, features)  # images是float64
         self.evaluator.process(inputs, outputs)
+        self.visualize_training(inputs, outputs)
         return outputs
 
     def summary(self):
