@@ -557,8 +557,7 @@ class GeneralizedRCNN(nn.Module):
         self.proposal_generator = proposal_generator
         self.roi_heads = roi_heads
 
-        self.input_format = input_format
-        print(input_format)
+        self.input_format = input_format #"BGR"
         self.vis_period = vis_period
         if vis_period > 0:
             assert input_format is not None, "input_format is required for visualization!"

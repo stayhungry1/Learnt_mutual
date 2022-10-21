@@ -298,6 +298,10 @@ class Eval:
         max_vis_prop = 20
 
         for input, prop in zip(batched_inputs, proposals):
+
+            for i in input:
+                print(i)
+                
             img = input["image"]
             img = convert_image_to_rgb(img.permute(1, 2, 0), self.input_format)
             v_gt = Visualizer(img, None)
