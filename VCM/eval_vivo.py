@@ -271,6 +271,8 @@ class Eval:
         self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1e0_finenet_iter37999.json'
         self.bpp_test5000 = {}
 
+        self.input_format = "BGR"
+
     def prepare_dir(self):
         os.makedirs(f"../../liutie_save/info/{self.set_idx}", exist_ok=True)
         os.makedirs(f"../../liutie_save/feature/{self.set_idx}_ori", exist_ok=True)
