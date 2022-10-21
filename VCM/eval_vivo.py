@@ -334,6 +334,8 @@ class Eval:
 
             print(vis_img.shape)
             path_savevisualize = '../../liutie_save/feature/1.png'
+            print(np.max(vis_img))
+            print(np.min(vis_img))
             cv2.imwrite(path_savevisualize, vis_img)
             # storage.put_image(vis_name, vis_img)
             break  # only visualize one image in a batch
