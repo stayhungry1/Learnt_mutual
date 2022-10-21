@@ -558,6 +558,7 @@ class GeneralizedRCNN(nn.Module):
         self.roi_heads = roi_heads
 
         self.input_format = input_format
+        print(input_format)
         self.vis_period = vis_period
         if vis_period > 0:
             assert input_format is not None, "input_format is required for visualization!"
