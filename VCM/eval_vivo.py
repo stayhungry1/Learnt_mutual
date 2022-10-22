@@ -338,6 +338,8 @@ class Eval:
             print(np.max(vis_img))
             print(np.min(vis_img))
             print(vis_img.dtype)
+
+            vis_img = cv2.cvtColor(vis_img, cv2.COLOR_BGR2RGB)
             cv2.imwrite(path_savevisualize, vis_img)
             # storage.put_image(vis_name, vis_img)
             break  # only visualize one image in a batch
