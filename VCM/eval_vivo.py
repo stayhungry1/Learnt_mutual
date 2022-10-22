@@ -330,8 +330,8 @@ class Eval:
 
         for input, prop in zip(batched_inputs, proposals):
 
-            for i in input:
-                print(i)
+            # for i in input:
+            #     print(i)
 
             # classes = outputs[0]['instances'].pred_classes.to('cpu').numpy()
             # scores = outputs[0]['instances'].scores.to('cpu').numpy()
@@ -393,6 +393,9 @@ class Eval:
             print(prop['instances'].scores.to('cpu').numpy()[1]) #[59]
             print(prop['instances'].pred_classes.to('cpu').numpy()[0]) #[59]
             print(prop['instances'].pred_classes.to('cpu').numpy()[1]) #[59]
+            for i in self.metadata:
+                print(i)
+            print(self.metadata.get("thing_classes", None))
 
             scores_temp = prop['instances'].scores.to('cpu').numpy()
             classes_temp = prop['instances'].pred_classes.to('cpu').numpy()
