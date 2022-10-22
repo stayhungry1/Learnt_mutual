@@ -318,7 +318,7 @@ class Eval:
             print('img_source hw:[%dx%d]' %(h_temp_sourceimg, w_temp_sourceimg))
             img = cv2.resize(img, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_NEAREST)
             # img = cv2.resize(img, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_CUBIC)
-            img = img.transpose(2, 0, 1) #[h, w, 3]->[3, h, w]
+            # img = img.transpose(2, 0, 1) #[h, w, 3]->[3, h, w]
 
             v_gt = Visualizer(img, None)
             # v_gt = v_gt.overlay_instances(boxes=input["instances"].gt_boxes)
