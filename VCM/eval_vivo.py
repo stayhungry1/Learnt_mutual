@@ -309,8 +309,8 @@ class Eval:
 
             img = input["image"]
 
-            h_temp = img.shape[2]
-            w_temp = img.shape[3]
+            h_temp = img.shape[1]
+            w_temp = img.shape[2]
             print('img hw:[%dx%d]' %(h_temp, w_temp))
             h_temp_sourceimg = input["height"]
             w_temp_sourceimg = input["width"]
