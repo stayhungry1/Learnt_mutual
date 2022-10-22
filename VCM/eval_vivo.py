@@ -316,22 +316,26 @@ class Eval:
 
             h_temp = img.shape[0]
             w_temp = img.shape[1]
-            print('hw:[%dx%d]' %(h_temp, w_temp))
+            print('img hw:[%dx%d]' %(h_temp, w_temp))
+            h_temp_sourceimg = input["height"]
+            w_temp_sourceimg = input["width"]
+            print('img_source hw:[%dx%d]' %(h_temp_sourceimg, w_temp_sourceimg))
+            img = cv2.resize(img, None, (int(w_temp_sourceimg), int(h_temp_sourceimg)), interpolation=cv2.INTER_LINEAR)
 
-            a1 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
-            a3 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
-            a2 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
-            a4 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
-            a1 = a1[:, np.newaxis]
-            a2 = a2[:, np.newaxis]
-            a3 = a3[:, np.newaxis]
-            a4 = a4[:, np.newaxis]
+            # a1 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
+            # a3 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
+            # a2 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
+            # a4 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
+            # a1 = a1[:, np.newaxis]
+            # a2 = a2[:, np.newaxis]
+            # a3 = a3[:, np.newaxis]
+            # a4 = a4[:, np.newaxis]
             print('before [%d, %d, %d, %d]' %(prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 0], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 1], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 2], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3]))
-            print('after [%d, %d, %d, %d]' %(a1[0, 0], a2[0, 0], a3[0, 0], a4[0, 0]))
-            a1234 = np.concatenate([a1, a2], axis=1)
-            a1234 = np.concatenate([a1234, a3], axis=1)
-            a1234 = np.concatenate([a1234, a4], axis=1)
-            print(a1234.shape) #[59, 4,]
+            # print('after [%d, %d, %d, %d]' %(a1[0, 0], a2[0, 0], a3[0, 0], a4[0, 0]))
+            # a1234 = np.concatenate([a1, a2], axis=1)
+            # a1234 = np.concatenate([a1234, a3], axis=1)
+            # a1234 = np.concatenate([a1234, a4], axis=1)
+            # print(a1234.shape) #[59, 4,]
 
             # bboxes = bboxes / [W, H, W, H]
             # bboxes = bboxes[:, [0, 2, 1, 3]]
@@ -356,8 +360,8 @@ class Eval:
             v_pred = Visualizer(img, None)
             v_pred = v_pred.overlay_instances(
                 # boxes=prop.proposal_boxes[0:box_size].tensor.cpu().numpy()
-                # boxes = prop['instances'].pred_boxes[0:box_size].tensor.cpu().numpy()
-                boxes = a1234
+                boxes = prop['instances'].pred_boxes[0:box_size].tensor.cpu().numpy()
+                # boxes = a1234
             )
             prop_img = v_pred.get_image()
             vis_img = np.concatenate((anno_img, prop_img), axis=1)
