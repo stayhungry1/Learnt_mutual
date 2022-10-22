@@ -588,6 +588,10 @@ class Eval:
             # for fname in tqdm(inputs[:2]):
             for fname in tqdm(inputs):
 
+                fname_simple_temp = utils.simple_filename(fname)
+                if fname_simple_temp != '00a159a661a2f5aa':
+                    continue
+
                 outputs = self._evaluation(fname)
                 outputs = outputs[0]
 
