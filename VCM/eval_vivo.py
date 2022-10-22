@@ -308,19 +308,20 @@ class Eval:
             # H, W = outputs[0]['instances'].image_size
 
             img = input["image"]
-            img = convert_image_to_rgb(img.permute(1, 2, 0), self.input_format)
-            v_gt = Visualizer(img, None)
-            # v_gt = v_gt.overlay_instances(boxes=input["instances"].gt_boxes)
-            v_gt = v_gt.overlay_instances(boxes=None)
-            anno_img = v_gt.get_image()
 
-            h_temp = img.shape[0]
-            w_temp = img.shape[1]
+            h_temp = img.shape[2]
+            w_temp = img.shape[3]
             print('img hw:[%dx%d]' %(h_temp, w_temp))
             h_temp_sourceimg = input["height"]
             w_temp_sourceimg = input["width"]
             print('img_source hw:[%dx%d]' %(h_temp_sourceimg, w_temp_sourceimg))
             img = cv2.resize(img, None, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_LINEAR)
+
+            img = convert_image_to_rgb(img.permute(1, 2, 0), self.input_format)
+            v_gt = Visualizer(img, None)
+            # v_gt = v_gt.overlay_instances(boxes=input["instances"].gt_boxes)
+            v_gt = v_gt.overlay_instances(boxes=None)
+            anno_img = v_gt.get_image()
 
             # a1 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
             # a3 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
