@@ -303,6 +303,8 @@ class Eval:
         self.metadata = MetadataCatalog.get(
             self.cfg.DATASETS.TEST[0] if len(self.cfg.DATASETS.TEST) else "__unused"
         )
+        print(self.cfg.DATASETS)
+        print(self.cfg.DATASETS.TEST)
 
     def prepare_dir(self):
         os.makedirs(f"../../liutie_save/info/{self.set_idx}", exist_ok=True)
