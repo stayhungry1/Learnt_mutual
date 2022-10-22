@@ -318,14 +318,21 @@ class Eval:
             w_temp = img.shape[1]
             print('hw:[%dx%d]' %(h_temp, w_temp))
 
-            a1 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
-            a3 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
-            a2 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
-            a4 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
-            print('[%d, %d, %d, %d]' %(a1[0, 0], a2[0, 0], a3[0, 0], a4[0, 0]))
-            a1234 = np.concatenate([a1,a2], axis=1)
-            a1234 = np.concatenate([a1234,a3], axis=1)
-            a1234 = np.concatenate([a1234,a4], axis=1)
+            # a1 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
+            # a3 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
+            # a2 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
+            # a4 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
+            # print('[%d, %d, %d, %d]' %(a1[0, 0], a2[0, 0], a3[0, 0], a4[0, 0]))
+            # a1234 = np.concatenate([a1,a2], axis=1)
+            # a1234 = np.concatenate([a1234,a3], axis=1)
+            # a1234 = np.concatenate([a1234,a4], axis=1)
+
+            prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0] = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
+            prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2] = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
+            prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1] = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
+            prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3] = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
+            print('[%d, %d, %d, %d]' %(prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3]))
+
 
             # box_size = min(len(prop.proposal_boxes), max_vis_prop)
             # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy().shape)
