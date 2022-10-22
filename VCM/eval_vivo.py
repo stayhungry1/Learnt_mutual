@@ -300,9 +300,9 @@ class Eval:
         self.bpp_test5000 = {}
 
         self.input_format = "BGR"
-        self.metadata = MetadataCatalog.get(
-            self.cfg.DATASETS.TEST[0] if len(self.cfg.DATASETS.TEST) else "__unused"
-        )
+        # self.metadata = MetadataCatalog.get(
+        #     self.cfg.DATASETS.TEST[0] if len(self.cfg.DATASETS.TEST) else "__unused"
+        # )
         print(self.cfg.DATASETS)
         print(self.cfg.DATASETS.TEST)
 
@@ -395,15 +395,16 @@ class Eval:
             print(prop['instances'].scores.to('cpu').numpy()[1]) #[59]
             print(prop['instances'].pred_classes.to('cpu').numpy()[0]) #[59]
             print(prop['instances'].pred_classes.to('cpu').numpy()[1]) #[59]
-            # for i in self.metadata:
-            #     print(i)
-            print('\n'.join(['{0}: {1}'.format(item[0], item[1]) for item in self.metadata.__dict__.items()]))
 
-            print(self.metadata.get("thing_classes", None))
+            # print('\n'.join(['{0}: {1}'.format(item[0], item[1]) for item in self.metadata.__dict__.items()]))
+            # print(self.metadata.get("thing_classes", None))
 
             scores_temp = prop['instances'].scores.to('cpu').numpy()
             classes_temp = prop['instances'].pred_classes.to('cpu').numpy()
-            labels_temp = _create_text_labels(classes_temp, scores_temp, self.metadata.get("thing_classes", None))  # [16] 17, 0, 25
+            metadata_temp = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
+            # labels_temp = _create_text_labels(classes_temp, scores_temp, self.metadata.get("thing_classes", None))  # [16] 17, 0, 25
+            labels_temp = _create_text_labels(classes_temp, scores_temp, metadata_temp)  # [16] 17, 0, 25
+            print(len(metadata_temp))
 
             v_pred = Visualizer(img, None)
             v_pred = v_pred.overlay_instances(
