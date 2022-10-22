@@ -308,16 +308,17 @@ class Eval:
             # H, W = outputs[0]['instances'].image_size
 
             img = input["image"]
+            img = convert_image_to_rgb(img.permute(1, 2, 0), self.input_format)
 
-            h_temp = img.shape[1]
-            w_temp = img.shape[2]
+            img = img.transpose(1, 2, 0)
+            h_temp = img.shape[0]
+            w_temp = img.shape[1]
             print('img hw:[%dx%d]' %(h_temp, w_temp))
             h_temp_sourceimg = input["height"]
             w_temp_sourceimg = input["width"]
             print('img_source hw:[%dx%d]' %(h_temp_sourceimg, w_temp_sourceimg))
             img = cv2.resize(img, None, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_LINEAR)
 
-            img = convert_image_to_rgb(img.permute(1, 2, 0), self.input_format)
             v_gt = Visualizer(img, None)
             # v_gt = v_gt.overlay_instances(boxes=input["instances"].gt_boxes)
             v_gt = v_gt.overlay_instances(boxes=None)
@@ -366,7 +367,6 @@ class Eval:
             )
             prop_img = v_pred.get_image()
             vis_img = np.concatenate((anno_img, prop_img), axis=1)
-            # vis_img = vis_img.transpose(2, 0, 1)
             # vis_img = vis_img.transpose(2, 0, 1)
             vis_name = "Left: GT bounding boxes;  Right: Predicted proposals"
 
