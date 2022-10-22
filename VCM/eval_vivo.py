@@ -328,11 +328,15 @@ class Eval:
             # a1234 = np.concatenate([a1234,a4], axis=1)
             # print(a1234.shape) #[59, 4,]
 
+            bboxes = bboxes / [W, H, W, H]
+            bboxes = bboxes[:, [0, 2, 1, 3]]
+
+            print('before [%d, %d, %d, %d]' %(prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 0], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 1], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 2], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3]))
             prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0] = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
             prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2] = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
             prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1] = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
             prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3] = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
-            print('[%d, %d, %d, %d]' %(prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 0], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 1], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 2], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3]))
+            print('after [%d, %d, %d, %d]' %(prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 0], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 1], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 2], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3]))
 
 
             # box_size = min(len(prop.proposal_boxes), max_vis_prop)
