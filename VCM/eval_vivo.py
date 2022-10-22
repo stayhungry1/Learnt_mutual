@@ -393,8 +393,10 @@ class Eval:
             print(prop['instances'].scores.to('cpu').numpy()[1]) #[59]
             print(prop['instances'].pred_classes.to('cpu').numpy()[0]) #[59]
             print(prop['instances'].pred_classes.to('cpu').numpy()[1]) #[59]
-            for i in self.metadata:
-                print(i)
+            # for i in self.metadata:
+            #     print(i)
+            print('\n'.join(['{0}: {1}'.format(item[0], item[1]) for item in self.metadata.__dict__.items()]))
+
             print(self.metadata.get("thing_classes", None))
 
             scores_temp = prop['instances'].scores.to('cpu').numpy()
