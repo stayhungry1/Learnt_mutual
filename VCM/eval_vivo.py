@@ -329,7 +329,8 @@ class Eval:
             )
             prop_img = v_pred.get_image()
             vis_img = np.concatenate((anno_img, prop_img), axis=1)
-            vis_img = vis_img.transpose(2, 0, 1)
+            # vis_img = vis_img.transpose(2, 0, 1)
+            # vis_img = vis_img.transpose(2, 0, 1)
             vis_name = "Left: GT bounding boxes;  Right: Predicted proposals"
 
             print(vis_img.shape)
