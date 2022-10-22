@@ -318,10 +318,10 @@ class Eval:
             w_temp = img.shape[1]
             print('hw:[%dx%d]' %(h_temp, w_temp))
 
-            a1 = w_temp - prop['instances'].pred_boxes[:, 0].tensor.cpu().numpy()
-            a3 = w_temp - prop['instances'].pred_boxes[:, 2].tensor.cpu().numpy()
-            a2 = h_temp - prop['instances'].pred_boxes[:, 1].tensor.cpu().numpy()
-            a4 = h_temp - prop['instances'].pred_boxes[:, 3].tensor.cpu().numpy()
+            a1 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
+            a3 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
+            a2 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
+            a4 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
             print('[%d, %d, %d, %d]' %(a1[0, 0], a2[0, 0], a3[0, 0], a4[0, 0]))
             a1234 = np.concatenate([a1,a2], axis=1)
             a1234 = np.concatenate([a1234,a3], axis=1)
