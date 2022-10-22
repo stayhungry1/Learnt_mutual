@@ -389,10 +389,10 @@ class Eval:
             # print(prop['instances'].scores.to('cpu').numpy().shape) #[59]
             # print(prop['instances'].pred_classes.to('cpu').numpy().shape) #[59]
             box_size = min(len(prop['instances'].pred_boxes), max_vis_prop)
-            print(prop['instances'].scores.tensor.to('cpu').numpy()[0]) #[59]
-            print(prop['instances'].scores.tensor.to('cpu').numpy()[1]) #[59]
-            print(prop['instances'].pred_classes.tensor.to('cpu').numpy()[0]) #[59]
-            print(prop['instances'].pred_classes.tensor.to('cpu').numpy()[1]) #[59]
+            print(prop['instances'].scores.to('cpu').numpy()[0]) #[59]
+            print(prop['instances'].scores.to('cpu').numpy()[1]) #[59]
+            print(prop['instances'].pred_classes.to('cpu').numpy()[0]) #[59]
+            print(prop['instances'].pred_classes.to('cpu').numpy()[1]) #[59]
 
             scores_temp = prop['instances'].scores.to('cpu').numpy()
             classes_temp = prop['instances'].pred_classes.to('cpu').numpy()
