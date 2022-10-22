@@ -320,7 +320,7 @@ class Eval:
             h_temp_sourceimg = input["height"]
             w_temp_sourceimg = input["width"]
             print('img_source hw:[%dx%d]' %(h_temp_sourceimg, w_temp_sourceimg))
-            img = cv2.resize(img, None, (int(w_temp_sourceimg), int(h_temp_sourceimg)), interpolation=cv2.INTER_LINEAR)
+            img = cv2.resize(img, None, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_LINEAR)
 
             # a1 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
             # a3 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
