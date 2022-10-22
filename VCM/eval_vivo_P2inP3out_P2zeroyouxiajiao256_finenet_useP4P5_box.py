@@ -8,7 +8,6 @@ from detectron2.data import build_detection_test_loader
 from detectron2.evaluation import COCOEvaluator
 from detectron2.data import DatasetCatalog
 from detectron2.data.detection_utils import convert_image_to_rgb
-from detectron2.data import MetadataCatalog
 from tqdm import tqdm
 import cv2
 import numpy as np
@@ -243,33 +242,6 @@ class RateDistortionLoss(nn.Module):  # 只注释掉了109行的bpp_loss, 080218
         return out
 
 
-def _create_text_labels(classes, scores, class_names, is_crowd=None):
-    """
-    Args:
-        classes (list[int] or None):
-        scores (list[float] or None):
-        class_names (list[str] or None):
-        is_crowd (list[bool] or None):
-
-    Returns:
-        list[str] or None
-    """
-    labels = None
-    if classes is not None:
-        if class_names is not None and len(class_names) > 0:
-            labels = [class_names[i] for i in classes]
-        else:
-            labels = [str(i) for i in classes]
-    if scores is not None:
-        if labels is None:
-            labels = ["{:.0f}%".format(s * 100) for s in scores]
-        else:
-            labels = ["{} {:.0f}%".format(l, s * 100) for l, s in zip(labels, scores)]
-    if labels is not None and is_crowd is not None:
-        labels = [l + ("|crowd" if crowd else "") for l, crowd in zip(labels, is_crowd)]
-    return labels
-
-
 class Eval:
     def __init__(self, settings, index) -> None:
         self.settings = settings
@@ -300,9 +272,6 @@ class Eval:
         self.bpp_test5000 = {}
 
         self.input_format = "BGR"
-        self.metadata = MetadataCatalog.get(
-            self.cfg.DATASETS.TEST[0] if len(self.cfg.DATASETS.TEST) else "__unused"
-        )
 
     def prepare_dir(self):
         os.makedirs(f"../../liutie_save/info/{self.set_idx}", exist_ok=True)
@@ -391,16 +360,11 @@ class Eval:
             box_size = min(len(prop['instances'].pred_boxes), max_vis_prop)
             print(box_size)
 
-            scores_temp = prop['instances'].scores.to('cpu').numpy()
-            classes_temp = prop['instances'].pred_classes.to('cpu').numpy()
-            labels_temp = _create_text_labels(classes_temp, scores_temp, self.metadata.get("thing_classes", None))  # [16] 17, 0, 25
-
             v_pred = Visualizer(img, None)
             v_pred = v_pred.overlay_instances(
                 # boxes=prop.proposal_boxes[0:box_size].tensor.cpu().numpy()
-                boxes = prop['instances'].pred_boxes[0:box_size].tensor.cpu().numpy(),
-                labels = labels_temp
-            # boxes = a1234
+                boxes = prop['instances'].pred_boxes[0:box_size].tensor.cpu().numpy()
+                # boxes = a1234
             )
             prop_img = v_pred.get_image()
             vis_img = np.concatenate((anno_img, prop_img), axis=1)
