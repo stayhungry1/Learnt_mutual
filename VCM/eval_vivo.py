@@ -408,12 +408,10 @@ class Eval:
             # vis_img = vis_img.transpose(2, 0, 1)
             vis_name = "Left: GT bounding boxes;  Right: Predicted proposals"
 
-            print(vis_img.shape)
             path_savevisualize = '../../liutie_save/feature/51and109_visualize/' + fname_simple + '.png'
-
-            print(np.max(vis_img))
-            print(np.min(vis_img))
-            print(vis_img.dtype)
+            # print(np.max(vis_img))
+            # print(np.min(vis_img))
+            # print(vis_img.dtype)
 
             vis_img = cv2.cvtColor(vis_img, cv2.COLOR_BGR2RGB)
             cv2.imwrite(path_savevisualize, vis_img)
