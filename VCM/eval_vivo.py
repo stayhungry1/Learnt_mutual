@@ -343,10 +343,10 @@ class Eval:
             # img = img.transpose(1, 2, 0) #[3, h, w]->[h, w, 3]
             h_temp = img.shape[0]
             w_temp = img.shape[1]
-            print('img hw:[%dx%d]' %(h_temp, w_temp))
+            # print('img hw:[%dx%d]' %(h_temp, w_temp))
             h_temp_sourceimg = input["height"]
             w_temp_sourceimg = input["width"]
-            print('img_source hw:[%dx%d]' %(h_temp_sourceimg, w_temp_sourceimg))
+            # print('img_source hw:[%dx%d]' %(h_temp_sourceimg, w_temp_sourceimg))
             img = cv2.resize(img, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_NEAREST)
 
             # #GT先不用
@@ -355,43 +355,34 @@ class Eval:
             # v_gt = v_gt.overlay_instances(boxes=None)
             # anno_img = v_gt.get_image()
 
-            # a1 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
-            # a3 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
-            # a2 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
-            # a4 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
-            # a1 = a1[:, np.newaxis]
-            # a2 = a2[:, np.newaxis]
-            # a3 = a3[:, np.newaxis]
-            # a4 = a4[:, np.newaxis]
-            print('before [%d, %d, %d, %d]' %(prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 0], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 1], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 2], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3]))
-            # print('after [%d, %d, %d, %d]' %(a1[0, 0], a2[0, 0], a3[0, 0], a4[0, 0]))
-            # a1234 = np.concatenate([a1, a2], axis=1)
-            # a1234 = np.concatenate([a1234, a3], axis=1)
-            # a1234 = np.concatenate([a1234, a4], axis=1)
-            # print(a1234.shape) #[59, 4,]
-
-            # bboxes = bboxes / [W, H, W, H]
-            # bboxes = bboxes[:, [0, 2, 1, 3]]
-
+            # # a1 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
+            # # a3 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
+            # # a2 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
+            # # a4 = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
+            # # a1 = a1[:, np.newaxis]
+            # # a2 = a2[:, np.newaxis]
+            # # a3 = a3[:, np.newaxis]
+            # # a4 = a4[:, np.newaxis]
             # print('before [%d, %d, %d, %d]' %(prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 0], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 1], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 2], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3]))
-            # prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0] = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
-            # prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2] = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
-            # prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1] = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
-            # prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3] = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
-            # print('after [%d, %d, %d, %d]' %(prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 0], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 1], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 2], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3]))
+            # # print('after [%d, %d, %d, %d]' %(a1[0, 0], a2[0, 0], a3[0, 0], a4[0, 0]))
+            # # a1234 = np.concatenate([a1, a2], axis=1)
+            # # a1234 = np.concatenate([a1234, a3], axis=1)
+            # # a1234 = np.concatenate([a1234, a4], axis=1)
+            # # print(a1234.shape) #[59, 4,]
+            # # print('before [%d, %d, %d, %d]' %(prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 0], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 1], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 2], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3]))
+            # # prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0] = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
+            # # prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2] = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
+            # # prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1] = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 1]
+            # # prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3] = h_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 3]
+            # # print('after [%d, %d, %d, %d]' %(prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 0], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 1], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 2], prop['instances'].pred_boxes.tensor.cpu().numpy()[0, 3]))
 
-
-            # box_size = min(len(prop.proposal_boxes), max_vis_prop)
-            # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy().shape)
-            # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy())
             print(prop['instances'].pred_boxes.tensor.to('cpu').numpy().shape) #[59, 4,]
             # print(prop['instances'].scores.to('cpu').numpy().shape) #[59]
             # print(prop['instances'].pred_classes.to('cpu').numpy().shape) #[59]
             box_size = min(len(prop['instances'].pred_boxes), max_vis_prop)
             # print(prop['instances'].scores.to('cpu').numpy()[0]) #[59]
             # print(prop['instances'].scores.to('cpu').numpy()[1]) #[59]
-            print(prop['instances'].pred_classes.to('cpu').numpy()[0])
-            print(prop['instances'].pred_classes.to('cpu').numpy()[1])
+            # print(prop['instances'].pred_classes.to('cpu').numpy()[0])
 
             # print('\n'.join(['{0}: {1}'.format(item[0], item[1]) for item in self.metadata.__dict__.items()]))
             # print(self.metadata.get("thing_classes", None))
@@ -401,7 +392,7 @@ class Eval:
             metadata_temp = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
             # labels_temp = _create_text_labels(classes_temp, scores_temp, self.metadata.get("thing_classes", None))  # [16] 17, 0, 25
             labels_temp = _create_text_labels(classes_temp, scores_temp, metadata_temp)  # [16] 17, 0, 25
-            print(len(metadata_temp))
+            # print(len(metadata_temp)) #长度为80的list
 
             v_pred = Visualizer(img, None)
             v_pred = v_pred.overlay_instances(
