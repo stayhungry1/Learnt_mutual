@@ -313,6 +313,17 @@ class Eval:
             # v_gt = v_gt.overlay_instances(boxes=input["instances"].gt_boxes)
             v_gt = v_gt.overlay_instances(boxes=None)
             anno_img = v_gt.get_image()
+
+            h_temp = img.shape[1]
+            w_temp = img.shape[2]
+            print('hw:[%dx%d]' %(h_temp, w_temp))
+
+            prop['instances'].pred_boxes[:, 0] = w_temp - prop['instances'].pred_boxes[:, 0]
+            prop['instances'].pred_boxes[:, 2] = w_temp - prop['instances'].pred_boxes[:, 2]
+            prop['instances'].pred_boxes[:, 1] = h_temp - prop['instances'].pred_boxes[:, 1]
+            prop['instances'].pred_boxes[:, 3] = h_temp - prop['instances'].pred_boxes[:, 3]
+            print('[%d, %d, %d, %d]' %(prop['instances'].pred_boxes[:, 0], prop['instances'].pred_boxes[:, 1], prop['instances'].pred_boxes[:, 2], prop['instances'].pred_boxes[:, 3]))
+
             # box_size = min(len(prop.proposal_boxes), max_vis_prop)
             # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy().shape)
             # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy())
