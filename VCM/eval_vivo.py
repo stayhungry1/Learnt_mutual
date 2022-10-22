@@ -313,7 +313,7 @@ class Eval:
         # os.makedirs(f"feature/{self.set_idx}_resid", exist_ok=True)
         os.makedirs(f"../../liutie_save/output", exist_ok=True)
 
-    def visualize_training(self, batched_inputs, proposals):
+    def visualize_training(self, batched_inputs, proposals, fname_simple):
         """
         A function used to visualize images and proposals. It shows ground truth
         bounding boxes on the original image and up to 20 top-scoring predicted
@@ -331,10 +331,8 @@ class Eval:
         max_vis_prop = 20
 
         for input, prop in zip(batched_inputs, proposals):
-
             # for i in input:
             #     print(i)
-
             # classes = outputs[0]['instances'].pred_classes.to('cpu').numpy()
             # scores = outputs[0]['instances'].scores.to('cpu').numpy()
             # bboxes = outputs[0]['instances'].pred_boxes.tensor.to('cpu').numpy()
@@ -350,8 +348,6 @@ class Eval:
             w_temp_sourceimg = input["width"]
             print('img_source hw:[%dx%d]' %(h_temp_sourceimg, w_temp_sourceimg))
             img = cv2.resize(img, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_NEAREST)
-            # img = cv2.resize(img, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_CUBIC)
-            # img = img.transpose(2, 0, 1) #[h, w, 3]->[3, h, w]
 
             v_gt = Visualizer(img, None)
             # v_gt = v_gt.overlay_instances(boxes=input["instances"].gt_boxes)
@@ -419,7 +415,8 @@ class Eval:
             vis_name = "Left: GT bounding boxes;  Right: Predicted proposals"
 
             print(vis_img.shape)
-            path_savevisualize = '../../liutie_save/feature/1.png'
+            path_savevisualize = '../../liutie_save/feature/51and109_visualize/' + fname_simple + '.png'
+
             print(np.max(vis_img))
             print(np.min(vis_img))
             print(vis_img.dtype)
@@ -677,8 +674,8 @@ class Eval:
 
                 #加了下面3行
                 fname_simple_temp = utils.simple_filename(fname)
-                if fname_simple_temp != '00a159a661a2f5aa':
-                    continue
+                # if fname_simple_temp != '00a159a661a2f5aa':
+                #     continue
 
                 outputs = self._evaluation(fname)
                 outputs = outputs[0]
@@ -810,7 +807,7 @@ class Eval:
         # ###################################################ccr added
         outputs = self.forward_front(inputs, images, features)  # images是float64
         self.evaluator.process(inputs, outputs)
-        self.visualize_training(inputs, outputs)
+        self.visualize_training(inputs, outputs, fname_simple)
         return outputs
 
     def summary(self):
