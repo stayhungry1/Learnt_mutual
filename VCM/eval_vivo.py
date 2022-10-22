@@ -349,10 +349,11 @@ class Eval:
             print('img_source hw:[%dx%d]' %(h_temp_sourceimg, w_temp_sourceimg))
             img = cv2.resize(img, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_NEAREST)
 
-            v_gt = Visualizer(img, None)
-            # v_gt = v_gt.overlay_instances(boxes=input["instances"].gt_boxes)
-            v_gt = v_gt.overlay_instances(boxes=None)
-            anno_img = v_gt.get_image()
+            # #GT先不用
+            # v_gt = Visualizer(img, None)
+            # # v_gt = v_gt.overlay_instances(boxes=input["instances"].gt_boxes)
+            # v_gt = v_gt.overlay_instances(boxes=None)
+            # anno_img = v_gt.get_image()
 
             # a1 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 0]
             # a3 = w_temp - prop['instances'].pred_boxes.tensor.cpu().numpy()[:, 2]
@@ -410,7 +411,9 @@ class Eval:
             # boxes = a1234
             )
             prop_img = v_pred.get_image()
-            vis_img = np.concatenate((anno_img, prop_img), axis=1)
+            # vis_img = np.concatenate((anno_img, prop_img), axis=1)
+            vis_img = prop_img
+
             # vis_img = vis_img.transpose(2, 0, 1)
             vis_name = "Left: GT bounding boxes;  Right: Predicted proposals"
 
