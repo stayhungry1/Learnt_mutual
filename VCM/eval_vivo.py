@@ -299,8 +299,8 @@ class Eval:
 
         for input, prop in zip(batched_inputs, proposals):
 
-            # for i in input:
-            #     print(i)
+            for i in input:
+                print(i)
 
             # classes = outputs[0]['instances'].pred_classes.to('cpu').numpy()
             # scores = outputs[0]['instances'].scores.to('cpu').numpy()
@@ -622,6 +622,7 @@ class Eval:
             # for fname in tqdm(inputs[:2]):
             for fname in tqdm(inputs):
 
+                #加了下面3行
                 fname_simple_temp = utils.simple_filename(fname)
                 if fname_simple_temp != '00a159a661a2f5aa':
                     continue
