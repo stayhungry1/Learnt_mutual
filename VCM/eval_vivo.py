@@ -308,11 +308,8 @@ class Eval:
             # H, W = outputs[0]['instances'].image_size
 
             img = input["image"]
-            img = convert_image_to_rgb(img.permute(1, 2, 0), self.input_format) #[h, w, 3]->[3, h, w]
-            print(img.shape)
-            aaa
-            
-            img = img.transpose(1, 2, 0) #[3, h, w]->[h, w, 3]
+            img = convert_image_to_rgb(img.permute(1, 2, 0), self.input_format) #[h, w, 3]
+            # img = img.transpose(1, 2, 0) #[3, h, w]->[h, w, 3]
             h_temp = img.shape[0]
             w_temp = img.shape[1]
             print('img hw:[%dx%d]' %(h_temp, w_temp))
@@ -320,7 +317,7 @@ class Eval:
             w_temp_sourceimg = input["width"]
             print('img_source hw:[%dx%d]' %(h_temp_sourceimg, w_temp_sourceimg))
             img = cv2.resize(img, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_NEAREST)
-            img = cv2.resize(img, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_CUBIC)
+            # img = cv2.resize(img, (w_temp_sourceimg, h_temp_sourceimg), interpolation=cv2.INTER_CUBIC)
             img = img.transpose(2, 0, 1) #[h, w, 3]->[3, h, w]
 
             v_gt = Visualizer(img, None)
