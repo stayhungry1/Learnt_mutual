@@ -314,20 +314,24 @@ class Eval:
             v_gt = v_gt.overlay_instances(boxes=None)
             anno_img = v_gt.get_image()
 
-            h_temp = img.shape[1]
-            w_temp = img.shape[2]
+            h_temp = img.shape[0]
+            w_temp = img.shape[1]
             print('hw:[%dx%d]' %(h_temp, w_temp))
 
-            prop['instances'].pred_boxes[:, 0] = w_temp - prop['instances'].pred_boxes[:, 0]
-            prop['instances'].pred_boxes[:, 2] = w_temp - prop['instances'].pred_boxes[:, 2]
-            prop['instances'].pred_boxes[:, 1] = h_temp - prop['instances'].pred_boxes[:, 1]
-            prop['instances'].pred_boxes[:, 3] = h_temp - prop['instances'].pred_boxes[:, 3]
-            print('[%d, %d, %d, %d]' %(prop['instances'].pred_boxes[:, 0], prop['instances'].pred_boxes[:, 1], prop['instances'].pred_boxes[:, 2], prop['instances'].pred_boxes[:, 3]))
+            a1 = w_temp - prop['instances'].pred_boxes[:, 0].tensor.cpu().numpy()
+            a3 = w_temp - prop['instances'].pred_boxes[:, 2].tensor.cpu().numpy()
+            a2 = h_temp - prop['instances'].pred_boxes[:, 1].tensor.cpu().numpy()
+            a4 = h_temp - prop['instances'].pred_boxes[:, 3].tensor.cpu().numpy()
+            print('[%d, %d, %d, %d]' %(a1[0, 0], a2[0, 0], a3[0, 0], a4[0, 0]))
+            a1234 = np.concatenate([a1,a2], axis=1)
+            a1234 = np.concatenate([a1234,a3], axis=1)
+            a1234 = np.concatenate([a1234,a4], axis=1)
 
             # box_size = min(len(prop.proposal_boxes), max_vis_prop)
             # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy().shape)
             # print(prop.proposal_boxes[0:box_size].pred_boxes.tensor.cpu().numpy())
             print(prop['instances'].pred_boxes.tensor.to('cpu').numpy().shape) #[59, 4,]
+            print(a1234.shape) #[59, 4,]
             # print(prop['instances'].scores.to('cpu').numpy().shape) #[59]
             # print(prop['instances'].pred_classes.to('cpu').numpy().shape) #[59]
             box_size = min(len(prop['instances'].pred_boxes), max_vis_prop)
@@ -336,7 +340,8 @@ class Eval:
             v_pred = Visualizer(img, None)
             v_pred = v_pred.overlay_instances(
                 # boxes=prop.proposal_boxes[0:box_size].tensor.cpu().numpy()
-                boxes = prop['instances'].pred_boxes[0:box_size].tensor.cpu().numpy()
+                # boxes = prop['instances'].pred_boxes[0:box_size].tensor.cpu().numpy()
+                boxes = a1234
             )
             prop_img = v_pred.get_image()
             vis_img = np.concatenate((anno_img, prop_img), axis=1)
