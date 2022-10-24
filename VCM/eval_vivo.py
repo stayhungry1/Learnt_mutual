@@ -252,6 +252,8 @@ class Eval:
             for inputs in iter(self.data_loader):
                 #自己加入的5行，断了之后重新跑，提过feature的不用再提
                 fname_temp = utils.simple_filename(inputs[0]["file_name"])
+                if (fname_temp != 'eeb18eb189719350') and (fname_temp != '00a159a661a2f5aa') and (fname_temp != '809a9c3af507dbfc') and (fname_temp != '7105f5486ecb5e61') and (fname_temp != '6306fc7f3573eb70') and (fname_temp != '363fbcd9d3492c8f'):
+                    continue
                 self.height_temp = self.numpixel_test5000[fname_temp][0]
                 self.width_temp = self.numpixel_test5000[fname_temp][1]
                 self.numpixel_temp = self.numpixel_test5000[fname_temp][2]
