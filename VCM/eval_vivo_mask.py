@@ -387,7 +387,8 @@ class Eval:
         self.criterion_p5 = RateDistortionLoss_P5(lmbda=compressai_lmbda)
 
         # 读取文件
-        path_save = './dataset/annotations_5k/newOpenimage_numpixel_text5000.json'  # new_dict[fname_simple][0] [1] [2] 分别为height, width, num_pixel fname_simple为 '000a1249af2bc5f0'
+        # path_save = './dataset/annotations_5k/newOpenimage_numpixel_text5000.json'  # new_dict[fname_simple][0] [1] [2] 分别为height, width, num_pixel fname_simple为 '000a1249af2bc5f0'
+        path_save = '/media/data/ccr/zzf/vcm/VCM/dataset/annotations_5k/newOpenimage_numpixel_text5000.json'  # new_dict[fname_simple][0] [1] [2] 分别为height, width, num_pixel fname_simple为 '000a1249af2bc5f0'
         tf = open(path_save, "r")
         self.numpixel_test5000 = json.load(tf)
         # 第一版结果
