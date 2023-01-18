@@ -1,13 +1,56 @@
-_BASE_: "../Base-RCNN-FPN.yaml"
+_BASE_: "../Base-RCNN-FPN-VCM.yaml"
 MODEL:
   MASK_ON: True
-  WEIGHTS: "detectron2://ImageNetPretrained/FAIR/X-101-32x8d.pkl"
+#  WEIGHTS: "detectron2://ImageNetPretrained/FAIR/X-101-32x8d.pkl"
+#  WEIGHTS: "/media/data/liutie/zzf/VCMbelle_0622/VCM/train_para/model_final_2d9806.pkl" #30901
+  WEIGHTS: "/media/data/ccr/zzf/vcm/train_para/model_final_2d9806.pkl" #vivo
+#  WEIGHTS: "/media/data/ccr/zzf/zzf_save/maskoutput/lambda2/model_0034999.pth" #vivo
+#  WEIGHTS: "/media/data/ccr/zzf/zzf_save/maskoutput/lambda1/model_0054999.pth" #vivo
+#  WEIGHTS: "/media/data/ccr/zzf/zzf_save/maskoutput/lambda0512/model_0050999.pth" #vivo
+#  WEIGHTS: "/media/data/ccr/zzf/zzf_save/maskoutput/lambda0256/model_0038999.pth" #vivo
+#  WEIGHTS: "/media/data/ccr/zzf/zzf_save/maskoutput/lambda4/model_0065999.pth" #vivo
+#  WEIGHTS: "/media/data/ccr/zzf/zzf_save/maskoutput/lambda16/model_0011999.pth" #vivo
+#  WEIGHTS: "/media/data/ccr/zzf/zzf_save/maskoutput2/lambda1/model_0044999.pth" #vivo
+
+
   PIXEL_STD: [57.375, 57.120, 58.395]
   RESNETS:
     STRIDE_IN_1X1: False  # this is a C2 model
     NUM_GROUPS: 32
     WIDTH_PER_GROUP: 8
     DEPTH: 101
+
+#OUTPUT_DIR: ../../zzf_save/maskoutput/test
+#OUTPUT_DIR: ../../zzf_save/maskoutput/lambda1
+#OUTPUT_DIR: ../../zzf_save/maskoutput/lambda4
+#OUTPUT_DIR: ../../zzf_save/maskoutput/lambda0512
+#OUTPUT_DIR: ../../zzf_save/maskoutput/lambda0256
+#OUTPUT_DIR: ../../zzf_save/maskoutput/lambda0128
+#OUTPUT_DIR: ../../zzf_save/maskoutput/lambda16
+#OUTPUT_DIR: ../../zzf_save/maskoutput/lambda16_new
+#OUTPUT_DIR: ../../zzf_save/maskoutput2/lambda1
+#OUTPUT_DIR: ../../zzf_save/maskoutput2/lambda1_new
+#OUTPUT_DIR: ../../zzf_save/maskoutput3_finetune3/lambda1
+#OUTPUT_DIR: ../../zzf_save/maskoutput3_finetune3/lambda2
+#OUTPUT_DIR: ../../zzf_save/maskoutput3_finetune3/lambda4
+#OUTPUT_DIR: ../../zzf_save/maskoutput4_batchsize8/lambda1
+OUTPUT_DIR: ../../zzf_save/output/EXP_cheng2020anchor_256chinput_P2down2345inout
+#OUTPUT_DIR: ../../zzf_save/output/EXP_cheng2020anchor_256chinput_P2inP3out
+
+
 SOLVER:
   STEPS: (210000, 250000)
   MAX_ITER: 270000
+  CHECKPOINT_PERIOD: 3000 #默认是5000
+  IMS_PER_BATCH: 4 #8 #1 #4 #6
+
+DATASETS:
+  TRAIN: ("openimg_mask_train",)
+  TEST: ()
+
+INPUT:
+# # MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+# # MIN_SIZE_TRAIN: (640, 640)
+#  MIN_SIZE_TRAIN: (640, 640)
+  MIN_SIZE_TRAIN: (800, 800)
+# # MIN_SIZE_TEST: 400
