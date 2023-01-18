@@ -566,12 +566,13 @@ class Eval:
         image_feat = quant_fix(features_p345.copy())
 
         fname = utils.simple_filename(inputs[0]["file_name"])
-        fname_feat = f"../../liutie_save/feature/{self.set_idx}_ori/{fname}.png"  # 用于存P345
-        # fname_p345 = f"feature/{self.set_idx}_p345/{fname}.png"
-        fname_ds = f"../../liutie_save/feature/{self.set_idx}_ds/{fname}.png"  # 用于存P2
-        # fname_resid = f"feature/{self.set_idx}_resid/{fname}.png"
+        # fname_feat = f"../../liutie_save/feature/{self.set_idx}_ori/{fname}.png"  # 用于存P345
+        fname_feat = f"../../zzf_save/feature/{self.set_idx}_ori/{fname}.png"  # 用于存P345
+        # fname_ds = f"../../liutie_save/feature/{self.set_idx}_ds/{fname}.png"  # 用于存P2
+        fname_ds = f"../../zzf_save/feature/{self.set_idx}_ds/{fname}.png"  # 用于存P2
 
-        with open(f"../../liutie_save/info/{self.set_idx}/{fname}_inputs.bin", "wb") as inputs_f:
+        # with open(f"../../liutie_save/info/{self.set_idx}/{fname}_inputs.bin", "wb") as inputs_f:
+        with open(f"../../zzf_save/info/{self.set_idx}/{fname}_inputs.bin", "wb") as inputs_f:
             torch.save(inputs, inputs_f)
 
         # utils.save_feature_map(fname_feat, image_feat)
