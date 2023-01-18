@@ -9,7 +9,8 @@ from eval_vivo_mask import DetectEval
 # os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
 os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/OpenImageV6-5K' #vivo
-os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/zzf/vcm/VCM/dataset/validation' #vivo 59942提案数据
+# os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/zzf/vcm/VCM/dataset/validation' #vivo 59942提案数据
+os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/zzf/vcm/VCM/dataset/validation_2image' #vivo 59942提案数据 2张图调试用
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/testimg2' #vivo  # 测试的两张图
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/OpenImageV6-5K' #30901
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/m57343_objdet_small_twoimage' #30901
