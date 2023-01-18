@@ -381,10 +381,13 @@ class Eval:
         self.pixel_num = settings["pixel_num"]
 
         compressai_lmbda = 1.0
-        self.criterion_p3 = RateDistortionLoss(lmbda=compressai_lmbda)
-        self.criterion_p2 = RateDistortionLoss_P2(lmbda=compressai_lmbda)
-        self.criterion_p4 = RateDistortionLoss_P4(lmbda=compressai_lmbda)
-        self.criterion_p5 = RateDistortionLoss_P5(lmbda=compressai_lmbda)
+        # ###P2inP2345out
+        # self.criterion_p3 = RateDistortionLoss(lmbda=compressai_lmbda)
+        # self.criterion_p2 = RateDistortionLoss_P2(lmbda=compressai_lmbda)
+        # self.criterion_p4 = RateDistortionLoss_P4(lmbda=compressai_lmbda)
+        # self.criterion_p5 = RateDistortionLoss_P5(lmbda=compressai_lmbda)
+        ##oldversion: P2inP3out
+        self.criterion = RateDistortionLoss(lmbda=compressai_lmbda)
 
         # 读取文件
         # path_save = './dataset/annotations_5k/newOpenimage_numpixel_text5000.json'  # new_dict[fname_simple][0] [1] [2] 分别为height, width, num_pixel fname_simple为 '000a1249af2bc5f0'
