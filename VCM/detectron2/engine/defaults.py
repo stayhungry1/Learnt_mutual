@@ -108,7 +108,8 @@ Run on multiple machines:
     )
     # parser.add_argument("--config-file", default="", metavar="FILE", help="path to config file")
     # parser.add_argument("--config-file", default="/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x_vcm.yaml", metavar="FILE", help="path to config file") #我改的30901
-    parser.add_argument("--config-file", default="/media/data/ccr/liutieCompressAI/VCM/configs/COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x_vcm.yaml", metavar="FILE", help="path to config file") #我改的vivo
+    # parser.add_argument("--config-file", default="/media/data/ccr/liutieCompressAI/VCM/configs/COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x_vcm.yaml", metavar="FILE", help="path to config file") #我改的vivo
+    parser.add_argument("--config-file", default="/media/data/ccr/liutieCompressAI/VCM/configs/COCO-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_3x.yaml", metavar="FILE", help="path to config file") #我改的vivo
     parser.add_argument(
         "--resume",
         action="store_true",
