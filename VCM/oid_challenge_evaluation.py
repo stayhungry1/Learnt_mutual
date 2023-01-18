@@ -153,7 +153,7 @@ def main(unused_argv):
   
   metrics = challenge_evaluator.evaluate()
 
-  print(">> metrics: ", metrics['OpenImagesDetectionChallenge_Precision/mAP@0.5IOU'], FLAGS.output_metrics)
+  # print(">> metrics: ", metrics['OpenImagesDetectionChallenge_Precision/mAP@0.5IOU'], FLAGS.output_metrics)
 
   with open(FLAGS.output_metrics, 'w') as fid:
     io_utils.write_csv(fid, metrics)
