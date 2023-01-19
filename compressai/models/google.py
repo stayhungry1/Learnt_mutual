@@ -278,6 +278,7 @@ class ScaleHyperprior(CompressionModel): #走这里
         }
 
     def load_state_dict(self, state_dict):
+        print('use load_state_dict form google.py instead of pytorch!!!!!!')
         update_registered_buffers(
             self.gaussian_conditional,
             "gaussian_conditional",

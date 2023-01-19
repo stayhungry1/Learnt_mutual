@@ -9,8 +9,8 @@ from eval_vivo_mask import DetectEval
 # os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
 os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/OpenImageV6-5K' #vivo
-os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/zzf/vcm/VCM/dataset/validation' #vivo 59942提案数据
-# os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/zzf/vcm/VCM/dataset/validation_2image' #vivo 59942提案数据 2张图调试用
+# os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/zzf/vcm/VCM/dataset/validation' #vivo 59942提案数据
+os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/zzf/vcm/VCM/dataset/validation_2image' #vivo 59942提案数据 2张图调试用
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/testimg2' #vivo  # 测试的两张图
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/OpenImageV6-5K' #30901
 # os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/m57343_objdet_small_twoimage' #30901
@@ -38,9 +38,9 @@ if __name__ == "__main__":
         methods_eval = DetectEval(settings, set_idx)
         picklist = sorted(glob.glob(os.path.join(os.environ["DETECTRON2_DATASETS"], "*.jpg")))[:number]
         picklist = [utils.simple_filename(x) for x in picklist]
-        # methods_eval.prepare_part(picklist, data_name="pick") # 14  18 new_train 21
-        methods_eval.prepare_part(picklist, data_name="pick1") # 13  19 finetune 31 20 42 22
-        # methods_eval.prepare_part(picklist, data_name="pick2") #15 41 43 23
+        methods_eval.prepare_part(picklist, data_name="pick") #2001
+        # methods_eval.prepare_part(picklist, data_name="pick1") #2000
+        # methods_eval.prepare_part(picklist, data_name="pick2")
 
     if mode == "feature_coding":
         filenames = methods_eval.feature_coding()
