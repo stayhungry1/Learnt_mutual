@@ -41,7 +41,7 @@ import functools
 from torch.autograd import Variable
 from PIL import Image
 from torch.utils.tensorboard import SummaryWriter
-from compressai.models import *
+# from compressai.models import *
 
 def weights_init(m):
     classname = m.__class__.__name__
