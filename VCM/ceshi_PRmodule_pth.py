@@ -520,7 +520,8 @@ class NLayerDiscriminator(nn.Module):
 path_savepth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999.pth'
 path_savenewpth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999_PRmodule.pth'
 
-netG = define_G(256, 256, 128, 'global', 0, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids)  # 3->0 64->128
+gpu_ids = [0, 1, 2]
+netG = define_G(256, 256, 128, 'global', 0, 9, 1, 3, 'instance', gpu_ids=gpu_ids)  # 3->0 64->128
 pretrained_dict = torch.load(path_savepth)
 model_dict = netG.state_dict()
 pretrained_dict = {key[6:]: value for key, value in pretrained_dict['model'].items() if ('netG' in key)} #去掉前缀net_G.
