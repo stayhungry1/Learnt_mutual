@@ -757,7 +757,8 @@ class Eval:
         # self.path_bppsave = '../../zzf_save/output/new2_mask_cheng_P2inP2P3P4P5out_P2zeropad256_bpp_lambda1_iter0044999.json' # 21
         # self.path_bppsave = '../../zzf_save/output/new2_mask_cheng_P2inP2P3P4P5out_P2zeropad256_bpp_lambda1_iter_plus0008999.json' # 22
         # self.path_bppsave = '../../zzf_save/output/new2_mask_cheng_P2inP2P3P4P5out_P2zeropad256_bpp_lambda1_iter_plus0020999.json' # 22
-        self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda4_finenet_iter37999.json'
+        # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda4_finenet_iter37999.json'
+        self.path_bppsave = '../../liutie_save/output/maskrcnn_P2inP3outzeropad128_bpp_lambda1_finenet_iter20999.json'
 
         # 在第一版基础上finetune的第三版训练结果
         # self.path_bppsave = '../../zzf_save/output/new3_mask_cheng_P2inP2P3P4P5out_P2zeropad256_bpp_lambda1_iter0038999.json' # 31
