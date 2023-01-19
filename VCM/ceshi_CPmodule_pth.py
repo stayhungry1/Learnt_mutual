@@ -14,11 +14,11 @@ from detectron2.utils.events import get_event_storage
 from detectron2.utils.logger import log_first_n
 from detectron2.layers.batch_norm import FrozenBatchNorm2d, get_norm
 
-from ..backbone import Backbone, build_backbone
-from ..postprocessing import detector_postprocess
-from ..proposal_generator import build_proposal_generator
-from ..roi_heads import build_roi_heads
-from .build import META_ARCH_REGISTRY
+# from ..backbone import Backbone, build_backbone
+# from ..postprocessing import detector_postprocess
+# from ..proposal_generator import build_proposal_generator
+# from ..roi_heads import build_roi_heads
+# from .build import META_ARCH_REGISTRY
 
 
 # # --add compressai framework
