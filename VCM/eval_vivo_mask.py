@@ -87,7 +87,8 @@ def define_G(input_nc, output_nc, ngf, netG, n_downsample_global=3, n_blocks_glo
         assert(torch.cuda.is_available())
         #netG.cuda(gpu_ids[0])
         #netG.cuda(1)
-        netG.to(device)
+        # netG.to(device)
+        netG.cuda()
     netG.apply(weights_init)
     return netG
 

@@ -79,3 +79,9 @@ net_belle.load_state_dict(model_dict)
 net_belle = Cheng2020Anchor(N=192).to(device)
 net_belle.load_state_dict(model_dict)
 
+net_belle_od = Cheng2020Anchor(N=192).cuda()
+path_saveCPmodule = '/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/EXP_cheng2020anchor_256chinput_P4MSE_lambda1_N192_smalltrain5W_eachdnorm_08172010/model_0009999_norcnn.pth'
+net_belle_od.load_state_dict(torch.load(path_saveCPmodule))
+# self.net_belle_od = torch.load(path_saveCPmodule)
+print(next(net_belle_od.parameters()).device)
+print('load CPmodule trained by od: %s' % (path_saveCPmodule))
