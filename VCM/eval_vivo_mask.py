@@ -881,7 +881,8 @@ class Eval:
         # d_big_p4 = torch.zeros(target_size_p4).cuda()
         # d_big_p4[:, 0:temp_ori_size_p4[1], 0:temp_ori_size_p4[2], 0:temp_ori_size_p4[3]] = d_p4
         # d_output = torch.zeros(temp_ori_size_p4)  # 用于从网络输出的tensor取出左上角
-        net_belle_output = self.model.net_belle(d_p2)
+        net_belle_output = self.net_belle_od(d_p2)
+        # net_belle_output = self.model.net_belle(d_p2)
         print(net_belle_output["x_hat"].size(), '-------------------Cheng output (P3) size')
         d_output = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output["x_hat"], h_new_p3_left, h_new_p3_right, w_new_p3_left, w_new_p3_right)
         print('max/min_P2(GT)(Cheng input): %8.4f/%8.4f, max/min_P3(Cheng output): %8.4f/%8.4f'
@@ -899,7 +900,8 @@ class Eval:
         fake_image_f_GT = d_p2
         upsample = torch.nn.Upsample(scale_factor=2, mode='bilinear')
         up_image = upsample(net_belle_output["x_hat"])
-        res = self.model.netG.forward(up_image)
+        res = self.netG_od.forward(up_image)
+        # res = self.model.netG.forward(up_image)
         fake_image_f = res + up_image
         d_output_p2 = Pfeature_zeropad_youxiajiao256_reverse(fake_image_f, h_new_p2_left, h_new_p2_right, w_new_p2_left, w_new_p2_right)
         print(d_output_p2.size(), '-------------------Finenet output P2 size')
