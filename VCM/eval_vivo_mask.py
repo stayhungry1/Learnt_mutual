@@ -899,7 +899,8 @@ class Eval:
         d_p3_new = (d_p3_new - guiyihua_min) / guiyihua_scale
         d_p4_new = (d_p4_new - guiyihua_min) / guiyihua_scale
         d_p5_new = (d_p5_new - guiyihua_min) / guiyihua_scale
-        net_belle_output_p2 = self.model.net_belle(d_p2_new)
+        # net_belle_output_p2 = self.model.net_belle(d_p2_new)
+        net_belle_output_p2 = self.net_belle_od(d_p2_new)
         d_output_p2 = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output_p2["x_hat"], h_p2_new_left,
                                                              h_p2_new_right, w_p2_new_left, w_p2_new_right)
         d_output_p2_up2 = F.interpolate(d_output_p2, scale_factor=2.0, mode="bilinear", align_corners=False)
@@ -907,21 +908,24 @@ class Eval:
         # print(d_p2_new.size(), '-------------------Cheng input (P2) size')
         # print(net_belle_output_p2["x_hat"].size(), '-------------------Cheng output (P2) size')
         # print(d_output_p2_up2.size(), '-------------------Cheng output (P2) padreverse_and_up2 size')
-        net_belle_output_p3 = self.model.net_belle(d_p3_new)
+        net_belle_output_p3 = self.net_belle_od(d_p3_new)
+        # net_belle_output_p3 = self.model.net_belle(d_p3_new)
         d_output_p3 = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output_p3["x_hat"], h_p3_new_left,
                                                              h_p3_new_right, w_p3_new_left, w_p3_new_right)
         # print(d_p3.size(), '-------------------P3 original size')
         # print(d_p3_new.size(), '-------------------Cheng input (P3) size')
         # print(net_belle_output_p3["x_hat"].size(), '-------------------Cheng output (P3) size')
         # print(d_output_p3.size(), '-------------------Cheng output (P3) padreverse size')
-        net_belle_output_p4 = self.model.net_belle(d_p4_new)
+        net_belle_output_p4 = self.net_belle_od(d_p4_new)
+        # net_belle_output_p4 = self.model.net_belle(d_p4_new)
         d_output_p4 = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output_p4["x_hat"], h_p4_new_left,
                                                              h_p4_new_right, w_p4_new_left, w_p4_new_right)
         # print(d_p4.size(), '-------------------P4 original size')
         # print(d_p4_new.size(), '-------------------Cheng input (P4) size')
         # print(net_belle_output_p4["x_hat"].size(), '-------------------Cheng output (P4) size')
         # print(d_output_p4.size(), '-------------------Cheng output (P4) padreverse size')
-        net_belle_output_p5 = self.model.net_belle(d_p5_new)
+        net_belle_output_p5 = self.net_belle_od(d_p5_new)
+        # net_belle_output_p5 = self.model.net_belle(d_p5_new)
         d_output_p5 = Pfeature_zeropad_youxiajiao128_reverse(net_belle_output_p5["x_hat"], h_p5_new_left,
                                                              h_p5_new_right, w_p5_new_left, w_p5_new_right)
         # print(d_p5.size(), '-------------------P5 original size')

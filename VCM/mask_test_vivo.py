@@ -40,7 +40,7 @@ if __name__ == "__main__":
         picklist = [utils.simple_filename(x) for x in picklist]
         # methods_eval.prepare_part(picklist, data_name="pick") #2001 2002
         # methods_eval.prepare_part(picklist, data_name="pick1") #2000
-        methods_eval.prepare_part(picklist, data_name="pick2") #2003
+        methods_eval.prepare_part(picklist, data_name="pick2") #2002
 
     if mode == "feature_coding":
         filenames = methods_eval.feature_coding()
