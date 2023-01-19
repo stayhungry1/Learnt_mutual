@@ -197,6 +197,32 @@ def Pfeature_zeropad_youxiajiao32_reverse(feat, h_new_left, h_new_right, w_new_l
     feat_new = feat[:, :, h_new_left:(h-h_new_right), w_new_left:(w-w_new_right)]
     return feat_new
 
+def Pfeature_zeropad_youxiajiao(feat, factor=16):
+    h = feat.size()[2]
+    w = feat.size()[3]
+    if h % factor == 0:
+        h_new = h
+    else:
+        h_new = ((h // factor) + 1) * factor
+    if w % factor == 0:
+        w_new = w
+    else:
+        w_new = ((w // factor) + 1) * factor
+    h_new_left = 0 #(h_new - h) // 2
+    h_new_right = h_new - h
+    w_new_left = 0
+    w_new_right = w_new - w
+    # nn.ReplicationPad2d((1, 2, 3, 2))  #左侧填充1行，右侧填充2行，上方填充3行，下方填充2行
+    pad_func = nn.ZeroPad2d((w_new_left, w_new_right, h_new_left, h_new_right))
+    feat_pad = pad_func(feat)
+    return feat_pad, h_new_left, h_new_right, w_new_left, w_new_right #恢复时h_new_left:(h_now-h_right)
+
+def Pfeature_zeropad_youxiajiao_reverse(feat, h_new_left, h_new_right, w_new_left, w_new_right): #输入feat为[b, 256, h, w]
+    h = feat.size()[2]
+    w = feat.size()[3]
+    feat_new = feat[:, :, h_new_left:(h-h_new_right), w_new_left:(w-w_new_right)]
+    return feat_new
+
 def padding_size(ori_size, factor_size):
     if ori_size % factor_size == 0:
         return ori_size
