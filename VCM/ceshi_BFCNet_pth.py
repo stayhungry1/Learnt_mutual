@@ -46,8 +46,8 @@ from torch.optim import Adam
 os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-path_savepth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachnorm_12k64kcontinue_09051530/model_0135999.pth'
-path_savenewpth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachnorm_12k64kcontinue_09051530/model_0135999_BFCNet.pth'
+path_savepth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/model_0135999.pth'
+path_savenewpth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/model_0135999_BFCNet.pth'
 
 net_belle = Cheng2020Anchor(N=192)
 net_belle = net_belle.to(device)
