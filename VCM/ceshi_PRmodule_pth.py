@@ -524,7 +524,9 @@ gpu_ids = [0, 1, 2]
 netG = define_G(256, 256, 128, 'global', 0, 9, 1, 3, 'instance', gpu_ids=gpu_ids)  # 3->0 64->128
 pretrained_dict = torch.load(path_savepth)
 model_dict = netG.state_dict()
-pretrained_dict = {key[6:]: value for key, value in pretrained_dict['model'].items() if ('netG' in key)} #去掉前缀net_G.
+pretrained_dict = {key: value for key, value in pretrained_dict['model'].items() if ('netG' in key)} #去掉前缀net_G.
+for key, value in pretrained_dict.items():
+    print(key)
 model_dict.update(pretrained_dict)
 netG.load_state_dict(model_dict)
 
