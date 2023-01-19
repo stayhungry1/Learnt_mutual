@@ -766,15 +766,17 @@ class Eval:
 
 
         ###多加载object detection训练好的CP module (P2inP3out)和PR module (P3upinP2out进来)
-        self.net_belle_od = Cheng2020Anchor(N=192).cuda()
+        # self.net_belle_od = Cheng2020Anchor(N=192).cuda()
         path_saveCPmodule = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999_CPmodule.pth'
-        self.net_belle_od.load_state_dict(torch.load(path_saveCPmodule))
+        # self.net_belle_od.load_state_dict(torch.load(path_saveCPmodule))
+        self.net_belle_od = torch.load(path_saveCPmodule).cuda()
         print('load CPmodule trained by od: %s' %(path_saveCPmodule))
 
-        gpu_ids = [0, 1, 2]
-        self.netG_od = define_G(256, 256, 128, 'global', 0, 9, 1, 3, 'instance', gpu_ids=gpu_ids).cuda()  # 3->0 64->128
+        # gpu_ids = [0, 1, 2]
+        # self.netG_od = define_G(256, 256, 128, 'global', 0, 9, 1, 3, 'instance', gpu_ids=gpu_ids).cuda()  # 3->0 64->128
         path_savePRmodule = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999_PRmodule.pth'
-        self.netG_od.load_state_dict(torch.load(path_savePRmodule))
+        # self.netG_od.load_state_dict(torch.load(path_savePRmodule))
+        self.netG_od = torch.load(path_savePRmodule).cuda()
         print('load PRmodule trained by od: %s' %(path_savePRmodule))
 
     def prepare_dir(self):
