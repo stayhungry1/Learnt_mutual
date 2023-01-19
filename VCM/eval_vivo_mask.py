@@ -776,6 +776,7 @@ class Eval:
         self.netG_od = define_G(256, 256, 128, 'global', 0, 9, 1, 3, 'instance', gpu_ids=gpu_ids).cuda()  # 3->0 64->128
         path_savePRmodule = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999_PRmodule.pth'
         self.netG_od.load_state_dict(torch.load(path_savePRmodule))
+        self.netG_od.eval()
         print('load PRmodule trained by od: %s' %(path_savePRmodule))
 
     def prepare_dir(self):
@@ -827,6 +828,8 @@ class Eval:
         # #加了这一行
         # self.model.net_belle.eval()
         # # self.model.net_belle.train()
+        self.net_belle_od.eval()
+        self.netG_od.eval()
 
         images = self.model.preprocess_image(inputs)  # images: device cpu, image_sizes [800, 1205] tensor [1, 3, 800, 1216] torch.float32 cpu
         features = self.model.backbone(images.tensor)
