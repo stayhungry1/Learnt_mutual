@@ -445,7 +445,16 @@ class Eval:
         # self.path_bppsave = '../../zzf_save/output/new2_mask_cheng_P2inP2P3P4P5out_P2zeropad256_bpp_lambda1_iter_plus0020999.json' # 22
         # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda4_finenet_iter37999.json'
         # self.path_bppsave = '../../liutie_save/output/cheng_P2inP3outzeropad128_bpp_lambda1_finenet_iter20999.json'
-        self.path_bppsave = '../../liutie_save/output/cheng_P2down2P345inout_bpp_lambda1_finenet_iter20999.json'
+        self.path_bppsave = '../../liutie_save/output/cheng_P2down2P345inout_bpp_lambda1_iter20999.json'
+        self.path_bppsave_p2 = '../../liutie_save/output/cheng_P2down2P345inout_bpp_lambda1_iter20999_P2.json'
+        self.path_bppsave_p3 = '../../liutie_save/output/cheng_P2down2P345inout_bpp_lambda1_iter20999_P3.json'
+        self.path_bppsave_p4 = '../../liutie_save/output/cheng_P2down2P345inout_bpp_lambda1_iter20999_P4.json'
+        self.path_bppsave_p5 = '../../liutie_save/output/cheng_P2down2P345inout_bpp_lambda1_iter20999_P5.json'
+        self.bpp_test5000 = {}
+        self.bpp_test5000_p2 = {}
+        self.bpp_test5000_p3 = {}
+        self.bpp_test5000_p4 = {}
+        self.bpp_test5000_p5 = {}
 
         # 在第一版基础上finetune的第三版训练结果
         # self.path_bppsave = '../../zzf_save/output/new3_mask_cheng_P2inP2P3P4P5out_P2zeropad256_bpp_lambda1_iter0038999.json' # 31
