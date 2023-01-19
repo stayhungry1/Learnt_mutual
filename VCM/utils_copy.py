@@ -91,7 +91,8 @@ def _save_feature_map(filename, features, debug=False):
         for row in range(height):
             big_blk_col = np.empty((blk.shape[1], 0))
             for col in range(width):
-                tile = blk[col + row * width].cpu().numpy()
+                # tile = blk[col + row * width].cpu().numpy()
+                tile = blk[col + row * width].detach().cpu().numpy()
                 if debug:
                     cv2.putText(tile, f"{col + row * width}", (32, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, )
                 big_blk_col = np.hstack((big_blk_col, tile))
@@ -118,7 +119,8 @@ def _save_feature_map_onlyp2(filename, features, debug=False): #输入P2
         for row in range(height):
             big_blk_col = np.empty((blk.shape[1], 0))
             for col in range(width):
-                tile = blk[col + row * width].cpu().numpy()
+                # tile = blk[col + row * width].cpu().numpy()
+                tile = blk[col + row * width].detach().cpu().numpy()
                 if debug:
                     cv2.putText(tile, f"{col + row * width}", (32, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, )
                 big_blk_col = np.hstack((big_blk_col, tile))
@@ -142,7 +144,8 @@ def _save_feature_map_p345(filename, features, debug=False):
         for row in range(height):
             big_blk_col = np.empty((blk.shape[1], 0))
             for col in range(width):
-                tile = blk[col + row * width].cpu().numpy()
+                # tile = blk[col + row * width].cpu().numpy()
+                tile = blk[col + row * width].detach().cpu().numpy()
                 if debug:
                     cv2.putText(tile, f"{col + row * width}", (32, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, )
                 big_blk_col = np.hstack((big_blk_col, tile))
