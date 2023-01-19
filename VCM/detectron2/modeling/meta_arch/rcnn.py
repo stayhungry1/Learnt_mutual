@@ -613,6 +613,7 @@ class GeneralizedRCNN(nn.Module):
         self.belle_criterion = RateDistortionLoss(compressaiargs_lambda)
         self.i_step_count = 0
         compressai_logdir = '../../liutie_save/tensorboard_belle/EXPmask_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_iter35999_finenet/'
+        # compressai_logdir = '/media/data/ccr/liutie_save/tensorboard_belle/EXPmask_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_iter35999_finenet/'
         mkdirs(compressai_logdir)
         self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
         self.belle_savetensorboardfreq = 200
