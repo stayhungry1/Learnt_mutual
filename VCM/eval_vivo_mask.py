@@ -13,8 +13,8 @@ import cv2
 import numpy as np
 import torch.nn.functional as F
 import subprocess
-
-import utils
+# import utils
+import utils_copy
 from quantizer import quant_fix, dequant_fix#
 # from VTM_encoder import run_vtm
 from VTM_encoder_ccr import run_vtm
@@ -41,7 +41,7 @@ import functools
 from torch.autograd import Variable
 from PIL import Image
 from torch.utils.tensorboard import SummaryWriter
-# from compressai.models import *
+from compressai.models import *
 
 def weights_init(m):
     classname = m.__class__.__name__
@@ -714,9 +714,9 @@ class Eval:
         self.set_idx = index
         self.VTM_param = settings["VTM"]
         print('load model path: %s' % (settings["pkl_path"]))
-        self.model, self.cfg = utils.model_loader(settings)  # load模型进来
+        self.model, self.cfg = utils_copy.model_loader(settings)  # load模型进来
         self.prepare_dir()
-        utils.print_settings(settings, index)
+        utils_copy.print_settings(settings, index)
 
         self.pixel_num = settings["pixel_num"]
 
@@ -800,7 +800,7 @@ class Eval:
         with tqdm(total=len(self.data_loader.dataset)) as pbar:
             for inputs in iter(self.data_loader):
                 # 自己加入的5行，断了之后重新跑，提过feature的不用再提
-                fname_temp = utils.simple_filename(inputs[0]["file_name"])
+                fname_temp = utils_copy.simple_filename(inputs[0]["file_name"])
                 self.height_temp = self.numpixel_test5000[fname_temp][0]
                 self.width_temp = self.numpixel_test5000[fname_temp][1]
                 self.numpixel_temp = self.numpixel_test5000[fname_temp][2]
@@ -958,7 +958,7 @@ class Eval:
 
         image_feat = quant_fix(features_p345.copy())
 
-        fname = utils.simple_filename(inputs[0]["file_name"])
+        fname = utils_copy.simple_filename(inputs[0]["file_name"])
         # fname_feat = f"../../liutie_save/feature/{self.set_idx}_ori/{fname}.png"  # 用于存P345
         fname_feat = f"../../zzf_save/feature/{self.set_idx}_ori/{fname}.png"  # 用于存P345
         # fname_ds = f"../../liutie_save/feature/{self.set_idx}_ds/{fname}.png"  # 用于存P2
@@ -970,9 +970,9 @@ class Eval:
 
         # utils.save_feature_map(fname_feat, image_feat)
         ####################################ccr added 3 parts
-        utils.save_feature_map_onlyp2(fname_ds, cheng_feat)  # 用于存P2
+        utils_copy.save_feature_map_onlyp2(fname_ds, cheng_feat)  # 用于存P2
         # utils.save_feature_map_onlyp2(fname_resid, resid_feat)
-        utils.save_feature_map_p345(fname_feat, image_feat)  # 用于存P345
+        utils_copy.save_feature_map_p345(fname_feat, image_feat)  # 用于存P345
         ####################################liutie added 3 parts
 
         #  #################################ccr added
@@ -1394,7 +1394,7 @@ class Eval:
 
     def _evaluation(self, fname):
 
-        fname_simple = utils.simple_filename(fname)
+        fname_simple = utils_copy.simple_filename(fname)
         print(fname)
         # fname_ds_rec = fname.replace('rec', 'ds_rec')
         # # fname_resid_rec = fname.replace('rec', 'resid_rec')
@@ -1428,7 +1428,7 @@ class Eval:
                 ap = ap_f.readline()
                 ap = ap.split(",")[1][:-1]
 
-            size_basis = utils.get_size(f'../../zzf_save/feature/{self.set_idx}_bit/')
+            size_basis = utils_copy.get_size(f'../../zzf_save/feature/{self.set_idx}_bit/')
 
             # ml add
             size_coeffs, size_mean, self.qp, self.DeepCABAC_qstep = 0, 0, 0, 0
@@ -1546,7 +1546,7 @@ class Eval:
 class DetectEval(Eval):
     def prepare_part(self, myarg, data_name="pick"):
         print("Loading", data_name, "...")
-        utils.pick_coco_exp(data_name, myarg)
+        utils_copy.pick_coco_exp(data_name, myarg)
         self.data_loader = build_detection_test_loader(self.cfg, data_name)
         self.evaluator = COCOEvaluator(data_name, self.cfg, False)
         self.evaluator.reset()
