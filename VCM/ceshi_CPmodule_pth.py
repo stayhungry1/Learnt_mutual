@@ -50,8 +50,15 @@ path_savepth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinpu
 path_savenewpth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999_norcnn.pth'
 net_belle = Cheng2020Anchor(N=192)
 net_belle = net_belle.to(device)
-net_belle.load_state_dict(torch.load(path_savepth), strict=False)
+pretrained_dict = torch.load(path_savepth)
+model_dict = net_belle.state_dict()
+pretrained_dict = {key[10:]: value for key, value in pretrained_dict['model'].items() if ('net_belle' in key)} #去掉前缀net_belle.
+model_dict.update(pretrained_dict)
+net_belle.load_state_dict(model_dict)
+
 torch.save(net_belle.state_dict(), path_savenewpth)
+
+
 
 
 
