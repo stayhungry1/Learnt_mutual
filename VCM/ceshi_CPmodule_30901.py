@@ -62,8 +62,8 @@ pretrained_dict = torch.load(path_savepth)
 model_dict = net_belle.state_dict()
 # 关键在于下面这句，从model_dict中读取key、value时，用if筛选掉不需要的网络层
 # pretrained_dict = {key: value for key, value in pretrained_dict['model'].items() if (key in model_dict and 'Prediction' not in key)}
-# for key, value in pretrained_dict['model'].items():
-#     print(key)
+for key, value in pretrained_dict['model'].items():
+    print(key)
 # pretrained_dict = {key: value for key, value in pretrained_dict['model'].items() if (key in model_dict)}
 pretrained_dict = {key[10:]: value for key, value in pretrained_dict['model'].items() if ('net_belle' in key)}
 

@@ -47,7 +47,8 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 path_savepth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999.pth'
-path_savenewpth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999_norcnn.pth'
+path_savenewpth = '/media/data/ccr/liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999_CPmodule.pth'
+
 net_belle = Cheng2020Anchor(N=192)
 net_belle = net_belle.to(device)
 pretrained_dict = torch.load(path_savepth)
