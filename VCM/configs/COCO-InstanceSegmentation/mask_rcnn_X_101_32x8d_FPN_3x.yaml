@@ -4,7 +4,9 @@ MODEL:
 #  WEIGHTS: "detectron2://ImageNetPretrained/FAIR/X-101-32x8d.pkl"
 #  WEIGHTS: "/media/data/liutie/zzf/VCMbelle_0622/VCM/train_para/model_final_2d9806.pkl" #30901
 #  WEIGHTS: "/media/data/ccr/zzf/vcm/train_para/model_final_2d9806.pkl" #从头训练加载此预训练模型
-  WEIGHTS: "/media/data/ccr/zzf_save/output/EXP_cheng2020anchor_256chinput_P2down2345inout/model_0035999.pth" #要训练finenet时加载此预训练模型
+#  WEIGHTS: "/media/data/ccr/zzf_save/output/EXP_cheng2020anchor_256chinput_P2down2345inout/model_0035999.pth" #要训练finenet时加载此预训练模型
+  WEIGHTS: "/media/data/ccr/model_final_2d9806.pkl" #30901 maskrcnn coco测试
+#  WEIGHTS: "/media/data/ccr/VCM/output/model_mask_final.pth" #30901 maskrcnn coco测试
 
 
 
@@ -40,9 +42,10 @@ SOLVER:
   CHECKPOINT_PERIOD: 3000 #默认是5000
   IMS_PER_BATCH: 2 #8 #1 #4 #6
 
-DATASETS:
-  TRAIN: ("openimg_mask_train",)
-  TEST: ()
+###为了cocotest5000，注释掉了这3行
+#DATASETS:
+#  TRAIN: ("openimg_mask_train",)
+#  TEST: ()
 
 INPUT:
 # # MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)

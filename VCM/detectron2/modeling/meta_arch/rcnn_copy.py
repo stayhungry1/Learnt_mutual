@@ -568,80 +568,56 @@ class GeneralizedRCNN(nn.Module):
             self.pixel_mean.shape == self.pixel_std.shape
         ), f"{self.pixel_mean} and {self.pixel_std} have different shapes!"
 
-        ############################################################################20220519
-        self.gpu_ids = [0,1,2]
-        # self.compG = define_compG(256, 256, 64, 3, norm='instance', gpu_ids=self.gpu_ids)
-        # self.netG = define_G(256, 256, 64, 'global', 3, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids)
-        # #self.netD = define_D(3, 64, 3, 'instance', 'store_true', 2, getIntermFeat=False, gpu_ids=self.gpu_ids)
-        # #self.compG = define_compG(netG_input_nc, opt.output_nc, opt.ncf, opt.n_downsample_comp, norm=opt.norm, gpu_ids=self.gpu_ids)
-        # #self.netG = define_G(netG_input_nc, opt.output_nc, opt.ngf, opt.netG, opt.n_downsample_global, opt.n_blocks_global, opt.n_local_enhancers, opt.n_blocks_local, opt.norm, gpu_ids=self.gpu_ids)
-        # #self.netD = networks.define_D(netD_input_nc, opt.ndf, opt.n_layers_D, opt.norm, use_sigmoid, opt.num_D, not opt.no_ganFeat_loss, gpu_ids=self.gpu_ids)
         # ############################################################################20220519
-        # #####ccr added
-        # self.netG = define_G(256, 256, 64, 'global', 3, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #原始finenet
-        # self.netG = define_G(256, 256, 64, 'global', 0, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #3->0
-        self.netG = define_G(256, 256, 128, 'global', 0, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #3->0 64->128
-        self.finenet_optimizer = Adam(self.netG.parameters(), lr=0.0001)
-
-        ############################belle
-        compressaiargs_experiment = 'rcnn_belle_0730'
-        if not os.path.exists(os.path.join('experiments', compressaiargs_experiment)):
-            os.makedirs(os.path.join('experiments', compressaiargs_experiment))
-        # compressaiargs_model = "bmshj2018-hyperprior"
-        # compressaiargs_quality = 4 #default=1 #指令里
-        compressaiargs_learning_rate = 0.0001 #指令里
-        compressaiargs_aux_learning_rate = 0.001 #new_train.py的parse_args
-        #####lambda设置
-        # compressaiargs_lambda = 8.0
-        compressaiargs_lambda = 4.0
-        # compressaiargs_lambda = 2.0
+        # self.gpu_ids = [0,1,2]
+        # # self.compG = define_compG(256, 256, 64, 3, norm='instance', gpu_ids=self.gpu_ids)
+        # # self.netG = define_G(256, 256, 64, 'global', 3, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids)
+        # # #self.netD = define_D(3, 64, 3, 'instance', 'store_true', 2, getIntermFeat=False, gpu_ids=self.gpu_ids)
+        # # #self.compG = define_compG(netG_input_nc, opt.output_nc, opt.ncf, opt.n_downsample_comp, norm=opt.norm, gpu_ids=self.gpu_ids)
+        # # #self.netG = define_G(netG_input_nc, opt.output_nc, opt.ngf, opt.netG, opt.n_downsample_global, opt.n_blocks_global, opt.n_local_enhancers, opt.n_blocks_local, opt.norm, gpu_ids=self.gpu_ids)
+        # # #self.netD = networks.define_D(netD_input_nc, opt.ndf, opt.n_layers_D, opt.norm, use_sigmoid, opt.num_D, not opt.no_ganFeat_loss, gpu_ids=self.gpu_ids)
+        # # ############################################################################20220519
+        # # #####ccr added
+        # # self.netG = define_G(256, 256, 64, 'global', 3, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #原始finenet
+        # # self.netG = define_G(256, 256, 64, 'global', 0, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #3->0
+        # self.netG = define_G(256, 256, 128, 'global', 0, 9, 1, 3, 'instance', gpu_ids=self.gpu_ids) #3->0 64->128
+        # self.finenet_optimizer = Adam(self.netG.parameters(), lr=0.0001)
+        #
+        # ############################belle
+        # compressaiargs_experiment = 'rcnn_belle_0730'
+        # if not os.path.exists(os.path.join('experiments', compressaiargs_experiment)):
+        #     os.makedirs(os.path.join('experiments', compressaiargs_experiment))
+        # # compressaiargs_model = "bmshj2018-hyperprior"
+        # # compressaiargs_quality = 4 #default=1 #指令里
+        # compressaiargs_learning_rate = 0.0001 #指令里
+        # compressaiargs_aux_learning_rate = 0.001 #new_train.py的parse_args
+        # #####lambda设置
+        # # compressaiargs_lambda = 8.0
+        # # compressaiargs_lambda = 4.0
+        # # compressaiargs_lambda = 2.0
         # compressaiargs_lambda = 1.0
-        # compressaiargs_lambda = 0.512
-        # compressaiargs_lambda = 0.256
-        # compressaiargs_lambda = 0.128
-        # compressaiargs_lambda = 0.064
-        ###############
-        self.belle_clip_max_norm = 1.0
-        # # self.net_belle = image_models[compressaiargs_model](quality=compressaiargs_quality)
-        # self.net_belle = ScaleHyperpriorMulti(M=192, N=128)  # M=192, N=128,  320,192
-        # # self.net_belle = ScaleHyperpriorMulti(M=512, N=320)
-        # # self.net_belle = Cheng2020AttentionMulti(N=192)
-        self.net_belle = Cheng2020Anchor(N=192)
-        self.net_belle = self.net_belle.to(device)
-        # self.optimizer_belle, self.belle_aux_optimizer = configure_optimizers(self.net_belle, compressaiargs_learning_rate, compressaiargs_aux_learning_rate)
-        # self.belle_lr_scheduler = optim.lr_scheduler.MultiStepLR(self.optimizer_belle, milestones=[2000, 4250], gamma=0.5)
-        self.belle_criterion = RateDistortionLoss(compressaiargs_lambda)
-        self.i_step_count = 0
+        # # compressaiargs_lambda = 0.512
+        # # compressaiargs_lambda = 0.256
+        # # compressaiargs_lambda = 0.128
+        # # compressaiargs_lambda = 0.064
+        # ###############
+        # self.belle_clip_max_norm = 1.0
+        # # # self.net_belle = image_models[compressaiargs_model](quality=compressaiargs_quality)
+        # # self.net_belle = ScaleHyperpriorMulti(M=192, N=128)  # M=192, N=128,  320,192
+        # # # self.net_belle = ScaleHyperpriorMulti(M=512, N=320)
+        # # # self.net_belle = Cheng2020AttentionMulti(N=192)
+        # self.net_belle = Cheng2020Anchor(N=192)
+        # self.net_belle = self.net_belle.to(device)
+        # # self.optimizer_belle, self.belle_aux_optimizer = configure_optimizers(self.net_belle, compressaiargs_learning_rate, compressaiargs_aux_learning_rate)
+        # # self.belle_lr_scheduler = optim.lr_scheduler.MultiStepLR(self.optimizer_belle, milestones=[2000, 4250], gamma=0.5)
+        # self.belle_criterion = RateDistortionLoss(compressaiargs_lambda)
+        # self.i_step_count = 0
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXPmask_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_iter35999_finenet/'
-        # compressai_logdir = '/media/data/ccr/liutie_save/tensorboard_belle/EXPmask_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_iter35999_finenet/'
-        compressai_logdir = '../../liutie_save/tensorboard_belle/lambda4_finenet_ftopenimage_cocotrain/'
-        mkdirs(compressai_logdir)
-        self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
-        self.belle_savetensorboardfreq = 200
+        # # compressai_logdir = '/media/data/ccr/liutie_save/tensorboard_belle/EXPmask_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_iter35999_finenet/'
+        # mkdirs(compressai_logdir)
+        # self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
+        # self.belle_savetensorboardfreq = 200
 
-        # self.guiyihua_scale = 43.6045
-        # self.guiyihua_min = -23.1728
-        # path_belle_pretrainedmodel = '/media/data/liutie/VCM/rcnn/belle_pretrainedmodel/bmshj2018-hyperprior-4-de1b779c.pth.tar'
-        # checkpoint = torch.load(path_belle_pretrainedmodel, map_location=lambda storage, loc: storage)
-        # try:
-        #     self.net_belle.load_state_dict(checkpoint['state_dict'])
-        # except:
-        #     try:
-        #         for key in list(checkpoint):
-        #             if key.split(".")[0] == "entropy_bottleneck":
-        #                 if key.split(".")[1] == "_biases":
-        #                     checkpoint[key.split(".")[0] + '._bias' + key.split(".")[2]] = checkpoint[key]
-        #                     del (checkpoint[key])
-        #                 if key.split(".")[1] == "_factors":
-        #                     checkpoint[key.split(".")[0] + '._factor' + key.split(".")[2]] = checkpoint[key]
-        #                     del (checkpoint[key])
-        #                 if key.split(".")[1] == "_matrices":
-        #                     checkpoint[key.split(".")[0] + '._matrix' + key.split(".")[2]] = checkpoint[key]
-        #                     del (checkpoint[key])
-        #         self.net_belle.load_state_dict(checkpoint)
-        #         print("load codec ori")
-        #     except:
-        #         print("codec load none")
 
         for p in self.backbone.parameters():
             p.requires_grad = False
@@ -655,9 +631,9 @@ class GeneralizedRCNN(nn.Module):
             p.requires_grad = False
             FrozenBatchNorm2d.convert_frozen_batchnorm(self.roi_heads)
 
-        for p in self.net_belle.parameters():
-            p.requires_grad = False
-            FrozenBatchNorm2d.convert_frozen_batchnorm(self.net_belle)
+        # for p in self.net_belle.parameters():
+        #     p.requires_grad = False
+        #     FrozenBatchNorm2d.convert_frozen_batchnorm(self.net_belle)
 
     @classmethod
     def from_config(cls, cfg):
