@@ -65,7 +65,8 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda8_N192_7imgtrain_eachdnorm_10071500/model_0009999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_10071700/model_0027999.pth"
 ####cocotrain_loadopenimgtrainedmodel
-  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft15999_finenet_09271600/model_0039999.pth"
+#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft15999_finenet_09271600/model_0039999.pth" #lambda=4
+  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999.pth" #lambda=1
 ####for cocotest5000
 #  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1_models/model_0037999.pth" #30901_lambda1_finenet暂时没用
 #  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1_models/model_0135999.pth" #30901_lambda1_BFCNet
@@ -163,15 +164,16 @@ MODEL:
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft15999_finenet_09271600
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda8_N192_7imgtrain_eachdnorm_10071500
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_10071700
-OUTPUT_DIR: ../../liutie_save/output/lambda4_finenet_ftopenimage_cocotrain
+#OUTPUT_DIR: ../../liutie_save/output/lambda4_finenet_ftopenimage_cocotrain
+OUTPUT_DIR: ../../liutie_save/output/lambda1_finenet_ftopenimage_cocotrain
 SOLVER:
   STEPS: (130000, 180000)
   MAX_ITER: 250000
   CHECKPOINT_PERIOD: 2000 #6000 #默认是5000
 INPUT:
 # # MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
-# # MIN_SIZE_TRAIN: (640, 640)
-#  MIN_SIZE_TRAIN: (640, 640)
+##  MIN_SIZE_TRAIN: (640, 640)
   MIN_SIZE_TRAIN: (800, 800)
-# # MIN_SIZE_TEST: 400
+#  MIN_SIZE_TRAIN: (576, 576) #专用于coco训练
+  # # MIN_SIZE_TEST: 400
   MIN_SIZE_TEST: 576 #use ccr
