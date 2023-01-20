@@ -40,7 +40,7 @@ DATASETS:
   #  TEST: ('coco_2017_val',) #"coco_validation" #("coco_validation") #仅用于coco测试
   TEST: () #正常情况下用这个
 SOLVER:
-  IMS_PER_BATCH: 2 #8 #1 #4 #6
+  IMS_PER_BATCH: 8 #2 #1 #4 #6
   BASE_LR: 0.0001
   STEPS: (60000, 80000)
   MAX_ITER: 90000
