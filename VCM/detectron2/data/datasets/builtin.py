@@ -250,7 +250,8 @@ def register_all_ade20k(root):
 # Internally at fb, we register them elsewhere
 if __name__.endswith(".builtin"):
     # Assume pre-defined datasets live in `./datasets`.
-    _root = os.path.expanduser(os.getenv("DETECTRON2_DATASETS", "datasets"))
+    # _root = os.path.expanduser(os.getenv("DETECTRON2_DATASETS", "datasets"))
+    _root = os.path.expanduser(os.getenv("DETECTRON2_DATASETS", "/media/data/ccr/zzf/vcm/VCM/datasets")) #vivo上的coco训练集
     register_all_coco(_root)
     register_all_lvis(_root)
     register_all_cityscapes(_root)
