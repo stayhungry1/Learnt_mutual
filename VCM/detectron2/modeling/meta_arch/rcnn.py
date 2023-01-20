@@ -41,7 +41,7 @@ import time
 import json
 
 __all__ = ["GeneralizedRCNN", "ProposalNetwork"]
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+# os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
