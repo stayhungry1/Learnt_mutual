@@ -106,6 +106,7 @@ Run on multiple machines:
 """,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
+    ######################30901和vivo服务器的区别：修改--config-file和--eval-only
     # parser.add_argument("--config-file", default="", metavar="FILE", help="path to config file")
     # parser.add_argument("--config-file", default="/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x_vcm.yaml", metavar="FILE", help="path to config file") #我改的30901
     # parser.add_argument("--config-file", default="/media/data/ccr/liutieCompressAI/VCM/configs/COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x_vcm.yaml", metavar="FILE", help="path to config file") #我改的vivo
@@ -116,7 +117,8 @@ Run on multiple machines:
         help="Whether to attempt to resume from the checkpoint directory. "
         "See documentation of `DefaultTrainer.resume_or_load()` for what it means.",
     )
-    parser.add_argument("--eval-only", action="store_true", help="perform evaluation only")
+    parser.add_argument("--eval-only", action="store_true", help="perform evaluation only") #openimage object detection和instance segmentaion
+    # parser.add_argument("--eval-only", default='True', help="perform evaluation only") #仅用于coco的测试
     parser.add_argument("--num-gpus", type=int, default=1, help="number of gpus *per machine*")
     parser.add_argument("--num-machines", type=int, default=1, help="total number of machines")
     parser.add_argument(

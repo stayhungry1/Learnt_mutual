@@ -270,7 +270,7 @@ class Eval:
             bpp_temp = bpp_test5000[key]
             bpp_sum = bpp_sum + bpp_temp[0]
             i_count = i_count + 1
-            print('i_count: %d, bpp: %9.6f, %s' %(i_count, bpp_test5000[key][0], key))
+            # print('i_count: %d, bpp: %9.6f, %s' %(i_count, bpp_test5000[key][0], key))
         print('average bpp: %8.4f' %(bpp_sum / i_count))
         ###bpp_P2
         tf_p2 = open(self.path_bppsave_p2, "r")

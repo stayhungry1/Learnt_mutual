@@ -1,6 +1,6 @@
 #_BASE_: "../Base-RCNN-FPN-VCM.yaml"
-#_BASE_: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/Base-RCNN-FPN-VCM.yaml" #30901
-_BASE_: "/media/data/ccr/liutieCompressAI/VCM/configs/Base-RCNN-FPN-VCM.yaml" #vivo
+_BASE_: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/Base-RCNN-FPN-VCM.yaml" #30901
+#_BASE_: "/media/data/ccr/liutieCompressAI/VCM/configs/Base-RCNN-FPN-VCM.yaml" #vivo
 MODEL:
   MASK_ON: False
   #WEIGHTS: "/media/data/ccr/model_final_68b088.pkl" #"/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P2MSE_nobpploss_lambda1_N192_eachdnorm_08041020/model_0007999.pth"
@@ -57,13 +57,14 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu8_N192_7imgtrain_eachdnorm_09230930/model_0009999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_09231300/model_0017999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu16_N192_7imgtrain_eachdnorm_10142030/model_0009999.pth"
-  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu16_N192_7imgtrainft9999_small5Wtrain_eachdnorm_10142230/model_0015999.pth"
+#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu16_N192_7imgtrainft9999_small5Wtrain_eachdnorm_10142230/model_0015999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1chu2_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft17999_finenet_09211000/model_0053999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda4_N192_7imgtrain_eachdnorm_09261700/model_0009999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_09261830/model_0015999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda8_N192_7imgtrain_eachdnorm_10071500/model_0009999.pth"
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_10071700/model_0027999.pth"
+  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1_models/model_0135999.pth" #30901_lambda1_finenet
   PIXEL_STD: [57.375, 57.120, 58.395]
   RESNETS:
     STRIDE_IN_1X1: False  # this is a C2 model

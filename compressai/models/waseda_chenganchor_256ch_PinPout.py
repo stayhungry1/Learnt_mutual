@@ -40,6 +40,7 @@ from compressai.layers import (
 
 from .google import JointAutoregressiveHierarchicalPriors
 
+#waseda_chenganchor_256ch_PinPout
 
 class Cheng2020Anchor_P2345attn(JointAutoregressiveHierarchicalPriors): #用于cheng2020attn的新网络结构 P2345联合训练 08162130
     """Anchor model variant from `"Learned Image Compression with
@@ -185,7 +186,7 @@ class Cheng2020Anchor_addconv2_P2P3inP4P5out(JointAutoregressiveHierarchicalPrio
         return net
 
 
-class Cheng2020Anchor(JointAutoregressiveHierarchicalPriors): #_P2inP3outnoprobolem
+class Cheng2020Anchor(JointAutoregressiveHierarchicalPriors): #PinPout
     """Anchor model variant from `"Learned Image Compression with
     Discretized Gaussian Mixture Likelihoods and Attention Modules"
     <https://arxiv.org/abs/2001.01568>`_, by Zhengxue Cheng, Heming Sun, Masaru
@@ -243,7 +244,7 @@ class Cheng2020Anchor(JointAutoregressiveHierarchicalPriors): #_P2inP3outnoprobo
             ResidualBlock(N, N),
             ResidualBlockUpsample(N, N, 2), #rm TODO P4
             ResidualBlock(N, N),
-            subpel_conv3x3(N, 256, 1), #TODO P4
+            subpel_conv3x3(N, 256, 2), #rm TODO P4
         )
 
     @classmethod
