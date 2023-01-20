@@ -68,8 +68,8 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda4_N192_7imgtrainft9999_small5Wtrain_eachdnorm_ft15999_finenet_09271600/model_0039999.pth" #lambda=4
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999.pth" #lambda=1
 ####loadopenimgtrainedmodel_cocotrain_BFCNet
-  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda4_N192_lambda2ft125999_small5Wtrain_eachdnorm_09261700/model_0003999.pth" #lambda=4
-#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/model_0135999.pth" #lambda=1
+#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda4_N192_lambda2ft125999_small5Wtrain_eachdnorm_09261700/model_0003999.pth" #lambda=4
+  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/model_0135999.pth" #lambda=1
   ####for cocotest5000
 #  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1_models/model_0037999.pth" #30901_lambda1_finenet暂时没用
 #  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1_models/model_0135999.pth" #30901_lambda1_BFCNet
@@ -169,8 +169,8 @@ MODEL:
 #OUTPUT_DIR: ../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda8_N192_7imgtrainft9999_small5Wtrain_eachdnorm_10071700
 #OUTPUT_DIR: ../../liutie_save/output/lambda4_finenet_ftopenimage_cocotrain
 #OUTPUT_DIR: ../../liutie_save/output/lambda1_finenet_ftopenimage_cocotrain
-OUTPUT_DIR: ../../liutie_save/output/lambda4_BFCNet_ftopenimage_cocotrain
-#OUTPUT_DIR: ../../liutie_save/output/lambda1_BFCNet_ftopenimage_cocotrain
+#OUTPUT_DIR: ../../liutie_save/output/lambda4_BFCNet_ftopenimage_cocotrain
+OUTPUT_DIR: ../../liutie_save/output/lambda1_BFCNet_ftopenimage_cocotrain
 SOLVER:
   STEPS: (130000, 180000)
   MAX_ITER: 250000

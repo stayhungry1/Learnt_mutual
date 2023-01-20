@@ -605,9 +605,9 @@ class GeneralizedRCNN(nn.Module):
         compressaiargs_aux_learning_rate = 0.001 #new_train.py的parse_args
         ######lambda设置的取值
         # compressaiargs_lambda = 8.0
-        compressaiargs_lambda = 4.0
+        # compressaiargs_lambda = 4.0
         # compressaiargs_lambda = 2.0
-        # compressaiargs_lambda = 1.0
+        compressaiargs_lambda = 1.0
         # compressaiargs_lambda = 0.512
         # compressaiargs_lambda = 0.256
         # compressaiargs_lambda = 0.128
@@ -646,7 +646,8 @@ class GeneralizedRCNN(nn.Module):
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1chu16_N192_lambda1chu8ft3999_small5Wtrain_eachdnorm_10142030/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda4_N192_lambda2ft125999_small5Wtrain_eachdnorm_09261700/'
         # compressai_logdir = '../../liutie_save/tensorboard_belle/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda8_N192_lambda4ft3999_small5Wtrain_eachdnorm_10051600/'
-        compressai_logdir = '../../liutie_save/tensorboard_belle/lambda4_BFCNet_ftopenimage_cocotrain/'
+        # compressai_logdir = '../../liutie_save/tensorboard_belle/lambda4_BFCNet_ftopenimage_cocotrain/'
+        compressai_logdir = '../../liutie_save/tensorboard_belle/lambda1_BFCNet_ftopenimage_cocotrain/'
         mkdirs(compressai_logdir)
         self.belle_writer = SummaryWriter(log_dir=compressai_logdir)
         self.belle_savetensorboardfreq = 200
