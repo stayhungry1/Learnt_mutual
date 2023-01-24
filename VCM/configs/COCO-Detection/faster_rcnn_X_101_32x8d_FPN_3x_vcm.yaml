@@ -1,6 +1,6 @@
 #_BASE_: "../Base-RCNN-FPN-VCM.yaml"
-_BASE_: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/Base-RCNN-FPN-VCM.yaml" #30901
-#_BASE_: "/media/data/ccr/liutieCompressAI/VCM/configs/Base-RCNN-FPN-VCM.yaml" #vivo
+#_BASE_: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/Base-RCNN-FPN-VCM.yaml" #30901
+_BASE_: "/media/data/ccr/liutieCompressAI/VCM/configs/Base-RCNN-FPN-VCM.yaml" #vivo
 MODEL:
   MASK_ON: False
   #WEIGHTS: "/media/data/ccr/model_final_68b088.pkl" #"/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P2MSE_nobpploss_lambda1_N192_eachdnorm_08041020/model_0007999.pth"
