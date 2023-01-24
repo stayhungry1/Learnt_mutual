@@ -635,8 +635,8 @@ class GeneralizedRCNN(nn.Module):
         compressaiargs_aux_learning_rate = 0.001 #new_train.py的parse_args
         ######lambda设置的取值
         # compressaiargs_lambda = 8.0
-        # compressaiargs_lambda = 4.0
-        compressaiargs_lambda = 2.0
+        compressaiargs_lambda = 4.0
+        # compressaiargs_lambda = 2.0
         # compressaiargs_lambda = 1.0
         # compressaiargs_lambda = 0.512
         # compressaiargs_lambda = 0.256
@@ -685,10 +685,10 @@ class GeneralizedRCNN(nn.Module):
         tf = open(path_save, "r")
         self.numpixel_test5000 = json.load(tf)
 
-        self.path_bppsave = '/media/data/liutie/VCM/rcnn/liutie_save/output/chenganchor_bpp_lambda1chu8_cocotest5000_hw576.json' ####记得改这里的lambda
-        self.path_bppsave_p3 = '/media/data/liutie/VCM/rcnn/liutie_save/output/chenganchor_bpp_lambda1chu8_cocotest5000_hw576_P3.json'
-        self.path_bppsave_p4 = '/media/data/liutie/VCM/rcnn/liutie_save/output/chenganchor_bpp_lambda1chu8_cocotest5000_hw576_P4.json'
-        self.path_bppsave_p5 = '/media/data/liutie/VCM/rcnn/liutie_save/output/chenganchor_bpp_lambda1chu8_cocotest5000_hw576_P5.json'
+        self.path_bppsave = '/media/data/liutie/VCM/rcnn/liutie_save/output/chenganchor_bpp_lambda1_cocofinetune_cocotest5000_hw576.json' ####记得改这里的lambda
+        self.path_bppsave_p3 = '/media/data/liutie/VCM/rcnn/liutie_save/output/chenganchor_bpp_lambda1_cocofinetune_cocotest5000_hw576_P3.json'
+        self.path_bppsave_p4 = '/media/data/liutie/VCM/rcnn/liutie_save/output/chenganchor_bpp_lambda1_cocofinetune_cocotest5000_hw576_P4.json'
+        self.path_bppsave_p5 = '/media/data/liutie/VCM/rcnn/liutie_save/output/chenganchor_bpp_lambda1_cocofinetune_cocotest5000_hw576_P5.json'
         self.bpp_test5000 = {}
         self.bpp_test5000_p3 = {}
         self.bpp_test5000_p4 = {}
@@ -702,7 +702,9 @@ class GeneralizedRCNN(nn.Module):
         # path_savepth = '/media/data/liutie/VCM/rcnn/liutie_save/lambda4_models/model_0039999.pth' #lambda=4
         # path_savepth = '/media/data/liutie/VCM/rcnn/liutie_save/lambda1chu2_models/model_0003999_CPPRmodule.pth' #lambda=1chu2
         # path_savepth = '/media/data/liutie/VCM/rcnn/liutie_save/lambda1chu4_models/model_0037999.pth' #lambda=1chu4
-        path_savepth = '/media/data/liutie/VCM/rcnn/liutie_save/lambda1chu8_models/model_0037999.pth' #lambda=1chu8
+        # path_savepth = '/media/data/liutie/VCM/rcnn/liutie_save/lambda1chu8_models/model_0037999.pth' #lambda=1chu8
+        # path_savepth = '/media/data/liutie/VCM/rcnn/liutie_save/lambda4_models_cocofinetune/model_0019999.pth' #lambda=4
+        path_savepth = '/media/data/liutie/VCM/rcnn/liutie_save/lambda1_models_cocofinetune/model_0019999.pth' #lambda=1
         self.CPmodule = Cheng2020Anchor_CPmodule(N=192)
         self.CPmodule = self.CPmodule.to(device)
         pretrained_dict = torch.load(path_savepth)

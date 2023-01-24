@@ -1,6 +1,6 @@
 #_BASE_: "../Base-RCNN-FPN-VCM.yaml"
-#_BASE_: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/Base-RCNN-FPN-VCM.yaml" #30901
-_BASE_: "/media/data/ccr/liutieCompressAI/VCM/configs/Base-RCNN-FPN-VCM.yaml" #vivo
+_BASE_: "/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/configs/Base-RCNN-FPN-VCM.yaml" #30901
+#_BASE_: "/media/data/ccr/liutieCompressAI/VCM/configs/Base-RCNN-FPN-VCM.yaml" #vivo
 MODEL:
   MASK_ON: False
   #WEIGHTS: "/media/data/ccr/model_final_68b088.pkl" #"/media/data/liutie/VCM/rcnn/VCMbelle_0622/VCM/output/EXP_cheng2020anchor_256chinput_P2MSE_nobpploss_lambda1_N192_eachdnorm_08041020/model_0007999.pth"
@@ -69,15 +69,18 @@ MODEL:
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2inP3outMSE_P2zeroyouxiajiao256_lambda1_N192_7imgtrainft9999_small5Wtrain_eachdnorm_finenet_09062230/model_0037999.pth" #lambda=1
 ####loadopenimgtrainedmodel_cocotrain_BFCNet
 #  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda4_N192_lambda2ft125999_small5Wtrain_eachdnorm_09261700/model_0003999.pth" #lambda=4
-  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/model_0135999.pth" #lambda=1
-  ####for cocotest5000
+#  WEIGHTS: "../../liutie_save/output/EXP_cheng2020anchor_256chinput_P2down2P345MSE_zeroyouxiajiaonew_lambda1_N192_7imgtrainft14999_small5Wtrain_eachdnorm_12k64kcontinue_09051530/model_0135999.pth" #lambda=1
+####for openimgtrain_cocotest5000
 #  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1_models/model_0037999.pth" #30901_lambda1_finenet暂时没用
 #  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1_models/model_0135999.pth" #30901_lambda1_BFCNet
 #  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda2_models/model_0125999.pth" #30901_lambda2_BFCNet
 #  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda4_models/model_0003999.pth" #30901_lambda4_BFCNet
-#  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1chu2_models/model_0003999_BFCNet.pth" #30901_lambda4_BFCNet
-#  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1chu4_models/model_0003999.pth" #30901_lambda4_BFCNet
-#  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1chu8_models/model_0003999.pth" #30901_lambda4_BFCNet
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1chu2_models/model_0003999_BFCNet.pth" #30901_lambda1chu2_BFCNet
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1chu4_models/model_0003999.pth" #30901_lambda1chu4_BFCNet
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1chu8_models/model_0003999.pth" #30901_lambda1chu8_BFCNet
+####for cocofinetune_cocotest5000
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda4_models_cocofinetune/model_0009999.pth" #30901_lambda1_BFCNet
+#  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1_models_cocofinetune/model_0009999.pth" #30901_lambda1_BFCNet
   PIXEL_STD: [57.375, 57.120, 58.395]
   RESNETS:
     STRIDE_IN_1X1: False  # this is a C2 model
@@ -181,4 +184,4 @@ INPUT:
   MIN_SIZE_TRAIN: (800, 800)
 #  MIN_SIZE_TRAIN: (576, 576) #专用于coco训练
   # # MIN_SIZE_TEST: 400
-  MIN_SIZE_TEST: 576 #use ccr
+#  MIN_SIZE_TEST: 576 #use ccr for cocotest5000

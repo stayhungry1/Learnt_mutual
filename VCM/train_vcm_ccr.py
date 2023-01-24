@@ -1,3 +1,4 @@
+###此文件用于cocotest的主程序
 #!/usr/bin/env python
 # Copyright (c) Facebook, Inc. and its affiliates.
 """
