@@ -401,7 +401,7 @@ class Eval:
         fake_image_f = res + up_image
         d_output_p4 = Pfeature_zeropad_youxiajiao256_reverse(fake_image_f, h_new_p4_left, h_new_p4_right, w_new_p4_left, w_new_p4_right)
         print(d_output_p4.size(), '-------------------Finenet output P4 size')
-        print('max/min_P3up(Finenet input): %8.4f/%8.4f, max/min_P2(GT): %8.4f/%8.4f, max/min_P2(Finenet output): %8.4f/%8.4f' %(torch.max(up_image), torch.min(up_image), torch.max(d_p2), torch.min(d_p2), torch.max(d_output_p2), torch.min(d_output_p2)))
+        print('max/min_P5up(Finenet input): %8.4f/%8.4f, max/min_P4(GT): %8.4f/%8.4f, max/min_P4(Finenet output): %8.4f/%8.4f' %(torch.max(up_image), torch.min(up_image), torch.max(d_p4), torch.min(d_p4), torch.max(d_output_p4), torch.min(d_output_p4)))
 
         features_p345["p4"] = d_output_p4 * guiyihua_scale + guiyihua_min
         cheng_feat = quant_fix(features_cheng.copy())
