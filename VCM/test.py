@@ -5,22 +5,17 @@ import json
 import os
 
 import utils
-from eval import DetectEval
+from eval_vivo_xxx import DetectEval
 
-# os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
-os.environ['CUDA_VISIBLE_DEVICES'] = '2'
-# os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/OpenImageV6-5K' #vivo61
-# os.environ["DETECTRON2_DATASETS"] = '/media/data/ccr/testimg2' #vivo61
-# os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/OpenImageV6-5K' #30901
-# os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/m57343_objdet_small_twoimage' #30901
-os.environ["DETECTRON2_DATASETS"] = '/media/data/liutie/VCM/rcnn/testimg2' #30901
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+os.environ["DETECTRON2_DATASETS"] = '../../OpenImageV6-5K'
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--index", default=36, type=int) #1
+    parser.add_argument("-i", "--index", default=31, type=int)
     parser.add_argument("-n", "--number", default=5000, type=int)
-    # parser.add_argument("-m", "--mode", default='feature_coding')
-    parser.add_argument("-m", "--mode", default='evaluation')
+    parser.add_argument("-m", "--mode", default='feature_coding')
+    # parser.add_argument("-m", "--mode", default='evaluation')
 
     args = parser.parse_args()
     set_idx = args.index
@@ -41,9 +36,7 @@ if __name__ == "__main__":
         filenames = methods_eval.feature_coding()
 
     elif mode == "evaluation":
-        # filenames = glob.glob(f"/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/feature/{set_idx}_rec/*.png")
-        # filenames = glob.lob(f"feature/{set_idx}_rec/*.png")
-        filenames = glob.glob(f"feature/{set_idx}_ori/*.png") #cheng2020anchor只压缩P2, 所以用P345 original的文件夹42_ori
+        filenames = glob.glob(f"../../feature_save/feature/{set_idx}_ori/*.png")
         methods_eval.evaluation(filenames)
 
     elif mode == "evaluation_offline":

@@ -22,13 +22,8 @@ def get_openimg_dicts(root_path, training=True):
     if training:
         save_path = root_path + 'train/'
         # if os.path.exists(save_path + '/openimg_anno.json'):
-        # if os.path.exists(save_path + '/openimg_anno_only3000.json'):
-        # if os.path.exists(save_path + '/openimg_anno_only8.json'):
-        # if os.path.exists(save_path + '/openimg_anno_only30000.json'):
         if os.path.exists(save_path + '/openimg_anno_99999select50000.json'):
             # with open(save_path + '/openimg_anno.json', "r") as fp:
-            # with open(save_path + '/openimg_anno_only8.json', "r") as fp:
-            # with open(save_path + '/openimg_anno_only30000.json', "r") as fp:
             with open(save_path + '/openimg_anno_99999select50000.json', "r") as fp:
                 print("Load existing json files ...")
                 dataset_dicts = json.load(fp)
@@ -189,7 +184,7 @@ def id_map(label):
         return 32
 
 
-root_path = "/media/data/ccr/OIdataset/"
+root_path = "xxx/OIdataset/"
 #get_openimg_dicts(root_path)
 for d in ["train", "val"]:
     # # register training and testing together

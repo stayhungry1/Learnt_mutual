@@ -17,14 +17,11 @@ def simple_filename(filename_ext):
 
 set_idx = 35
 
-# filenames = glob.glob(f"/media/data/liutie/VCM/OpenImageV6-5K/*.jpg") #30901
 filenames = glob.glob(f"/media/data/ccr/OpenImageV6-5K/*.jpg") #vivo
-# filenames = glob.glob(f"/media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/feature/{set_idx}_rec/*.png")
 num_img = len(filenames)
-# path_img_qianzhui = '/media/data/liutie/VCM/OpenImageV6-5K/' #30901
 path_img_qianzhui = '/media/data/ccr/OpenImageV6-5K/' #vivo
 # path_vvc_qianzhui = './feature/35_bit/' #QP35
-path_vvc_qianzhui = '../../liutie_save/feature/33_resid_bit/' #QP33 P2_residual_QP41
+path_vvc_qianzhui = '../../ccr/feature/33_resid_bit/' #QP33 P2_residual_QP41
 
 i_count = 0
 bit_sum = 0

@@ -1,4 +1,4 @@
-absolute_path_to_dataset="/media/data/liutie/VCM/yolov3/EE1/openimages/m57343_objdet_small"
+absolute_path_to_dataset="/media/data/ccr/VCM/yolov3/EE1/openimages/m57343_objdet_small"
 #absolute_path_to_dataset="./dataset/val_openimage_v6"
 export DETECTRON2_DATASETS=${absolute_path_to_dataset}
 

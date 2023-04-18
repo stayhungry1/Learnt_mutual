@@ -486,7 +486,7 @@ def parse_args(argv=None):
     parser.add_argument(
         '--config-file',
         default=
-        '/media/data/liutie/VCM/rcnn/VCMbelle_0622/examples/train_in_this.yaml',
+        'VCMbelle_06221/examples/train_in_this.yaml',
         type=str,
         metavar='FILE',
         help='YAML config file specifying default arguments')
@@ -494,7 +494,7 @@ def parse_args(argv=None):
     parser.add_argument(
         '--cai-file',
         default=
-        '/media/data/liutie/VCM/rcnn/VCMbelle_0622/examples/train_in_this.yaml',
+        'VCMbelle_06221/examples/train_in_this.yaml',
         type=str,
         metavar='FILE',
         help='YAML config file specifying default arguments')

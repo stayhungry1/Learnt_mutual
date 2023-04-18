@@ -1,6 +1,6 @@
 model: bmshj2018-hyperprior
-dataset: /media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/feature/43_ori/ #/media/data/minglang/data/feature_compression/set_feature_zero/rm_0_channels/ #/media/data/yangwenzhe/rm_0_channels/
-test_dataset: /media/data/liutie/VCM/rcnn/VCM_EE1.2_P-layer_feature_map_anchor_generation_137th_MPEG-VCM-main/feature/43_ori/ #/media/data/minglang/data/feature_compression/set_feature_zero/rm_0_channels/ #/media/data/yangwenzhe/rm_0_channels/
+dataset: ./feature/43_ori/
+test_dataset: ./feature/43_ori/
 quality: 4
 lambda: 0.001
 learning_rate: 1e-4

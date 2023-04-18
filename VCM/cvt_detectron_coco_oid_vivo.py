@@ -28,8 +28,6 @@ import argparse
 
 
 def conversion(index):
-  # coco_fname = f"../../liutie_save/output/{index}_coco.txt" ##object detection
-  # oid_fname = f"../../liutie_save/output/{index}_oi.txt" ##object detection
   coco_fname = f"../../zzf_save/output/{index}_coco.txt" #instance segmentation
   oid_fname = f"../../zzf_save/output/{index}_oi.txt" #instance segmentation
   selected_coco_classes_fname = "oi_eval/selected_classes.txt"

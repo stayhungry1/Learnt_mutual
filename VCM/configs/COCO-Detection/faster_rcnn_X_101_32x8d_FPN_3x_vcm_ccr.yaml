@@ -4,7 +4,7 @@ MODEL:
 #  WEIGHTS: "output/model_0x4_8c_0911.pth"
 #  WEIGHTS: "output/model_1128_coco.pth"
 #  WEIGHTS: "/media/data/ccr/model_final_68b088.pkl"
-  WEIGHTS: "/media/data/liutie/VCM/rcnn/liutie_save/lambda1_models/model_0135999.pth" #30901_lambda1_BFCNet
+# WEIGHTS CCR model
   PIXEL_STD: [57.375, 57.120, 58.395]
   RESNETS:
     STRIDE_IN_1X1: False  # this is a C2 model
