@@ -1,17 +1,9 @@
-# Building the documentation
+Training
 
-Install sphinx and dependencies:
-```
-pip install -r requirements.txt
-```
+python train.py
 
-Then build the html documentation:
-```
-make html
-```
 
-Run `make html` again whenever a change is made in the `source` folder. The
-output html is generated in the `_build/html` folder. Open
-`_build/html/index.html` in your browser to view the locally generated
-documentation.
+Testing
 
+python test.py -i 30 -m feature_coding
+python test.py -i 30 -m evaluation
